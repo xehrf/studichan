@@ -1,115 +1,145 @@
-# Chinese Universities Portal
+# Studichan — каталог китайских университетов
 
-Mobile-first platform for studying in Chinese universities. Designed for simplicity and ease of use.
+React-сайт и Node.js/Express API с базой PostgreSQL. Проект рассчитан на один
+Render Web Service: фронтенд и `/api` работают на одном домене.
 
-## Features
+## Что уже настроено
 
-- **University Catalog**: Browse and search Chinese universities
-- **Filters**: Filter by region, search by name or city
-- **Agency System**: Universities can be "claimed" by agencies after reaching 100 applications
-- **User Accounts**: Simple registration for submitting applications
-- **Responsive Design**: Optimized for mobile devices
+- PostgreSQL вместо временной SQLite-базы;
+- автоматическое создание таблиц при запуске;
+- `render.yaml`, который создаёт сайт и базу в одном регионе Render;
+- безопасное хранение паролей в bcrypt-хешах;
+- скрипт для сбора информации только с заранее одобренных официальных сайтов;
+- первоначальные четыре университетa при первом деплое.
 
-## Tech Stack
+## Самый простой путь: ничего не скачивать, развернуть в Render
 
-- **Frontend**: React 19 + Vite + Lucide Icons
-- **Backend**: Node.js + Express 5 + Better SQLite3
-- **Database**: SQLite (file-based, no setup required)
+PostgreSQL не нужно устанавливать на компьютер. Render создаст управляемую
+базу сам и передаст сайту секретную строку подключения `DATABASE_URL`.
 
-## Quick Start
+1. Сохрани изменения в GitHub:
 
-### 1. Install Dependencies
+   ```bash
+   git add .
+   git commit -m "Move Studichan to PostgreSQL and Render"
+   git push
+   ```
 
-```bash
-npm install
-```
+2. Зайди на [Render](https://render.com), выбери **New → Blueprint** и выбери
+   репозиторий `studichan`.
+3. Render прочитает `render.yaml`. Проверь, что он собирается создать:
+   `studichan` (Web Service) и `studichan-db` (PostgreSQL).
+4. Нажми **Apply**. После окончания деплоя открой URL сервиса вида
+   `https://studichan.onrender.com`.
 
-### 2. Start Development
+При первом старте сервер сам создаст таблицы, а `initialDeployHook` добавит
+несколько тестовых университетов. Сайт не должен быть создан как **Static
+Site**: нужен именно **Web Service**, потому что у него есть API и база.
 
-```bash
-npm run dev
-```
+## Локальная разработка (если всё же нужна)
 
-This starts:
-- Backend API: http://127.0.0.1:3000
-- Frontend Vite: http://127.0.0.1:5173
+1. Установи Node.js 22 и выполни:
 
-### 3. Seed Sample Data
+   ```bash
+   npm install
+   ```
 
-```bash
-curl -X POST http://127.0.0.1:3000/api/admin/seed
-```
+2. Создай файл `.env` из `.env.example` и задай `DATABASE_URL`.
 
-This adds sample universities and agencies to the database.
+   Легче всего сначала создать базу в Render, открыть её страницу, выбрать
+   **Connect → External Database URL**, вставить URL в `.env` и добавить:
 
-## Project Structure
+   ```env
+   PGSSLMODE=require
+   ```
 
-```
-.
-├── server.mjs              # Express backend + SQLite DB
-├── src/
-│   ├── App.jsx            # Main React component
-│   ├── App.css            # Mobile-first styles
-│   └── main.jsx           # React entry point
-├── index.html             # HTML template
-├── vite.config.js         # Vite config
-├── package.json           # Dependencies
-└── .runtime/              # Generated DB file
-```
+   `.env` не отправляется в GitHub.
 
-## Database Schema
+3. Создай таблицы и тестовые данные:
 
-### Universities Table
-- `id`, `name`, `city`, `region`, `ranking`
-- `specialties`, `requirements`, `tuition`, `description`
-- `agency_id`, `students_count`
+   ```bash
+   npm run db:migrate
+   npm run db:seed
+   ```
 
-### Users Table
-- `id`, `email`, `password`, `full_name`, `country`, `phone`
+4. Запусти проект:
 
-### Agencies Table
-- `id`, `name`, `email`, `phone`, `website`, `description`
+   ```bash
+   npm run dev
+   ```
 
-### Applications Table
-- `id`, `user_id`, `university_id`, `status`, `created_at`
+   Открой `http://localhost:5173`.
 
-## API Endpoints
+## Сбор данных об университетах
 
-- `GET /api/universities` - List all universities (with filters)
-- `GET /api/universities/:id` - Get university details
-- `POST /api/auth/register` - Create new account
-- `POST /api/auth/login` - Login
-- `POST /api/applications` - Submit application
-- `POST /api/admin/seed` - Add sample data (dev only)
-
-## Flow
-
-1. **User browsing** (no auth needed):
-   - Search and filter universities
-   - View university details
-   - See agency contact info for "claimed" universities
-
-2. **User action**:
-   - Click "I want to apply" → Registration modal appears
-   - Create account or login
-   - Submit application
-
-3. **Agency system**:
-   - Once a university reaches 100 applications, it becomes "claimed"
-   - Only agency contact is shown, no direct application option
-
-## Build & Deploy
+Для автоматических переводов и фотографий можно запустить синхронизацию:
 
 ```bash
-npm run build      # Production bundle
-npm run lint       # Check code quality
-npm run preview    # Preview production build
+npm run sync:universities
 ```
 
-## Notes
+Перед этим укажи в `.env` адрес LibreTranslate. Для локального сервера его
+можно запустить Docker-командой `docker run --rm -p 5000:5000 libretranslate/libretranslate`,
+а в `.env` оставить `LIBRETRANSLATE_URL=http://localhost:5000/translate`.
+Скрипт переводит поля на русский и казахский, а фото ищет в Wikimedia Commons
+и сохраняет ссылку на страницу-источник. Для запуска на Render добавь URL
+доступного LibreTranslate в переменную `LIBRETRANSLATE_URL`; Cron Job запускается
+каждую ночь в 03:00 UTC.
 
-- All data stored in `.runtime/universities.db` (SQLite file)
-- No external dependencies for database
-- Mobile-first design with minimal assets
-- Simple password auth (consider adding OAuth for production)
-# studichan
+Скрипт не пытается парсить весь интернет или обходить защиту сайтов. Он
+загружает только URL, которые ты сам указал как официальные. Для каждого
+университета он:
+
+- проверяет, что URL находится на разрешённом домене;
+- соблюдает базовые правила `robots.txt`;
+- делает не чаще одного запроса к домену за две секунды;
+- сохраняет источник и дату проверки;
+- сначала создаёт JSON для ручной проверки и **ничего не пишет в базу**.
+
+Начни с шаблона:
+
+```bash
+cp data/university-sources.example.csv data/university-sources.csv
+npm run import:universities -- --input data/university-sources.csv
+```
+
+Открой созданный файл `data/review/universities-ГГГГ-ММ-ДД.json`. Если
+результат нормальный, заполни или уточни поля в исходном CSV и выполни:
+
+```bash
+npm run import:universities -- --input data/university-sources.csv --apply
+```
+
+Для `--apply` нужна `DATABASE_URL` в `.env`. CSV-колонки:
+
+| Колонка | Обязательна | Что писать |
+| --- | --- | --- |
+| `name`, `city`, `region` | Да | Название, город, регион (`North`, `East`, `Central`, `South`, `West`) |
+| `official_domain` | Да | Официальный домен, например `tsinghua.edu.cn` |
+| `website` | Нет | Главная официальная страница |
+| `admissions_url`, `programs_url`, `fees_url` | Нет | Страницы для иностранных студентов, программ и стоимости |
+| `specialties`, `requirements`, `tuition`, `ranking`, `description` | Нет | Проверенные вручную данные |
+
+Важно: цена, требования и доступность программы меняются каждый год. Скрипт
+помогает быстро собрать источники и описание, но перед публикацией карточки
+эти поля нужно сверять с официальной страницей и датой набора.
+
+## Полезные команды
+
+```bash
+npm run build              # production-сборка
+npm run lint               # проверка кода
+npm run db:migrate         # создать таблицы PostgreSQL
+npm run db:seed            # добавить тестовые университеты
+npm run import:universities -- --help
+```
+
+## Безопасность
+
+Импорт из браузера доступен только в локальной разработке. На опубликованном
+сайте административный API отключён, чтобы посетитель не мог изменить каталог.
+Для наполнения опубликованной базы используй CLI-скрипт с внешним URL базы.
+
+Перед приёмом реальных заявок стоит добавить полноценные серверные сессии и
+роли администратора: сейчас вход проверяет пароль безопасно, но клиентская
+часть ещё не выдаёт защищённую сессию.

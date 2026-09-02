@@ -79,6 +79,17 @@ body {
   justify-content: center;
 }
 
+.icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
 .search-section {
   padding: 12px;
   background: white;
@@ -163,6 +174,14 @@ body {
   padding: 14px;
   cursor: pointer;
   transition: transform .2s, box-shadow .2s;
+}
+
+.detail-image {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 12px 0 16px;
 }
 
 .uni-card:active {
@@ -368,6 +387,65 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.import-modal {
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title h3 {
+  margin-bottom: 0;
+}
+
+.import-hint, .columns-help, .import-status {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin: 12px 0;
+}
+
+.import-status {
+  color: #2a6c36;
+  font-weight: 600;
+}
+
+.template-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: white;
+  padding: 9px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.modal textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  outline: none;
+}
+
+.modal textarea:focus {
+  border-color: var(--accent);
+}
+
+.modal button:disabled {
+  opacity: .6;
+  cursor: wait;
 }
 
 .auth-toggle {

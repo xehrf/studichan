@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, TrendingUp, LogOut, Globe } from 'lucide-react'
+import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
+
+// The browser importer is deliberately local-only: a public import endpoint
+// would let any visitor alter the production catalogue.
+const canUseBrowserImporter = import.meta.env.DEV
+const localized = (translations, lang, fallback = '') => translations?.[lang] || translations?.en || fallback
 
 function App() {
   const [universities, setUniversities] = useState([])
@@ -14,6 +19,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [selectedUniversity, setSelectedUniversity] = useState(null)
   const [showAuth, setShowAuth] = useState(false)
+  const [showImport, setShowImport] = useState(false)
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en')
   const t = useTranslation(lang)
 
@@ -35,8 +41,8 @@ function App() {
       // Extract unique specialties
       const allSpecialties = new Set()
       data.forEach(uni => {
-        uni.specialties.split(',').forEach(spec => {
-          allSpecialties.add(spec.trim())
+        uni.specialties.split(',').map(spec => spec.trim()).filter(Boolean).forEach(spec => {
+          allSpecialties.add(spec)
         })
       })
       setUniqueSpecialties(Array.from(allSpecialties).sort())
@@ -76,7 +82,7 @@ function App() {
     }
     if (specialties.length > 0) {
       result = result.filter(u => {
-        const uniSpecs = u.specialties.split(',').map(s => s.trim())
+        const uniSpecs = u.specialties.split(',').map(s => s.trim()).filter(Boolean)
         return specialties.some(spec => uniSpecs.includes(spec))
       })
     }
@@ -105,6 +111,7 @@ function App() {
                 <option value="ru">РУ</option>
                 <option value="kk">KK</option>
               </select>
+              {canUseBrowserImporter && <button className="icon-btn" title="Импорт университетов" onClick={() => setShowImport(true)}><Upload size={18} /></button>}
               {user && <button className="logout-btn" onClick={() => setUser(null)}><LogOut size={18} /></button>}
             </div>
           </header>
@@ -146,12 +153,12 @@ function App() {
                 <div key={uni.id} className="uni-card">
                   <div className="uni-header">
                     <div>
-                      <h3>{uni.name}</h3>
+                      <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
                       <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)}</p>
                     </div>
                     {uni.ranking && <div className="ranking"><TrendingUp size={14} /> {t('ranking', uni.ranking)}</div>}
                   </div>
-                  <p className="uni-tuition">{uni.tuition}</p>
+                  <p className="uni-tuition">{localized(uni.tuition_translations, lang, uni.tuition)}</p>
                   {uni.agency_id ? (
                     <div className="agency-badge">{t('agencyHandled', uni.students_count)}</div>
                   ) : (
@@ -167,7 +174,56 @@ function App() {
       )}
 
       {showAuth && <AuthModal university={selectedUniversity} lang={lang} t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
+      {canUseBrowserImporter && showImport && <ImportModal onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
     </main>
+  )
+}
+
+function ImportModal({ onClose, onImported }) {
+  const [csv, setCsv] = useState('')
+  const [status, setStatus] = useState('')
+  const [importing, setImporting] = useState(false)
+
+  const template = `name,city,region,ranking,specialties,requirements,tuition,description,website,source_url,verified_at\nTsinghua University,Beijing,North,1,"Engineering, Computer Science",HSK 4+,30000 CNY/year,Top research university,https://www.tsinghua.edu.cn,https://www.tsinghua.edu.cn,2026-08-31`
+
+  const downloadTemplate = () => {
+    const url = URL.createObjectURL(new Blob([template], { type: 'text/csv;charset=utf-8' }))
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'universities-template.csv'
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importCsv = async (event) => {
+    event.preventDefault()
+    setImporting(true); setStatus('')
+    try {
+      const response = await fetch('/api/admin/import-universities', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ csv }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'Не удалось импортировать файл')
+      setStatus(`Готово: добавлено или обновлено ${data.imported}. ${data.skipped.length ? `Пропущены строки: ${data.skipped.join(', ')}` : ''}`)
+      onImported()
+    } catch (error) { setStatus(error.message) }
+    finally { setImporting(false) }
+  }
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal import-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-title"><h3>Импорт университетов</h3><button className="icon-btn" onClick={onClose}><X size={18} /></button></div>
+        <p className="import-hint">Скопируй таблицу из Excel или Google Sheets и вставь её сюда. Университет с тем же названием будет обновлён.</p>
+        <button className="template-btn" onClick={downloadTemplate}><Download size={16} /> Скачать шаблон CSV</button>
+        <form onSubmit={importCsv}>
+          <textarea value={csv} onChange={(e) => setCsv(e.target.value)} required placeholder="name,city,region,..." rows="10" />
+          <button type="submit" disabled={importing}>{importing ? 'Импортируем…' : 'Импортировать'}</button>
+        </form>
+        {status && <p className="import-status">{status}</p>}
+        <p className="columns-help">Обязательные колонки: <code>name, city, region</code>. Дополнительно: ranking, specialties, requirements, tuition, description, website, source_url, verified_at.</p>
+      </div>
+    </div>
   )
 }
 
@@ -210,20 +266,21 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   return (
     <div className="detail-view">
       <button className="back-btn" onClick={onBack}>{t('back')}</button>
-      <h2>{university.name}</h2>
+      {university.image_url && <img className="detail-image" src={university.image_url} alt={university.name} />}
+      <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
-      {university.description && <p className="detail-desc">{university.description}</p>}
+      {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
       <div className="detail-section">
         <strong>{t('requirements')}:</strong>
-        <p>{university.requirements}</p>
+        <p>{localized(university.requirements_translations, lang, university.requirements)}</p>
       </div>
       <div className="detail-section">
         <strong>{t('specialties')}:</strong>
-        <p>{university.specialties}</p>
+        <p>{localized(university.specialties_translations, lang, university.specialties)}</p>
       </div>
       <div className="detail-section">
         <strong>{t('tuition')}:</strong>
-        <p>{university.tuition}</p>
+        <p>{localized(university.tuition_translations, lang, university.tuition)}</p>
       </div>
 
       {agency ? (

@@ -1,8 +1,9 @@
 node_modules/
 dist/
-.runtime/
 .env
+.runtime/
 *.db
 *.db-shm
 *.db-wal
 .DS_Store
+data/review/
