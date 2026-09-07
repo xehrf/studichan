@@ -123,13 +123,13 @@ try {
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
           image_url, image_source, data_status, data_checked_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $9, CURRENT_DATE, $10, $11, $12, $13, $14, $15, $16, 'requires_verification', NULL)
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $9, NULL, $10, $11, $12, $13, $14, $15, $16, 'requires_verification', NULL)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
           tuition = EXCLUDED.tuition, description = EXCLUDED.description,
           website = EXCLUDED.website, source_url = EXCLUDED.source_url,
-          verified_at = CURRENT_DATE, name_translations = EXCLUDED.name_translations,
+          verified_at = NULL, name_translations = EXCLUDED.name_translations,
           description_translations = EXCLUDED.description_translations,
           specialties_translations = EXCLUDED.specialties_translations,
           requirements_translations = EXCLUDED.requirements_translations,

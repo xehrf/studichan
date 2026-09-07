@@ -211,7 +211,7 @@ function App() {
         <UniversityDetail university={selectedUniversity} user={user} lang={lang} t={t} onBack={() => setSelectedUniversity(null)} onAuth={() => setShowAuth(true)} />
       )}
 
-      {showAuth && <AuthModal university={selectedUniversity} lang={lang} t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
+      {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
       {canUseBrowserImporter && showImport && <ImportModal t={t} onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
     </main>
   )
@@ -352,7 +352,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
         body: JSON.stringify({ userId: user.id, universityId: university.id }),
       })
       alert(t('applicationSubmitted'))
-    } catch (error) {
+    } catch {
       alert(t('applicationError'))
     }
   }
@@ -364,7 +364,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
       {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
-      {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('verifiedSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
+      {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('officialSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
       {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}
       <div className="detail-section">
         <strong>{t('requirements')}:</strong>
@@ -397,7 +397,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   )
 }
 
-function AuthModal({ university, lang, t, onClose, onLogin }) {
+function AuthModal({ t, onClose, onLogin }) {
   const [isLogin, setIsLogin] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -414,7 +414,7 @@ function AuthModal({ university, lang, t, onClose, onLogin }) {
       if (data.user || data.userId) {
         onLogin(data.user || { id: data.userId, email })
       }
-    } catch (error) {
+    } catch {
       alert(t('error'))
     }
   }
