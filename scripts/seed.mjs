@@ -30,7 +30,7 @@ try {
   await initDb()
   await withTransaction(async (client) => {
     for (const university of universities) {
-      const specialties = university.description.match(/Сильные стороны вуза: ([^.]+)\./)?.[1] || ''
+      const specialties = university.specialties || university.description.match(/Сильные стороны вуза: ([^.]+)\./)?.[1] || ''
       await client.query(`
         INSERT INTO universities (
           name, city, region, ranking, specialties, requirements, tuition, description,
