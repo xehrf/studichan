@@ -86,8 +86,7 @@ try {
         translatedSpecialties.en, translatedDescription.en, university.website,
         JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
         JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),
-        JSON.stringify({ en: 'See the official admissions page', ru: 'Уточните требования на официальном сайте приёмной комиссии.', kk: 'Талаптарды университеттің ресми қабылдау сайтынан нақтылаңыз.' }),
-        JSON.stringify({ en: 'Tuition varies by program; check the official page.', ru: 'Стоимость зависит от программы; уточните на официальном сайте.', kk: 'Оқу ақысы бағдарламаға байланысты; ресми сайттан нақтылаңыз.' }),
+        '{}', '{}',
         university.coverUrl, university.logoUrl,
       ])
     }

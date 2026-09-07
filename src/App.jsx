@@ -7,6 +7,7 @@ import './App.css'
 // would let any visitor alter the production catalogue.
 const canUseBrowserImporter = import.meta.env.DEV
 const localized = (translations, lang, fallback = '') => translations?.[lang] || translations?.en || fallback
+const localizedOrPending = (translations, lang, fallback, pending) => localized(translations, lang, fallback) || pending
 const parseSpecialties = (specialties) => Array.isArray(specialties)
   ? specialties.map(spec => String(spec).trim()).filter(Boolean)
   : String(specialties || '').split(',').map(spec => spec.trim()).filter(Boolean)
@@ -349,17 +350,18 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
       {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
+      {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('verifiedSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
       <div className="detail-section">
         <strong>{t('requirements')}:</strong>
-        <p>{localized(university.requirements_translations, lang, university.requirements)}</p>
+        <p>{localizedOrPending(university.requirements_translations, lang, university.requirements, t('dataPending'))}</p>
       </div>
       <div className="detail-section">
         <strong>{t('specialties')}:</strong>
-        <p>{localized(university.specialties_translations, lang, university.specialties)}</p>
+        <p>{localizedOrPending(university.specialties_translations, lang, university.specialties, t('dataPending'))}</p>
       </div>
       <div className="detail-section">
         <strong>{t('tuition')}:</strong>
-        <p>{localized(university.tuition_translations, lang, university.tuition)}</p>
+        <p>{localizedOrPending(university.tuition_translations, lang, university.tuition, t('dataPending'))}</p>
       </div>
 
       {agency ? (
