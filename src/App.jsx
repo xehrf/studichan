@@ -214,7 +214,7 @@ function Questionnaire({ t, onComplete, onSkip }) {
 
   const questions = [
     { key: 'goal', title: t('questionnaire.goalTitle'), options: ['bachelor', 'master', 'language'] },
-    { key: 'specialty', title: t('questionnaire.specialtyTitle'), options: ['Computer Science', 'Engineering', 'Medicine', 'Business', 'Economics', 'Law', 'Liberal Arts'] },
+    { key: 'specialty', title: t('questionnaire.specialtyTitle'), options: ['', 'Computer Science', 'Engineering', 'Medicine', 'Business', 'Economics', 'Law', 'Liberal Arts'] },
     { key: 'region', title: t('questionnaire.regionTitle'), options: ['', 'North', 'East', 'Central', 'South', 'West'] },
     { key: 'scholarship', title: t('questionnaire.scholarshipTitle'), options: ['yes', 'no'] },
   ]
@@ -248,7 +248,7 @@ function Questionnaire({ t, onComplete, onSkip }) {
         <div className="answer-grid">
           {question.options.map((option) => (
             <button key={option || 'all'} className={`answer-btn ${answers[question.key] === option ? 'selected' : ''}`} onClick={() => choose(option)}>
-              <span>{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : t(`specialtyNames.${option}`)}</span>
+              <span>{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : (option ? t(`specialtyNames.${option}`) : t('filterAll'))}</span>
               {answers[question.key] === option ? <Check size={17} /> : <ArrowRight size={16} />}
             </button>
           ))}
