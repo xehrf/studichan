@@ -195,6 +195,7 @@ def parse_catalogue() -> list[dict[str, Any]]:
             "rankingWorld": int(qs) if qs != "=" else 700 + len(records),
             "website": f"https://www.{domain}/", "logoUrl": "", "coverUrl": "",
             "description": f"{name_ru} — государственный университет Китая в городе {city}. Сильные стороны вуза: {strengths}.",
+            "specialties": strengths,
             "hasCscScholarship": True, "_strengths": strengths,
         })
     if len(records) != 115:

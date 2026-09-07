@@ -10,9 +10,10 @@
     "rankingNational": 1,
     "rankingWorld": 25,
     "website": "https://www.tsinghua.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Tsinghua_University_Logo.svg/1280px-Tsinghua_University_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Tsinghua_University_Logo.svg/1280px-Tsinghua_University_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Tsinghua_University_campus_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
     "description": "Университет Цинхуа расположен в городе Пекин. Tsinghua University (Chinese: 清华大学; pinyin: Qīnghuá Dàxué; THU) is a public research university in Haidian, Beijing, China. It is affiliated with and funded by the Ministry of Education of China. The university is part of the Double First-Class Construction, and was a part of its predecessor initiatives: Project 211 and Project 985. It is also a member of the C9 League. Tsinghua University's campus is in northwestern Beijing, on the site of the former imperial gardens of the Qing dynasty. The university has 21 schools and 59 departments, with faculties in science, engineering, humanities, law, medicine, history, philosophy, economics, managem",
+    "specialties": "инженерия, компьютерные науки и архитектура",
     "hasCscScholarship": true
   },
   {
@@ -26,9 +27,10 @@
     "rankingNational": 2,
     "rankingWorld": 14,
     "website": "https://www.pku.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Peking_University_seal.svg/1280px-Peking_University_seal.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Peking_University_seal.svg/1280px-Peking_University_seal.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg/1920px-Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Пекинский университет расположен в городе Пекин. Peking University (PKU) is a public university in Haidian, Beijing, China. It is affiliated with and funded by the Ministry of Education. The university is part of Project 211, Project 985, and the Double First-Class Construction. It is also a member of the C9 League. Founded in 1898 as the Imperial University of Peking by royal charter from the Guangxu Emperor, it is the second-oldest university in China after Tianjin University (established in 1895). In May 1912, the government of the Republic of China ordered the Imperial University of Peking to be renamed Peking University. After the People's Republic of China was established, the univers",
+    "specialties": "естественные науки, медицина, право и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -42,9 +44,10 @@
     "rankingNational": 3,
     "rankingWorld": 30,
     "website": "https://www.fudan.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Fudan_University_Logo.svg/1280px-Fudan_University_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Fudan_University_Logo.svg/1280px-Fudan_University_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Fudan_University_Jiangwan_Campus.jpg/1920px-Fudan_University_Jiangwan_Campus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Университет Фудань расположен в городе Шанхай. Fudan University (FDU) is a public university in Yangpu, Shanghai, China. It is affiliated with the Ministry of Education and is co-funded with the Shanghai Municipal Government. The university is part of Project 211, Project 985, and the Double First-Class Construction. The university was originally founded by the Chinese Jesuit priest Ma Xiangbo in 1905. It is a member of the C9 League.",
+    "specialties": "медицина, экономика, менеджмент и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -61,6 +64,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.sjtu.edu.cn&sz=256",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/A_panorama_of_Shanghai_Jiao_Tong_University_school_campus.jpg/1920px-A_panorama_of_Shanghai_Jiao_Tong_University_school_campus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Шанхайский университет Цзяотун расположен в городе Шанхай. Shanghai Jiao Tong University (SJTU) is a public university in Shanghai, China. It is affiliated with the Ministry of Education of China. The university is part of Project 211, Project 985, and the Double First-Class Construction. It is a member of the C9 League. SJTU was founded as Nanyang Public School in 1896. It was merged into Jiao Tong University in 1921, before gaining its current name in 1959. The university currently has 33 schools, 12 affiliated hospitals, 2 affiliated medical research institutes, 23 directly affiliated units, and 5 directly affiliated enterprises.",
+    "specialties": "инженерия, медицина и менеджмент",
     "hasCscScholarship": true
   },
   {
@@ -74,9 +78,10 @@
     "rankingNational": 5,
     "rankingWorld": 47,
     "website": "https://www.zju.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Zhejiang_University_Logotype.svg/1280px-Zhejiang_University_Logotype.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/en/thumb/8/89/Zhejiang_University_Logotype.svg/1280px-Zhejiang_University_Logotype.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/The_Third_Teaching_Building_in_Zhejiang_University_Yuquan_Campus_01_2017-10.jpg/1920px-The_Third_Teaching_Building_in_Zhejiang_University_Yuquan_Campus_01_2017-10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Чжэцзянский университет расположен в городе Ханчжоу. Zhejiang University (ZJU) is a public research university in Hangzhou, Zhejiang, China. It is affiliated with the Ministry of Education. The university is part of the C9 League, Project 211, Project 985, and Double First-Class Construction. The university was established as National Third Chung Shan University in 1927, in memory of Sun Yat-sen, and soon renamed as National Chekiang University (NCKU) in 1928. During the presidency of Chu Kochen from 1936 to 1949, the university retreated to Guizhou in Western China during the Second Sino-Japanese War, before it moved back to Hangzhou in 1946. After the Communist Revolution, the university was ",
+    "specialties": "инженерия, медицина, сельское хозяйство и технологии",
     "hasCscScholarship": true
   },
   {
@@ -90,9 +95,10 @@
     "rankingNational": 6,
     "rankingWorld": 137,
     "website": "https://www.ustc.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ustc.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Университет науки и технологий Китая — государственный университет Китая в городе Хэфэй. Сильные стороны вуза: физика, химия, математика и компьютерные науки.",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Gate_of_USTC.JPG/1280px-Gate_of_USTC.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Yuequn_Building_in_East_Campus_of_University_of_Science_and_Technology_of_China.jpg/1920px-Yuequn_Building_in_East_Campus_of_University_of_Science_and_Technology_of_China.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Университет науки и технологий Китая расположен в городе Хэфэй. The University of Science and Technology of China (USTC) is a public university in Hefei, Anhui, China. It is owned by the Chinese Academy of Sciences, and co-funded by the Chinese Academy of Sciences, the Ministry of Education of China, and the Anhui Provincial Government. It is part of Project 211, Project 985, and the Double First-Class Construction. The university was founded in Beijing by the Chinese Academy of Sciences in September 1958. In the beginning of 1970, the university moved to Hefei during the Cultural Revolution. The university has 13 schools, 11 national research platforms, 8 science-education integration colleges, and 5 joi",
+    "specialties": "физика, химия, математика и компьютерные науки",
     "hasCscScholarship": true
   },
   {
@@ -107,8 +113,9 @@
     "rankingWorld": 145,
     "website": "https://www.nju.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nju.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Нанкинский университет — государственный университет Китая в городе Нанкин. Сильные стороны вуза: естественные науки, астрономия, химия и гуманитарные науки.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Zhongshan_Building_in_Nanjing_University_Gulou_campus_2012-04.JPG/1920px-Zhongshan_Building_in_Nanjing_University_Gulou_campus_2012-04.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Нанкинский университет расположен в городе Нанкин. Nanjing University (NJU) is a public university in Nanjing and Suzhou, Jiangsu, China. It is affiliated and sponsored by the Ministry of Education. The university is part of Project 211, Project 985, and the Double First-Class Construction. The university is a member of the C9 League. Established in 1902 as Sanjiang Normal School, Nanjing University underwent a number of name changes, such as Nanjing Higher Normal School, National Southeastern University and National Central University, until it was renamed Nanjing University in 1950. It merged with the University of Nanking in 1952. Nanjing University has four campuses: the Xianlin campus in",
+    "specialties": "естественные науки, астрономия, химия и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -123,8 +130,9 @@
     "rankingWorld": 194,
     "website": "https://www.whu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.whu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Уханьский университет — государственный университет Китая в городе Ухань. Сильные стороны вуза: геодезия, медицина, право и гуманитарные науки.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Wuhan_University_-_Water_Resources_Lab_-_Yu_the_Great_-_DSCF4287.JPG/1920px-Wuhan_University_-_Water_Resources_Lab_-_Yu_the_Great_-_DSCF4287.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Уханьский университет расположен в городе Ухань. Wuhan University (WHU) is a public university in Wuhan, Hubei, China. It is affiliated with and funded by the Ministry of Education of China. The university is part of Project 985, Project 211, and Double First-Class Construction.",
+    "specialties": "геодезия, медицина, право и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -139,8 +147,9 @@
     "rankingWorld": 256,
     "website": "https://www.hit.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hit.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Харбинский технологический институт — государственный университет Китая в городе Харбин. Сильные стороны вуза: космическая техника, робототехника и инженерия.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/The_Big_T_1924.pdf/page1-960px-The_Big_T_1924.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Харбинский технологический институт расположен в городе Харбин. The Harbin Institute of Technology (HIT) is a public science and engineering university in Nan'gang, Harbin, Heilongjiang, China. It is one of the top universities in China and is affiliated with the Ministry of Industry and Information Technology. The university is part of Project 211, Project 985, and the Double First-Class Construction. The university is a member of the C9 League. The university was founded in 1920 as Harbin Sino-Russia Industrial School. Besides the main campus in Harbin, the university operates two satellite campuses in Shenzhen, Guangdong (as Harbin Institute of Technology, Shenzhen) and in Weihai, Shandong (as Harbin I",
+    "specialties": "космическая техника, робототехника и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -157,6 +166,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.bnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский педагогический университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: образование, психология, география и гуманитарные науки.",
+    "specialties": "образование, психология, география и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -173,6 +183,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.tongji.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Университет Тунцзи — государственный университет Китая в городе Шанхай. Сильные стороны вуза: архитектура, гражданское строительство и транспорт.",
+    "specialties": "архитектура, гражданское строительство и транспорт",
     "hasCscScholarship": true
   },
   {
@@ -189,6 +200,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.bit.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский технологический институт — государственный университет Китая в городе Пекин. Сильные стороны вуза: аэрокосмическая техника, оптика и инженерия.",
+    "specialties": "аэрокосмическая техника, оптика и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -205,6 +217,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hust.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хуачжунский университет науки и технологий — государственный университет Китая в городе Ухань. Сильные стороны вуза: медицина, инженерия и компьютерные науки.",
+    "specialties": "медицина, инженерия и компьютерные науки",
     "hasCscScholarship": true
   },
   {
@@ -221,6 +234,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.tju.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Тяньцзиньский университет — государственный университет Китая в городе Тяньцзинь. Сильные стороны вуза: химическая технология, архитектура и инженерия.",
+    "specialties": "химическая технология, архитектура и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -237,6 +251,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.sysu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Университет Сунь Ятсена — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: медицина, бизнес и естественные науки.",
+    "specialties": "медицина, бизнес и естественные науки",
     "hasCscScholarship": true
   },
   {
@@ -253,6 +268,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nankai.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нанькайский университет — государственный университет Китая в городе Тяньцзинь. Сильные стороны вуза: экономика, химия, математика и история.",
+    "specialties": "экономика, химия, математика и история",
     "hasCscScholarship": true
   },
   {
@@ -269,6 +285,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.seu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Юго-Восточный университет — государственный университет Китая в городе Нанкин. Сильные стороны вуза: архитектура, электроника и гражданское строительство.",
+    "specialties": "архитектура, электроника и гражданское строительство",
     "hasCscScholarship": true
   },
   {
@@ -285,6 +302,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.xjtu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Сианьский университет Цзяотун — государственный университет Китая в городе Сиань. Сильные стороны вуза: энергетика, инженерия, менеджмент и медицина.",
+    "specialties": "энергетика, инженерия, менеджмент и медицина",
     "hasCscScholarship": true
   },
   {
@@ -301,6 +319,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.buaa.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский университет аэронавтики и астронавтики — государственный университет Китая в городе Пекин. Сильные стороны вуза: авиакосмическая техника, робототехника и информатика.",
+    "specialties": "авиакосмическая техника, робототехника и информатика",
     "hasCscScholarship": true
   },
   {
@@ -317,6 +336,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.sdu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шаньдунский университет — государственный университет Китая в городе Цзинань. Сильные стороны вуза: медицина, математика, экономика и гуманитарные науки.",
+    "specialties": "медицина, математика, экономика и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -333,6 +353,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.xmu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Сямэньский университет — государственный университет Китая в городе Сямынь. Сильные стороны вуза: экономика, химия, менеджмент и океанология.",
+    "specialties": "экономика, химия, менеджмент и океанология",
     "hasCscScholarship": true
   },
   {
@@ -349,6 +370,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.scu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Сычуаньский университет — государственный университет Китая в городе Чэнду. Сильные стороны вуза: медицина, стоматология, инженерия и гуманитарные науки.",
+    "specialties": "медицина, стоматология, инженерия и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -365,6 +387,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.zuel.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Чжуннаньский университет экономики и права — государственный университет Китая в городе Ухань. Сильные стороны вуза: экономика, финансы, право и менеджмент.",
+    "specialties": "экономика, финансы, право и менеджмент",
     "hasCscScholarship": true
   },
   {
@@ -378,9 +401,10 @@
     "rankingNational": 24,
     "rankingWorld": 801,
     "website": "https://www.bfsu.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/0/07/%E5%8C%97%E4%BA%AC%E5%A4%96%E5%9B%BD%E8%AF%AD%E5%A4%A7%E5%AD%A6.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Campusbfsu.jpg/1920px-Campusbfsu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Пекинский университет иностранных языков расположен в городе Пекин. Beijing Foreign Studies University (BFSU; 北京外国语大学) is a public university in Haidian, Beijing, China. It is affiliated with the Ministry of Education. The university is part of Project 211 and the Double First-Class Construction. BFSU is a sister university of Peking University (PKU), with both institutions affiliated with the Education Working Committee in the Haidian District. Given their affiliation with the same committee, the two universities also maintain institutional and academic links, including the appointment of a former president of one university as president of the other, as well as cooperation in courses and degree programmes.",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.bfsu.edu.cn&sz=256",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Пекинский университет иностранных языков — государственный университет Китая в городе Пекин. Сильные стороны вуза: иностранные языки, международные отношения и перевод.",
+    "specialties": "иностранные языки, международные отношения и перевод",
     "hasCscScholarship": true
   },
   {
@@ -395,8 +419,9 @@
     "rankingWorld": 724,
     "website": "https://www.ucas.ac.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ucas.ac.cn&sz=256",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Catalogue_of_the_officers_and_students_of_Dummer_Academy_%28IA_catalogueofoffic1922dumm%29.pdf/page1-1280px-Catalogue_of_the_officers_and_students_of_Dummer_Academy_%28IA_catalogueofoffic1922dumm%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Университет Китайской академии наук — государственный университет Китая в городе Пекин. Сильные стороны вуза: естественные науки, инженерия и исследовательские программы.",
+    "specialties": "естественные науки, инженерия и исследовательские программы",
     "hasCscScholarship": true
   },
   {
@@ -410,9 +435,10 @@
     "rankingNational": 26,
     "rankingWorld": 621,
     "website": "https://www.ruc.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/RenminUniversitysign.JPG/1280px-RenminUniversitysign.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Construction_site_of_Renmin_University_East_Campus_%2820180728151529%29.jpg/1920px-Construction_site_of_Renmin_University_East_Campus_%2820180728151529%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Китайский народный университет расположен в городе Пекин. The Renmin University of China (RUC) is a public university in Haidian, Beijing, China. The university is affiliated with the Ministry of Education, and co-funded by the Ministry of Education and the Beijing Municipal People's Government. The university is part of Project 211, Project 985, and the Double First-Class Construction.",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ruc.edu.cn&sz=256",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Китайский народный университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: экономика, право, социология и журналистика.",
+    "specialties": "экономика, право, социология и журналистика",
     "hasCscScholarship": true
   },
   {
@@ -426,9 +452,10 @@
     "rankingNational": 27,
     "rankingWorld": 726,
     "website": "https://www.buct.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Beijing_University_of_Chemical_Technology_%2820240125140308%29.jpg/1280px-Beijing_University_of_Chemical_Technology_%2820240125140308%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Hong_Kong_and_Beijing_-_trip_report_%28IA_hongkongbeijingt00buss%29.pdf/page1-960px-Hong_Kong_and_Beijing_-_trip_report_%28IA_hongkongbeijingt00buss%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Пекинский университет химической технологии расположен в городе Пекин. The Beijing University of Chemical Technology (BUCT, Chinese: 北京化工大学; lit. 'Beijing Chemical Industry University') is a public university in Chaoyang, Beijing, China. It was founded in 1958 and is affiliated with the Ministry of Education of China. The university is part of Project 211 and the Double First-Class Construction.",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.buct.edu.cn&sz=256",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Пекинский университет химической технологии — государственный университет Китая в городе Пекин. Сильные стороны вуза: химическая технология, материалы и биоинженерия.",
+    "specialties": "химическая технология, материалы и биоинженерия",
     "hasCscScholarship": true
   },
   {
@@ -443,8 +470,9 @@
     "rankingWorld": 727,
     "website": "https://www.bjtu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.bjtu.edu.cn&sz=256",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Agricultural_libraries_information_notes_%28IA_CAT75654148161%29.pdf/page1-960px-Agricultural_libraries_information_notes_%28IA_CAT75654148161%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Пекинский транспортный университет расположен в городе Пекин. Beijing Jiaotong University (BJTU; Chinese: 北京交通大学; lit. 'Beijing Transport University'; previously Northern Jiaotong University) is a public university in Haidian, Beijing, China. It is affiliated with the Ministry of Education, and co-funded by the Ministry of Education, the Ministry of Transport, the Beijing Municipal People's Government, and China State Railway Group Company Limited. The university is part of the Double First-Class Construction and Project 211.",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Пекинский транспортный университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: транспорт, логистика, информатика и инженерия.",
+    "specialties": "транспорт, логистика, информатика и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -461,6 +489,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.bjut.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский технологический университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: инженерия, компьютерные науки и материалы.",
+    "specialties": "инженерия, компьютерные науки и материалы",
     "hasCscScholarship": true
   },
   {
@@ -477,6 +506,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.uibe.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Университет международного бизнеса и экономики — государственный университет Китая в городе Пекин. Сильные стороны вуза: международная торговля, финансы и экономика.",
+    "specialties": "международная торговля, финансы и экономика",
     "hasCscScholarship": true
   },
   {
@@ -493,6 +523,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cufe.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Центральный финансово-экономический университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: финансы, экономика, бухгалтерский учет и право.",
+    "specialties": "финансы, экономика, бухгалтерский учет и право",
     "hasCscScholarship": true
   },
   {
@@ -509,6 +540,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cau.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский сельскохозяйственный университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: агрономия, биотехнологии, ветеринария и пищевые науки.",
+    "specialties": "агрономия, биотехнологии, ветеринария и пищевые науки",
     "hasCscScholarship": true
   },
   {
@@ -525,6 +557,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cup.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский нефтяной университет — государственный университет Китая в городе Циндао. Сильные стороны вуза: нефтегазовая инженерия, геология и химическая технология.",
+    "specialties": "нефтегазовая инженерия, геология и химическая технология",
     "hasCscScholarship": true
   },
   {
@@ -541,6 +574,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cumt.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский горный университет — государственный университет Китая в городе Сюйчжоу. Сильные стороны вуза: горное дело, безопасность, геология и энергетика.",
+    "specialties": "горное дело, безопасность, геология и энергетика",
     "hasCscScholarship": true
   },
   {
@@ -554,9 +588,10 @@
     "rankingNational": 35,
     "rankingWorld": 734,
     "website": "https://www.dlut.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.dlut.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Даляньский технологический университет — государственный университет Китая в городе Далянь. Сильные стороны вуза: инженерия, химия, менеджмент и материалы.",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Dalian_University_of_Technology.jpg/1280px-Dalian_University_of_Technology.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/CLEARING_THE_AIR-_THE_HUMAN_RIGHTS_AND_LEGAL_DIMENSIONS_OF_CHINA%27S_ENVIRONMENTAL_DILEMMA_%28IA_gov.gpo.fdsys.CHRG-108hhrg85625%29.pdf/page1-960px-CLEARING_THE_AIR-_THE_HUMAN_RIGHTS_AND_LEGAL_DIMENSIONS_OF_CHINA%27S_ENVIRONMENTAL_DILEMMA_%28IA_gov.gpo.fdsys.CHRG-108hhrg85625%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Даляньский технологический университет расположен в городе Далянь. The Dalian University of Technology (DLUT) is a public university in Ganjingzi, Dalian, Liaoning, China. It is affiliated with the Ministry of Education. The university is part of Project 211, Project 985, and the Double First-Class Construction. The university was initially founded in 1949. As of August 2021, 13 members of Chinese Academy of Sciences and members of Chinese Academy of Engineering in full-time faculty, 38 in part-time faculty, 1 foreign member of the Chinese Academy of Science, 1 member of Royal Swedish Academy of Engineering Sciences and 10 members of the Discipline Review Group of Academic Degrees Committee of the State Coun",
+    "specialties": "инженерия, химия, менеджмент и материалы",
     "hasCscScholarship": true
   },
   {
@@ -570,9 +605,10 @@
     "rankingNational": 36,
     "rankingWorld": 735,
     "website": "https://www.neu.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.neu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Северо-Восточный университет — государственный университет Китая в городе Шэньян. Сильные стороны вуза: металлургия, автоматизация, информатика и инженерия.",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/NU_RGB_seal_R.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Northeastern_University_Shenyang_Nanhu_Campus_Zhulou_Central_Building_2019.jpg/1920px-Northeastern_University_Shenyang_Nanhu_Campus_Zhulou_Central_Building_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Северо-Восточный университет расположен в городе Шэньян. Northeastern University (abbreviated as NU or NEU) is a private research university with its main campus in Boston, Massachusetts, United States. It was founded by the Boston Young Men's Christian Association in 1898 as an all-male institute before being incorporated as Northeastern College in 1916, gaining university status in 1922. With more than 38,000 students, Northeastern is the largest university in Massachusetts by enrollment. The university's main campus in Boston is located within the center of the city along Huntington Avenue and Columbus Avenue near the Fenway–Kenmore and Roxbury neighborhoods. It offers undergraduate and graduate",
+    "specialties": "металлургия, автоматизация, информатика и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -587,8 +623,9 @@
     "rankingWorld": 736,
     "website": "https://www.jlu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.jlu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Цзилиньский университет — государственный университет Китая в городе Чанчунь. Сильные стороны вуза: медицина, химия, автомобили и право.",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Jilin_University_Oil_Shale_Complex_Building_from_the_side.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "description": "Цзилиньский университет расположен в городе Чанчунь. Jilin University (JLU) is a public university in the city of Changchun, Jilin, China. It is affiliated with the Ministry of Education. The university is part of Project 211, Project 985, and the Double First-Class Construction.",
+    "specialties": "медицина, химия, автомобили и право",
     "hasCscScholarship": true
   },
   {
@@ -602,9 +639,10 @@
     "rankingNational": 38,
     "rankingWorld": 737,
     "website": "https://www.nenu.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.nenu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Северо-Восточный педагогический университет — государственный университет Китая в городе Чанчунь. Сильные стороны вуза: образование, психология и гуманитарные науки.",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Northeast_normal_university_new_campus_garden_2011_07_27.jpg/1280px-Northeast_normal_university_new_campus_garden_2011_07_27.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Northeast_normal_university_new_campus_buildings_2011_07_27.jpg/1920px-Northeast_normal_university_new_campus_buildings_2011_07_27.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Северо-Восточный педагогический университет расположен в городе Чанчунь. Northeast Normal University (NENU; 东北师范大学) is a public normal university in Changchun, Jilin, China. It is affiliated with the Ministry of Education, and co-funded by the Ministry of Education and the Jilin Provincial People's Government. The university is part of Project 211 and the Double First-Class Construction.",
+    "specialties": "образование, психология и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -619,8 +657,9 @@
     "rankingWorld": 738,
     "website": "https://www.nefu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nefu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Северо-Восточный лесотехнический университет — государственный университет Китая в городе Харбин. Сильные стороны вуза: лесное хозяйство, экология и инженерия.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Forestry_research_west_%28IA_CAT80724881057%29.pdf/page1-960px-Forestry_research_west_%28IA_CAT80724881057%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Северо-Восточный лесотехнический университет расположен в городе Харбин. Northeast Forestry University (NEFU; 东北林业大学) is a public university in Harbin, Heilongjiang, China. It is affiliated with the Ministry of Education, and co-founded by the Minister of Education, the National Forestry and Grassland Administration, and the Heilongjiang Provincial People's Government. The university is part of Project 211 and the Double First-Class Construction.",
+    "specialties": "лесное хозяйство, экология и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -637,6 +676,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.neau.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Северо-Восточный сельскохозяйственный университет — государственный университет Китая в городе Харбин. Сильные стороны вуза: сельское хозяйство, ветеринария и пищевые науки.",
+    "specialties": "сельское хозяйство, ветеринария и пищевые науки",
     "hasCscScholarship": true
   },
   {
@@ -653,6 +693,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.lzu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Ланьчжоуский университет — государственный университет Китая в городе Ланьчжоу. Сильные стороны вуза: экология, физика, химия и тибетские исследования.",
+    "specialties": "экология, физика, химия и тибетские исследования",
     "hasCscScholarship": true
   },
   {
@@ -669,6 +710,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nwpu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Северо-Западный политехнический университет — государственный университет Китая в городе Сиань. Сильные стороны вуза: авиакосмическая техника, материалы и робототехника.",
+    "specialties": "авиакосмическая техника, материалы и робототехника",
     "hasCscScholarship": true
   },
   {
@@ -685,6 +727,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nwafu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Северо-Западный университет сельского и лесного хозяйства — государственный университет Китая в городе Янлин. Сильные стороны вуза: агрономия, лесное хозяйство и биотехнологии.",
+    "specialties": "агрономия, лесное хозяйство и биотехнологии",
     "hasCscScholarship": true
   },
   {
@@ -701,6 +744,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nwu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Северо-Западный университет — государственный университет Китая в городе Сиань. Сильные стороны вуза: геология, экономика, археология и химия.",
+    "specialties": "геология, экономика, археология и химия",
     "hasCscScholarship": true
   },
   {
@@ -717,6 +761,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.scut.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Южно-Китайский технологический университет — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: инженерия, материалы, архитектура и бизнес.",
+    "specialties": "инженерия, материалы, архитектура и бизнес",
     "hasCscScholarship": true
   },
   {
@@ -733,6 +778,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.scnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Южно-Китайский педагогический университет — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: образование, психология и гуманитарные науки.",
+    "specialties": "образование, психология и гуманитарные науки",
     "hasCscScholarship": true
   },
   {
@@ -749,6 +795,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.swufe.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Юго-Западный университет финансов и экономики — государственный университет Китая в городе Чэнду. Сильные стороны вуза: финансы, экономика и страхование.",
+    "specialties": "финансы, экономика и страхование",
     "hasCscScholarship": true
   },
   {
@@ -765,6 +812,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.swu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Юго-Западный университет — государственный университет Китая в городе Чунцин. Сильные стороны вуза: образование, психология, сельское хозяйство и биология.",
+    "specialties": "образование, психология, сельское хозяйство и биология",
     "hasCscScholarship": true
   },
   {
@@ -781,6 +829,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cqu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Чунцинский университет — государственный университет Китая в городе Чунцин. Сильные стороны вуза: архитектура, инженерия, энергетика и менеджмент.",
+    "specialties": "архитектура, инженерия, энергетика и менеджмент",
     "hasCscScholarship": true
   },
   {
@@ -797,6 +846,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хунаньский университет — государственный университет Китая в городе Чанша. Сильные стороны вуза: архитектура, инженерия, химия и бизнес.",
+    "specialties": "архитектура, инженерия, химия и бизнес",
     "hasCscScholarship": true
   },
   {
@@ -813,6 +863,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.csu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Центральный южный университет — государственный университет Китая в городе Чанша. Сильные стороны вуза: медицина, горное дело, транспорт и материалы.",
+    "specialties": "медицина, горное дело, транспорт и материалы",
     "hasCscScholarship": true
   },
   {
@@ -829,6 +880,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.zzu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Чжэнчжоуский университет — государственный университет Китая в городе Чжэнчжоу. Сильные стороны вуза: медицина, химия, инженерия и экономика.",
+    "specialties": "медицина, химия, инженерия и экономика",
     "hasCscScholarship": true
   },
   {
@@ -845,6 +897,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.henu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хэнаньский университет — государственный университет Китая в городе Кайфын. Сильные стороны вуза: образование, биология, история и химия.",
+    "specialties": "образование, биология, история и химия",
     "hasCscScholarship": true
   },
   {
@@ -861,6 +914,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ecnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Восточно-Китайский педагогический университет — государственный университет Китая в городе Шанхай. Сильные стороны вуза: образование, психология, география и информатика.",
+    "specialties": "образование, психология, география и информатика",
     "hasCscScholarship": true
   },
   {
@@ -877,6 +931,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ecust.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Восточно-Китайский университет науки и технологий — государственный университет Китая в городе Шанхай. Сильные стороны вуза: химическая технология, материалы и биоинженерия.",
+    "specialties": "химическая технология, материалы и биоинженерия",
     "hasCscScholarship": true
   },
   {
@@ -893,6 +948,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.shu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шанхайский университет — государственный университет Китая в городе Шанхай. Сильные стороны вуза: материалы, кино, бизнес и инженерия.",
+    "specialties": "материалы, кино, бизнес и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -909,6 +965,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.shufe.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шанхайский университет финансов и экономики — государственный университет Китая в городе Шанхай. Сильные стороны вуза: финансы, экономика и статистика.",
+    "specialties": "финансы, экономика и статистика",
     "hasCscScholarship": true
   },
   {
@@ -925,6 +982,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.shisu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шанхайский университет иностранных языков — государственный университет Китая в городе Шанхай. Сильные стороны вуза: языки, перевод и международные отношения.",
+    "specialties": "языки, перевод и международные отношения",
     "hasCscScholarship": true
   },
   {
@@ -941,6 +999,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.shanghaitech.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шанхайский технический университет — государственный университет Китая в городе Шанхай. Сильные стороны вуза: биомедицина, физика, материалы и информатика.",
+    "specialties": "биомедицина, физика, материалы и информатика",
     "hasCscScholarship": true
   },
   {
@@ -957,6 +1016,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nbu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нинбоский университет — государственный университет Китая в городе Нинбо. Сильные стороны вуза: океанология, медицина, бизнес и инженерия.",
+    "specialties": "океанология, медицина, бизнес и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -973,6 +1033,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.caa.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайская академия искусств — государственный университет Китая в городе Ханчжоу. Сильные стороны вуза: изобразительное искусство, дизайн и архитектура.",
+    "specialties": "изобразительное искусство, дизайн и архитектура",
     "hasCscScholarship": true
   },
   {
@@ -989,6 +1050,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nuaa.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нанкинский университет аэронавтики и астронавтики — государственный университет Китая в городе Нанкин. Сильные стороны вуза: авиакосмическая техника, механика и робототехника.",
+    "specialties": "авиакосмическая техника, механика и робототехника",
     "hasCscScholarship": true
   },
   {
@@ -1005,6 +1067,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.njust.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нанкинский университет науки и технологий — государственный университет Китая в городе Нанкин. Сильные стороны вуза: оптика, инженерия, материалы и информатика.",
+    "specialties": "оптика, инженерия, материалы и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1019,8 +1082,9 @@
     "rankingWorld": 763,
     "website": "https://www.suda.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.suda.edu.cn&sz=256",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Soochow_University_BE-572_and_Judicial_Second_Building_20100610.jpg/1920px-Soochow_University_BE-572_and_Judicial_Second_Building_20100610.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Сучжоуский университет — государственный университет Китая в городе Сучжоу. Сильные стороны вуза: медицина, материаловедение, право и текстиль.",
+    "specialties": "медицина, материаловедение, право и текстиль",
     "hasCscScholarship": true
   },
   {
@@ -1035,8 +1099,9 @@
     "rankingWorld": 764,
     "website": "https://www.hhu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hhu.edu.cn&sz=256",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Hohai_University_Jiangning_Campus_02_2013-03.JPG/1920px-Hohai_University_Jiangning_Campus_02_2013-03.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Университет Хохай расположен в городе Нанкин. Hohai University (HHU; Chinese: 河海大学; pinyin: Héhǎi Dàxué) is a public university in Nanjing, Jiangsu, China. It is affiliated with the Ministry of Education of China, and co-sponsored by the Ministry of Education, the Ministry of Water Resources, the State Oceanic Administration, and the Jiangsu Provincial People's Government. The university is part of Project 211 and the Double First-Class Construction. Named after \"Hohai (河海)\", which literally means river and sea in Chinese, it is a comprehensive university famous in the disciplines related to hydrology, water resources, hydraulic engineering, coastal engineering and marine engineering and",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Университет Хохай — государственный университет Китая в городе Нанкин. Сильные стороны вуза: гидротехника, водные ресурсы и инженерия.",
+    "specialties": "гидротехника, водные ресурсы и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -1052,7 +1117,8 @@
     "website": "https://www.cpu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cpu.edu.cn&sz=256",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/The_West_China_Missionary_News_%28June_1927%29.pdf/page1-500px-The_West_China_Missionary_News_%28June_1927%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Китайский фармацевтический университет расположен в городе Нанкин. China Pharmaceutical University (CPU; 中国药科大学) is a public university in Nanjing, Jiangsu, China. It is affiliated with the Ministry of Education, and co-sponsored by the Ministry of Education and the Province of Jiangsu. It was founded in 1968 through mergers between the National College of Pharmacy and other smaller universities. The university is part of Project 211 and the Double First-Class Construction.",
+    "description": "Китайский фармацевтический университет — государственный университет Китая в городе Нанкин. Сильные стороны вуза: фармацевтика, медицина и биотехнологии.",
+    "specialties": "фармацевтика, медицина и биотехнологии",
     "hasCscScholarship": true
   },
   {
@@ -1066,9 +1132,10 @@
     "rankingNational": 67,
     "rankingWorld": 766,
     "website": "https://www.xmut.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Xiamen_University_of_Technology_Siming_Campus.jpg/1280px-Xiamen_University_of_Technology_Siming_Campus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Xiamen_University_of_Technology_Siming_Campus.jpg/1280px-Xiamen_University_of_Technology_Siming_Campus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Enhancing_Teaching_and_Learning_through_Internal_Quality_Assurance.pdf/page1-960px-Enhancing_Teaching_and_Learning_through_Internal_Quality_Assurance.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Технологический университет Сямэня расположен в городе Сямынь. The Xiamen University of Technology (XMUT; Chinese: 厦门理工学院; lit. 'Xiamen Polytechnic College') is a provincial public university located in Xiamen, Fujian, China.",
+    "specialties": "инженерия, дизайн и бизнес",
     "hasCscScholarship": true
   },
   {
@@ -1085,6 +1152,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.fzu.edu.cn&sz=256",
     "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/West_Area_Athletic_Field%2C_Qishan_Campus%2C_FJNU_01.jpg/1920px-West_Area_Athletic_Field%2C_Qishan_Campus%2C_FJNU_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "description": "Фучжоуский университет расположен в городе Фучжоу. Fuzhou University (FZU; 福州大学) is a provincial public university in Fuzhou, Fujian, China. It is affiliated with the Province of Fujian. The university is part of Project 211 and the Double First-Class Construction. The university has two campuses, split by the Min River. The university's old campus is located on the north bank of the river in the western part of Fuzhou City, while the new campus is located on the edge of the city on the south bank, at the base of Qi Mountain.",
+    "specialties": "химия, инженерия, информатика и менеджмент",
     "hasCscScholarship": true
   },
   {
@@ -1099,8 +1167,9 @@
     "rankingWorld": 768,
     "website": "https://www.gzhu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.gzhu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/A_building_of_Guihuagang_Campus%2C_Guangzhou_University_20190712.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
     "description": "Гуанчжоуский университет расположен в городе Гуанчжоу. Guangzhou University (GU; Chinese: 广州大学) is a public university in Guangzhou, Guangdong province, China. Guangzhou University is currently one of the 13 high-level universities in Guangdong Province. Guangzhou University was established in 2000 through the merger of the former Guangzhou University, South China Construction Institute West Campus, Guangzhou Normal College, Guangzhou Institute of Education, and Guangzhou Higher Normal College. The university operates under a co-management system between the provincial and municipal governments, with the city taking the lead. The legal address of Guangzhou University is 230 Outer Ring West Road, ",
+    "specialties": "строительство, география, бизнес и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1115,8 +1184,9 @@
     "rankingWorld": 769,
     "website": "https://www.jnu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.jnu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Университет Цзинань — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: медицина, журналистика, экономика и фармацевтика.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Administrative_Building%2C_Jinan_University_20250119.jpg/1920px-Administrative_Building%2C_Jinan_University_20250119.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Университет Цзинань расположен в городе Гуанчжоу. Jinan University ( JEE-NAHN; JNU, Chinese: 暨南大学) is a national public university in Guangzhou, Guangdong, China. It is affiliated with the United Front Work Department (UFWD) of the Chinese Communist Party (CCP), and managed by the UFWD of CCP, Ministry of Education of China, and the Guangdong Provincial People's Government. The university is part of the Double First-Class Construction and Project 211. It is also one of the 13 Guangdong Province High-Level Universities. \"Jinan\" literally means \"reaching southward,\" indicating the university's original mission to disseminate Chinese learning and culture from North to South when it was founded ",
+    "specialties": "медицина, журналистика, экономика и фармацевтика",
     "hasCscScholarship": true
   },
   {
@@ -1130,9 +1200,10 @@
     "rankingNational": 71,
     "rankingWorld": 770,
     "website": "https://www.szu.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.szu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Шэньчжэньский университет — государственный университет Китая в городе Шэньчжэнь. Сильные стороны вуза: инженерия, финансы, медицина и компьютерные науки.",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Central_Plaza_of_Yuehai_Campus%2C_Shenzhen_University.jpg/1280px-Central_Plaza_of_Yuehai_Campus%2C_Shenzhen_University.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Central_Plaza_of_Yuehai_Campus%2C_Shenzhen_University.jpg/1280px-Central_Plaza_of_Yuehai_Campus%2C_Shenzhen_University.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "description": "Шэньчжэньский университет расположен в городе Шэньчжэнь. Shenzhen University (SZU, traditional Chinese: 深圳大學, simplified Chinese: 深圳大学, pinyin: Shēnzhèn Dàxué) is a municipal public research university in Shenzhen, Guangdong, China. The university is funded by the Shenzhen Municipal People's Government.",
+    "specialties": "инженерия, финансы, медицина и компьютерные науки",
     "hasCscScholarship": true
   },
   {
@@ -1149,6 +1220,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hkust-gz.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Гонконгский университет науки и технологий в Гуанчжоу — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: информатика, инженерия, бизнес и искусственный интеллект.",
+    "specialties": "информатика, инженерия, бизнес и искусственный интеллект",
     "hasCscScholarship": true
   },
   {
@@ -1165,6 +1237,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ynu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Юньнаньский университет — государственный университет Китая в городе Куньмин. Сильные стороны вуза: экология, биология, этнология и химия.",
+    "specialties": "экология, биология, этнология и химия",
     "hasCscScholarship": true
   },
   {
@@ -1181,6 +1254,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.gzu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Гуйчжоуский университет — государственный университет Китая в городе Гуйян. Сильные стороны вуза: сельское хозяйство, инженерия, химия и информатика.",
+    "specialties": "сельское хозяйство, инженерия, химия и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1197,6 +1271,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.gxnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Гуанси-Чжуанский университет — государственный университет Китая в городе Наньнин. Сильные стороны вуза: сельское хозяйство, инженерия и биология.",
+    "specialties": "сельское хозяйство, инженерия и биология",
     "hasCscScholarship": true
   },
   {
@@ -1213,6 +1288,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hainanu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хайнаньский университет — государственный университет Китая в городе Хайкоу. Сильные стороны вуза: тропическое сельское хозяйство, право и океанология.",
+    "specialties": "тропическое сельское хозяйство, право и океанология",
     "hasCscScholarship": true
   },
   {
@@ -1229,6 +1305,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.utibet.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Тибетский университет — государственный университет Китая в городе Лхаса. Сильные стороны вуза: тибетология, медицина, экология и языки.",
+    "specialties": "тибетология, медицина, экология и языки",
     "hasCscScholarship": true
   },
   {
@@ -1245,6 +1322,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.imu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Внутренняя Монголия университет — государственный университет Китая в городе Хух-Хото. Сильные стороны вуза: экология, монголоведение, химия и биология.",
+    "specialties": "экология, монголоведение, химия и биология",
     "hasCscScholarship": true
   },
   {
@@ -1261,6 +1339,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.xju.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Синьцзянский университет — государственный университет Китая в городе Урумчи. Сильные стороны вуза: геология, энергетика, химия и информатика.",
+    "specialties": "геология, энергетика, химия и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1277,6 +1356,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.nxu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нинсяский университет — государственный университет Китая в городе Иньчуань. Сильные стороны вуза: сельское хозяйство, экология и инженерия.",
+    "specialties": "сельское хозяйство, экология и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -1293,6 +1373,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.qhu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Цинхайский университет — государственный университет Китая в городе Синин. Сильные стороны вуза: экология плато, медицина и сельское хозяйство.",
+    "specialties": "экология плато, медицина и сельское хозяйство",
     "hasCscScholarship": true
   },
   {
@@ -1309,6 +1390,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.sxu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шаньсийский университет — государственный университет Китая в городе Тайюань. Сильные стороны вуза: оптика, физика, химия и история.",
+    "specialties": "оптика, физика, химия и история",
     "hasCscScholarship": true
   },
   {
@@ -1325,6 +1407,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.tyut.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Тайюаньский технологический университет — государственный университет Китая в городе Тайюань. Сильные стороны вуза: горное дело, материалы, инженерия и химия.",
+    "specialties": "горное дело, материалы, инженерия и химия",
     "hasCscScholarship": true
   },
   {
@@ -1341,6 +1424,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hbu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хэбэйский университет — государственный университет Китая в городе Баодин. Сильные стороны вуза: экономика, медицина, химия и история.",
+    "specialties": "экономика, медицина, химия и история",
     "hasCscScholarship": true
   },
   {
@@ -1357,6 +1441,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hebut.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хэбэйский технологический университет — государственный университет Китая в городе Тяньцзинь. Сильные стороны вуза: инженерия, материалы, химия и электротехника.",
+    "specialties": "инженерия, материалы, химия и электротехника",
     "hasCscScholarship": true
   },
   {
@@ -1373,6 +1458,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ysu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Яньшаньский университет — государственный университет Китая в городе Циньхуандао. Сильные стороны вуза: механика, материалы и электротехника.",
+    "specialties": "механика, материалы и электротехника",
     "hasCscScholarship": true
   },
   {
@@ -1389,6 +1475,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ouc.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Океанологический университет Китая — государственный университет Китая в городе Циндао. Сильные стороны вуза: океанология, рыбное хозяйство, биология и экология.",
+    "specialties": "океанология, рыбное хозяйство, биология и экология",
     "hasCscScholarship": true
   },
   {
@@ -1405,6 +1492,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cug.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский геологический университет — государственный университет Китая в городе Ухань. Сильные стороны вуза: геология, геофизика, ресурсы и экология.",
+    "specialties": "геология, геофизика, ресурсы и экология",
     "hasCscScholarship": true
   },
   {
@@ -1421,6 +1509,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.whut.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Уханьский университет технологий — государственный университет Китая в городе Ухань. Сильные стороны вуза: материалы, транспорт, строительство и инженерия.",
+    "specialties": "материалы, транспорт, строительство и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -1437,6 +1526,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hubu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Хубэйский университет — государственный университет Китая в городе Ухань. Сильные стороны вуза: химия, биология, экономика и образование.",
+    "specialties": "химия, биология, экономика и образование",
     "hasCscScholarship": true
   },
   {
@@ -1453,6 +1543,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.csust.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Чаншаский университет науки и технологий — государственный университет Китая в городе Чанша. Сильные стороны вуза: транспорт, энергетика и гражданское строительство.",
+    "specialties": "транспорт, энергетика и гражданское строительство",
     "hasCscScholarship": true
   },
   {
@@ -1469,6 +1560,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ncu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Наньчанский университет — государственный университет Китая в городе Наньчан. Сильные стороны вуза: медицина, пищевые науки, материаловедение и инженерия.",
+    "specialties": "медицина, пищевые науки, материаловедение и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -1485,6 +1577,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ahu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Аньхойский университет — государственный университет Китая в городе Хэфэй. Сильные стороны вуза: китайский язык, химия, информатика и право.",
+    "specialties": "китайский язык, химия, информатика и право",
     "hasCscScholarship": true
   },
   {
@@ -1501,6 +1594,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.uestc.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Университет электронной науки и технологий Китая — государственный университет Китая в городе Чэнду. Сильные стороны вуза: электроника, телекоммуникации, информатика и искусственный интеллект.",
+    "specialties": "электроника, телекоммуникации, информатика и искусственный интеллект",
     "hasCscScholarship": true
   },
   {
@@ -1517,6 +1611,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.xidian.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Сианьский университет электронной науки и технологий — государственный университет Китая в городе Сиань. Сильные стороны вуза: электроника, связь, радар и кибербезопасность.",
+    "specialties": "электроника, связь, радар и кибербезопасность",
     "hasCscScholarship": true
   },
   {
@@ -1531,8 +1626,9 @@
     "rankingWorld": 795,
     "website": "https://www.cdut.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cdut.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Чэндуйский университет технологий — государственный университет Китая в городе Чэнду. Сильные стороны вуза: геология, ресурсы, ядерная техника и информатика.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/SISE_Building_of_UESTC.jpg/1920px-SISE_Building_of_UESTC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Чэндуйский университет технологий расположен в городе Чэнду. The Chengdu University of Technology (CDUT; 成都理工大学) is a national public research university located in Chengdu, Sichuan, China. It is a technology-focused institution co-funded by the Ministry of Education of China, the Ministry of Natural Resources of China, and the Sichuan Provincial People's Government. The university is part of the Double First-Class Construction Initiative. CDUT was established in 1956 on the basis of geology-related faculties from Chongqing University, Nanjing University, Northwest University, Beijing Institute of Geology (now China University of Geosciences), Northeast College of Geology (now Jilin University), and Ji",
+    "specialties": "геология, ресурсы, ядерная техника и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1547,8 +1643,9 @@
     "rankingWorld": 796,
     "website": "https://www.cdu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cdu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Чэндуйский университет — государственный университет Китая в городе Чэнду. Сильные стороны вуза: медицина, туризм, образование и инженерия.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/SISE_Building_of_UESTC.jpg/1920px-SISE_Building_of_UESTC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Чэндуйский университет расположен в городе Чэнду. Chengdu University (CDU; 成都大学) is a provincial public university located in Chengdu, Sichuan, China. It is affiliated with the Province of Sichuan, and co-sponsored by the Sichuan Provincial People's Government and the Chengdu Municipal People's Government. The university is accredited to confer bachelor's and master's degrees.",
+    "specialties": "медицина, туризм, образование и инженерия",
     "hasCscScholarship": true
   },
   {
@@ -1562,9 +1659,10 @@
     "rankingNational": 98,
     "rankingWorld": 797,
     "website": "https://www.wmu.edu.cn/",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.wmu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Медицинский университет Вэньчжоу — государственный университет Китая в городе Вэньчжоу. Сильные стороны вуза: медицина, офтальмология и фармацевтика.",
+    "logoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/WMC_Pinned_Crest.JPG/1280px-WMC_Pinned_Crest.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/CONGRESSIONAL-EXECUTIVE_COMMISSION_ON_CHINA_ANNUAL_REPORT_2015_%28IA_gov.gpo.fdsys.CHRG-114hhrg96106%29.pdf/page1-960px-CONGRESSIONAL-EXECUTIVE_COMMISSION_ON_CHINA_ANNUAL_REPORT_2015_%28IA_gov.gpo.fdsys.CHRG-114hhrg96106%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Медицинский университет Вэньчжоу расположен в городе Вэньчжоу. Wenzhou Medical University (WMU; Chinese: 温州医科大学; pinyin: Wēnzhōu Yīkē Dàxué) is a provincial public university in Wenzhou, Zhejiang, China.",
+    "specialties": "медицина, офтальмология и фармацевтика",
     "hasCscScholarship": true
   },
   {
@@ -1579,8 +1677,9 @@
     "rankingWorld": 798,
     "website": "https://www.ccmu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ccmu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Столичный медицинский университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: медицина, клинические исследования и общественное здоровье.",
+    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Dhaka_University_campus%2C_Dhaka.jpg/1920px-Dhaka_University_campus%2C_Dhaka.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Столичный медицинский университет расположен в городе Пекин. Capital Medical University (CCMU; 首都医科大学) is a municipal public university in Beijing, China. It is affiliated with the City of Beijing, and co-funded by the Beijing Municipal People's Government, the National Health Commission, and the Ministry of Education. The university was founded in 1960 as the Beijing Second Medical College.",
+    "specialties": "медицина, клинические исследования и общественное здоровье",
     "hasCscScholarship": true
   },
   {
@@ -1595,8 +1694,9 @@
     "rankingWorld": 799,
     "website": "https://www.cmu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cmu.edu.cn&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Китайский медицинский университет — государственный университет Китая в городе Шэньян. Сильные стороны вуза: клиническая медицина, стоматология и фармацевтика.",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/2/20/Dorm_buildings_of_the_China_Medical_University_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "description": "Китайский медицинский университет расположен в городе Шэньян. China Medical University may refer to: China Medical University (Liaoning) (中国医科大学), in Shenyang, Liaoning, China China Medical University (Taiwan) (中國醫藥大學), in Taichung, Taiwan",
+    "specialties": "клиническая медицина, стоматология и фармацевтика",
     "hasCscScholarship": true
   },
   {
@@ -1613,6 +1713,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.njmu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Нанкинский медицинский университет — государственный университет Китая в городе Нанкин. Сильные стороны вуза: медицина, общественное здоровье и фармацевтика.",
+    "specialties": "медицина, общественное здоровье и фармацевтика",
     "hasCscScholarship": true
   },
   {
@@ -1626,9 +1727,10 @@
     "rankingNational": 102,
     "rankingWorld": 801,
     "website": "https://www.smu.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Qilingang_campus.jpg/1280px-Qilingang_campus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/College_of_Liberal_Arts_building_at_the_University_of_Southern_California%2C_Los_Angeles%2C_ca.1915_%28CHS-5193%29.jpg/1920px-College_of_Liberal_Arts_building_at_the_University_of_Southern_California%2C_Los_Angeles%2C_ca.1915_%28CHS-5193%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Южный медицинский университет расположен в городе Гуанчжоу. Southern Medical University (南方医科大学) is a provincial public medical university in Baiyun, Guangzhou, Guangdong, China. Formerly as a military-affiliated medical university, the whole institution was transferred to the Guangdong Provincial People's Government and became a provincial public university in 2004. It is now wholly owned by the Guangdong Provincial People's Government. Southern Medical University is in the foothills of the picturesque Baiyun Mountain in Guangzhou. The main campus, together with its south campus in the southern suburb of Guangzhou, covers an area of nearly one square kilometer. Its gardens are known for rows of green",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.smu.edu.cn&sz=256",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Южный медицинский университет — государственный университет Китая в городе Гуанчжоу. Сильные стороны вуза: медицина, стоматология и общественное здоровье.",
+    "specialties": "медицина, стоматология и общественное здоровье",
     "hasCscScholarship": true
   },
   {
@@ -1643,8 +1745,9 @@
     "rankingWorld": 802,
     "website": "https://www.tmu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.tmu.edu.cn&sz=256",
-    "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Tentsu_medical.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-    "description": "Тяньцзиньский медицинский университет расположен в городе Тяньцзинь. Tianjin Medical University (TMU; Chinese: 天津医科大学; pinyin: Tiānjīn Yīkē Dàxué) is a public medical university in Tianjin, China. It is affiliated with the City of Tianjin, and co-funded by the Tianjin Municipal People's Government, the National Health Commission, and the Ministry of Education. The university is part of Project 211 and the Double First-Class Construction. Founded in 1951 as Tianjin Medical College, the school was the first medical institution approved by the State Council. Hsien-I Chu, a renowned endocrinologist, was the first president of the university. In December 1993, with the approval of the State Education Council, the T",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Тяньцзиньский медицинский университет — государственный университет Китая в городе Тяньцзинь. Сильные стороны вуза: клиническая медицина, фармацевтика и общественное здоровье.",
+    "specialties": "клиническая медицина, фармацевтика и общественное здоровье",
     "hasCscScholarship": true
   },
   {
@@ -1658,9 +1761,10 @@
     "rankingNational": 104,
     "rankingWorld": 803,
     "website": "https://www.bucm.edu.cn/",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Beijing_University_of_Chinese_Medicine_%2820210914135137%29.jpg/1280px-Beijing_University_of_Chinese_Medicine_%2820210914135137%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/China%27s_Xinjiang_Uygur_autonomous_region_-_cornucopia_or_Achilles_heel%3F._%28IA_chinasxinjianguy00elde%29.pdf/page1-960px-China%27s_Xinjiang_Uygur_autonomous_region_-_cornucopia_or_Achilles_heel%3F._%28IA_chinasxinjianguy00elde%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "description": "Пекинский университет китайской медицины расположен в городе Пекин. The Beijing University of Chinese Medicine (BUCM, Chinese: 北京中医药大学) is a public university in China. Founded in 1956, it is one of the first traditional Chinese medical institutions for higher learning in China. The university is affiliated with the Ministry of Education. It is part of Project 211 and the Double First-Class Construction. Beijing University of Chinese Medicine operates across three campuses: the Heping Street Campus, Wangjing Campus, and Liangxiang Campus. Collectively, these campuses span an area of 268 acres (approximately 108 hectares).",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.bucm.edu.cn&sz=256",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
+    "description": "Пекинский университет китайской медицины — государственный университет Китая в городе Пекин. Сильные стороны вуза: традиционная китайская медицина, фармацевтика и медицина.",
+    "specialties": "традиционная китайская медицина, фармацевтика и медицина",
     "hasCscScholarship": true
   },
   {
@@ -1675,8 +1779,9 @@
     "rankingWorld": 804,
     "website": "https://www.shutcm.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.shutcm.edu.cn&sz=256",
-    "coverUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/University_of_Chicago_magazine_%28IA_universityofchic06univuoft%29.pdf/page1-500px-University_of_Chicago_magazine_%28IA_universityofchic06univuoft%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Шанхайский университет традиционной китайской медицины — государственный университет Китая в городе Шанхай. Сильные стороны вуза: традиционная китайская медицина, фармакология и реабилитация.",
+    "specialties": "традиционная китайская медицина, фармакология и реабилитация",
     "hasCscScholarship": true
   },
   {
@@ -1692,7 +1797,8 @@
     "website": "https://www.minzu.edu.cn/",
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.minzu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
-    "description": "Центральный университет национальностей Китая расположен в городе Пекин. The Minzu University of China (MUC) is a national public university in Beijing, China. It is affiliated with the National Ethnic Affairs Commission of the United Front Work Department of the Central Committee of the Chinese Communist Party. The university is part of Project 211, Project 985, and the Double First-Class Construction. Minzu University ranked first in China among universities for ethnic minority studies. It aims to be one of the best universities of its kind in the world for inheriting and promoting the excellent culture of all ethnic groups. With the strong support of Chinese government, it has developed rapidly over the years. ",
+    "description": "Центральный университет национальностей Китая — государственный университет Китая в городе Пекин. Сильные стороны вуза: этнология, гуманитарные науки, право и социальные науки.",
+    "specialties": "этнология, гуманитарные науки, право и социальные науки",
     "hasCscScholarship": true
   },
   {
@@ -1709,6 +1815,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ccom.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Центральная консерватория музыки — государственный университет Китая в городе Пекин. Сильные стороны вуза: музыка, исполнительское искусство и теория искусства.",
+    "specialties": "музыка, исполнительское искусство и теория искусства",
     "hasCscScholarship": true
   },
   {
@@ -1725,6 +1832,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cugb.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский геологический университет (Пекин) — государственный университет Китая в городе Пекин. Сильные стороны вуза: геология, геофизика, ресурсы и экология.",
+    "specialties": "геология, геофизика, ресурсы и экология",
     "hasCscScholarship": true
   },
   {
@@ -1741,6 +1849,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cupl.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский университет политологии и права — государственный университет Китая в городе Пекин. Сильные стороны вуза: право, политология, криминология и государственное управление.",
+    "specialties": "право, политология, криминология и государственное управление",
     "hasCscScholarship": true
   },
   {
@@ -1757,6 +1866,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.cuc.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Китайский университет коммуникаций — государственный университет Китая в городе Пекин. Сильные стороны вуза: журналистика, медиакоммуникации, кино и телевидение.",
+    "specialties": "журналистика, медиакоммуникации, кино и телевидение",
     "hasCscScholarship": true
   },
   {
@@ -1773,6 +1883,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ncepu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Северо-Китайский электроэнергетический университет — государственный университет Китая в городе Пекин. Сильные стороны вуза: энергетика, электротехника, инженерия и автоматизация.",
+    "specialties": "энергетика, электротехника, инженерия и автоматизация",
     "hasCscScholarship": true
   },
   {
@@ -1789,6 +1900,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.pumc.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский медицинский колледж Союза — государственный университет Китая в городе Пекин. Сильные стороны вуза: медицина, клинические исследования и общественное здоровье.",
+    "specialties": "медицина, клинические исследования и общественное здоровье",
     "hasCscScholarship": true
   },
   {
@@ -1805,6 +1917,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ustb.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Пекинский университет науки и технологий — государственный университет Китая в городе Пекин. Сильные стороны вуза: металлургия, материалы, инженерия и информатика.",
+    "specialties": "металлургия, материалы, инженерия и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1821,6 +1934,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.ccnu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Центральный педагогический университет Китая — государственный университет Китая в городе Ухань. Сильные стороны вуза: педагогика, психология, гуманитарные науки и информатика.",
+    "specialties": "педагогика, психология, гуманитарные науки и информатика",
     "hasCscScholarship": true
   },
   {
@@ -1837,57 +1951,7 @@
     "logoUrl": "https://www.google.com/s2/favicons?domain=www.hrbeu.edu.cn&sz=256",
     "coverUrl": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=85",
     "description": "Харбинский инженерный университет — государственный университет Китая в городе Харбин. Сильные стороны вуза: кораблестроение, морская техника, ядерная инженерия и информатика.",
+    "specialties": "кораблестроение, морская техника, ядерная инженерия и информатика",
     "hasCscScholarship": true
-  },
-  {
-    "slug": "test-beijing-digital-university",
-    "nameRu": "Пробный университет цифровых технологий Пекина",
-    "nameEn": "Test Beijing Digital University",
-    "nameCn": "测试北京数字大学",
-    "city": "Пекин",
-    "province": "Пекин",
-    "type": "Public",
-    "rankingNational": 901,
-    "rankingWorld": 1901,
-    "website": "https://example.com/test-beijing-digital-university",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=example.com&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=85",
-    "specialties": "Computer Science, Business",
-    "description": "Test university for catalogue checks in Beijing. This record is intended for development testing only.",
-    "hasCscScholarship": false
-  },
-  {
-    "slug": "test-shanghai-medical-university",
-    "nameRu": "Пробный медицинский университет Шанхая",
-    "nameEn": "Test Shanghai Medical University",
-    "nameCn": "测试上海医科大学",
-    "city": "Шанхай",
-    "province": "Шанхай",
-    "type": "Public",
-    "rankingNational": 902,
-    "rankingWorld": 1902,
-    "website": "https://example.com/test-shanghai-medical-university",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=example.com&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=85",
-    "specialties": "Medicine, Economics",
-    "description": "Test university for catalogue checks in Shanghai. This record is intended for development testing only.",
-    "hasCscScholarship": true
-  },
-  {
-    "slug": "test-chengdu-language-institute",
-    "nameRu": "Пробный языковой институт Чэнду",
-    "nameEn": "Test Chengdu Language Institute",
-    "nameCn": "测试成都语言学院",
-    "city": "Чэнду",
-    "province": "Сычуань",
-    "type": "Public",
-    "rankingNational": 903,
-    "rankingWorld": 1903,
-    "website": "https://example.com/test-chengdu-language-institute",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=example.com&sz=256",
-    "coverUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=85",
-    "specialties": "Liberal Arts, Law",
-    "description": "Test university for catalogue checks in Chengdu. This record is intended for development testing only.",
-    "hasCscScholarship": false
   }
 ]

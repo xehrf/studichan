@@ -39,8 +39,25 @@ const specialtyTranslations = {
 }
 
 const translateSpecialties = (value) => {
-  const keys = Object.keys(specialtyTranslations)
-  const selected = keys.filter((key) => value.toLowerCase().includes(key))
+  const aliases = {
+    engineering: ['engineering', 'инженерия', 'строительство', 'автоматизация', 'энергетика', 'транспорт'],
+    'computer science': ['computer science', 'информатика', 'телекоммуникации', 'кибербезопасность', 'искусственный интеллект'],
+    architecture: ['architecture', 'архитектура'],
+    medicine: ['medicine', 'медицина', 'стоматология', 'фармацевтика', 'офтальмология'],
+    economics: ['economics', 'экономика', 'финансы', 'страхование', 'бухгалтерский учет'],
+    business: ['business', 'менеджмент', 'торговля', 'бизнес'],
+    law: ['law', 'право', 'криминология'],
+    humanities: ['humanities', 'гуманитарные', 'история', 'философия', 'этнология', 'языки'],
+    science: ['science', 'физика', 'химия', 'математика', 'биология', 'геология', 'география', 'экология'],
+    education: ['education', 'образование', 'педагогика', 'психология'],
+    agriculture: ['agriculture', 'сельское хозяйство', 'агрономия', 'ветеринария', 'лесное хозяйство'],
+    materials: ['materials', 'материалы', 'материаловедение', 'металлургия'],
+    chemistry: ['chemistry', 'химия', 'биоинженерия'],
+  }
+  const lowerValue = value.toLowerCase()
+  const selected = Object.entries(aliases)
+    .filter(([, words]) => words.some((word) => lowerValue.includes(word)))
+    .map(([key]) => key)
   const fallback = selected.length ? selected : ['engineering', 'science']
   return {
     en: fallback.map((key) => specialtyTranslations[key][0]).join(', '),
