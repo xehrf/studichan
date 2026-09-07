@@ -252,14 +252,14 @@ function Questionnaire({ t, onComplete, onSkip }) {
       </div>
       <div className="questionnaire-panel">
         <div className="questionnaire-topline"><span className="eyebrow">{t('questionnaire.matchProfile')}</span><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div>
-        <div className="questionnaire-progress-meta"><span>{String(step + 1).padStart(2, '0')}<small> / 04</small></span></div>
+        <div className="questionnaire-progress-meta"><span>{step + 1}<small> / 4</small></span></div>
         <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
         <div className="question-block">
-          <div className="questionnaire-heading"><div><p className="questionnaire-step">{String(step + 1).padStart(2, '0')} — {t('questionnaire.step', step + 1, questions.length)}</p><h2>{question.title}</h2></div><div className="questionnaire-mark">{String(step + 1).padStart(2, '0')}</div></div>
+          <div className="questionnaire-heading"><div><p className="questionnaire-step">{step + 1} — {t('questionnaire.step', step + 1, questions.length)}</p><h2>{question.title}</h2></div></div>
           <div className="answer-grid">
             {question.options.map((option, index) => (
               <button type="button" key={option || 'all'} className={`answer-btn ${answers[question.key] === option ? 'selected' : ''}`} onClick={() => choose(option)} aria-pressed={answers[question.key] === option}>
-                <span className="answer-index">{String(index + 1).padStart(2, '0')}</span><span className="answer-label">{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : (option ? t(`specialtyNames.${option}`) : t('filterAll'))}</span><span className="answer-indicator">{answers[question.key] === option && <Check size={16} />}</span>
+                <span className="answer-index">{index + 1}</span><span className="answer-label">{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : (option ? t(`specialtyNames.${option}`) : t('filterAll'))}</span><span className="answer-indicator">{answers[question.key] === option && <Check size={16} />}</span>
               </button>
             ))}
           </div>
