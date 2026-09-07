@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown } from 'lucide-react'
+import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
 
@@ -100,11 +100,17 @@ function App() {
     setFiltered(result)
   }
 
-  const handleApply = (university) => {
-    if (!user) {
-      setSelectedUniversity(university)
-      setShowAuth(true)
-    }
+  const handleViewDetails = (university) => {
+    setSelectedUniversity(university)
+  }
+
+  const resetFilters = () => {
+    setSearch('')
+    setRegion('')
+    setSelectedSpecialties([])
+    setSpecialtySearch('')
+    setShowSpecialtyFilter(false)
+    setFiltered(universities)
   }
 
   const handleQuestionnaireComplete = ({ specialty, region: preferredRegion }) => {
@@ -124,21 +130,27 @@ function App() {
           ) : (
             <>
               <header className="app-header">
-            <div className="header-title">
-              <h1>中国大学</h1>
-              <p>{t('title')}</p>
+            <div className="brand-lockup">
+              <span className="brand-mark">C</span>
+              <div className="header-title"><h1><strong>china</strong><span>course</span></h1><p>{t('title')}</p></div>
             </div>
             <div className="header-controls">
-              <select className="lang-select" value={lang} onChange={(e) => setLang(e.target.value)}>
+              <select className="lang-select" value={lang} onChange={(e) => setLang(e.target.value)} aria-label="Language">
                 <option value="en">EN</option>
-                <option value="ru">РУ</option>
+                <option value="ru">RU</option>
                 <option value="kk">KK</option>
               </select>
+              {!user && <button className="sign-in-btn" onClick={() => setShowAuth(true)}>{t('signIn')}</button>}
               {canUseBrowserImporter && <button className="icon-btn" title="Импорт университетов" onClick={() => setShowImport(true)}><Upload size={18} /></button>}
               {user && <button className="logout-btn" onClick={() => setUser(null)}><LogOut size={18} /></button>}
             </div>
               </header>
 
+              <div className="catalogue-content">
+              <section className="catalogue-intro">
+                <div><p className="catalogue-eyebrow">University catalogue</p><h2>Find your right fit.</h2></div>
+                <p>Compare programmes, tuition and application support in one clear shortlist.</p>
+              </section>
               <div className="search-section">
             <div className="search-input">
               <Search size={18} />
@@ -173,29 +185,25 @@ function App() {
             )}
               </div>
 
+              <div className="results-meta"><p><strong>{filtered.length}</strong> universities to explore</p><button onClick={resetFilters}>Reset all</button></div>
+
               {loading ? (
                 <div className="loading">{t('loading')}</div>
               ) : (
                 <div className="universities-list">
-                  {filtered.map(uni => (
+                  {filtered.length === 0 ? <div className="empty-state"><h3>No universities found.</h3><p>Try changing your search or filters.</p><button onClick={resetFilters}>Reset all</button></div> : filtered.map(uni => (
                     <div key={uni.id} className="uni-card">
-                      <div className="uni-header">
-                        <div>
-                          <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
-                          <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)}</p>
-                        </div>
-                        {uni.ranking && <div className="ranking"><TrendingUp size={14} /> {t('ranking', uni.ranking)}</div>}
+                      <div className="uni-card-top">
+                        <div className="uni-badges">{uni.ranking && <div className="ranking">{t('ranking', uni.ranking)} WORLD</div>}{uni.agency_id && <span className="agency-badge">AGENCY SUPPORT</span>}</div>
+                        <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
+                        <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)} · {uni.region} China</p>
                       </div>
-                      <p className="uni-tuition">{localized(uni.tuition_translations, lang, uni.tuition)}</p>
-                      {uni.agency_id ? (
-                        <div className="agency-badge">{t('agencyHandled', uni.students_count)}</div>
-                      ) : (
-                        <button className="apply-btn" onClick={() => handleApply(uni)}>{t('learnMore')}</button>
-                      )}
+                      <div className="uni-card-footer"><p className="uni-meta"><strong>{t('tuition')} </strong>{localized(uni.tuition_translations, lang, uni.tuition)} <span>Focus {parseSpecialties(uni.specialties).slice(0, 2).join(', ')}</span></p><button className="apply-btn" onClick={() => handleViewDetails(uni)}>{t('viewDetails')} <ArrowRight size={16} /></button></div>
                     </div>
                   ))}
                 </div>
               )}
+              </div>
             </>
           )}
         </>
@@ -211,7 +219,7 @@ function App() {
 
 function Questionnaire({ t, onComplete, onSkip }) {
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState({ goal: '', specialty: '', region: '', scholarship: '' })
+  const [answers, setAnswers] = useState({ goal: null, specialty: null, region: null, scholarship: null })
 
   const questions = [
     { key: 'goal', title: t('questionnaire.goalTitle'), options: ['bachelor', 'master', 'language'] },
@@ -223,37 +231,40 @@ function Questionnaire({ t, onComplete, onSkip }) {
   const isLast = step === questions.length - 1
 
   const choose = (value) => {
-    const nextAnswers = { ...answers, [question.key]: value }
-    setAnswers(nextAnswers)
-    if (isLast) onComplete(nextAnswers)
+    setAnswers(current => ({ ...current, [question.key]: value }))
+  }
+
+  const continueQuestion = () => {
+    if (answers[question.key] === null) return
+    if (isLast) onComplete(answers)
     else setStep(step + 1)
   }
 
   return (
     <section className="questionnaire" aria-label={t('questionnaire.title')}>
-      <div className="questionnaire-topline">
-        <span className="eyebrow">{t('questionnaire.eyebrow')}</span>
-        <button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button>
-      </div>
-      <div className="questionnaire-heading">
-        <div>
-          <p className="questionnaire-step">{t('questionnaire.step', step + 1, questions.length)}</p>
-          <h2>{t('questionnaire.title')}</h2>
-          <p>{t('questionnaire.subtitle')}</p>
+      <div className="questionnaire-hero">
+        <div className="questionnaire-brand"><span className="brand-mark">C</span><span className="questionnaire-wordmark"><strong>china</strong><span>course</span></span></div>
+        <div className="questionnaire-hero-copy">
+          <p className="hero-support">A precise starting point for your next chapter in China.</p>
+          <h1>Study in<br />China<br /><em>made<br />simple.</em></h1>
+          <p className="hero-footer"><span>■</span> BUILT AROUND YOUR GOALS</p>
         </div>
-        <div className="questionnaire-mark">{String(step + 1).padStart(2, '0')}</div>
       </div>
-      <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
-      <div className="question-block">
-        <h3>{question.title}</h3>
-        <div className="answer-grid">
-          {question.options.map((option) => (
-            <button key={option || 'all'} className={`answer-btn ${answers[question.key] === option ? 'selected' : ''}`} onClick={() => choose(option)}>
-              <span>{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : (option ? t(`specialtyNames.${option}`) : t('filterAll'))}</span>
-              {answers[question.key] === option ? <Check size={17} /> : <ArrowRight size={16} />}
-            </button>
-          ))}
+      <div className="questionnaire-panel">
+        <div className="questionnaire-topline"><span className="eyebrow">YOUR MATCH PROFILE</span><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div>
+        <div className="questionnaire-progress-meta"><span>{String(step + 1).padStart(2, '0')}<small> / 04</small></span></div>
+        <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
+        <div className="question-block">
+          <div className="questionnaire-heading"><div><p className="questionnaire-step">{String(step + 1).padStart(2, '0')} — {t('questionnaire.step', step + 1, questions.length)}</p><h2>{question.title}</h2></div><div className="questionnaire-mark">{String(step + 1).padStart(2, '0')}</div></div>
+          <div className="answer-grid">
+            {question.options.map((option, index) => (
+              <button type="button" key={option || 'all'} className={`answer-btn ${answers[question.key] === option ? 'selected' : ''}`} onClick={() => choose(option)} aria-pressed={answers[question.key] === option}>
+                <span className="answer-index">{String(index + 1).padStart(2, '0')}</span><span className="answer-label">{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : (option ? t(`specialtyNames.${option}`) : t('filterAll'))}</span><span className="answer-indicator">{answers[question.key] === option && <Check size={16} />}</span>
+              </button>
+            ))}
+          </div>
         </div>
+        <div className="questionnaire-actions"><p>Choose one answer to continue.</p><button type="button" className="continue-btn" onClick={continueQuestion} disabled={answers[question.key] === null}>{isLast ? 'See my matches' : 'Continue'} <ArrowRight size={17} /></button></div>
       </div>
     </section>
   )
