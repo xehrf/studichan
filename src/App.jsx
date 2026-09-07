@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X, ArrowRight, Check } from 'lucide-react'
+import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
 
@@ -7,6 +7,9 @@ import './App.css'
 // would let any visitor alter the production catalogue.
 const canUseBrowserImporter = import.meta.env.DEV
 const localized = (translations, lang, fallback = '') => translations?.[lang] || translations?.en || fallback
+const parseSpecialties = (specialties) => Array.isArray(specialties)
+  ? specialties.map(spec => String(spec).trim()).filter(Boolean)
+  : String(specialties || '').split(',').map(spec => spec.trim()).filter(Boolean)
 
 function App() {
   const [universities, setUniversities] = useState([])
@@ -15,6 +18,8 @@ function App() {
   const [region, setRegion] = useState('')
   const [selectedSpecialties, setSelectedSpecialties] = useState([])
   const [uniqueSpecialties, setUniqueSpecialties] = useState([])
+  const [specialtySearch, setSpecialtySearch] = useState('')
+  const [showSpecialtyFilter, setShowSpecialtyFilter] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [selectedUniversity, setSelectedUniversity] = useState(null)
@@ -23,6 +28,10 @@ function App() {
   const [showQuestionnaire, setShowQuestionnaire] = useState(true)
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en')
   const t = useTranslation(lang)
+  const specialtyLabel = (specialty) => {
+    const translated = t(`specialtyNames.${specialty}`)
+    return translated === `specialtyNames.${specialty}` ? specialty : translated
+  }
 
   useEffect(() => {
     localStorage.setItem('lang', lang)
@@ -42,7 +51,7 @@ function App() {
       // Extract unique specialties
       const allSpecialties = new Set()
       data.forEach(uni => {
-        uni.specialties.split(',').map(spec => spec.trim()).filter(Boolean).forEach(spec => {
+        parseSpecialties(uni.specialties).forEach(spec => {
           allSpecialties.add(spec)
         })
       })
@@ -83,7 +92,7 @@ function App() {
     }
     if (specialties.length > 0) {
       result = result.filter(u => {
-        const uniSpecs = u.specialties.split(',').map(s => s.trim()).filter(Boolean)
+        const uniSpecs = parseSpecialties(u.specialties)
         return specialties.some(spec => uniSpecs.includes(spec))
       })
     }
@@ -139,18 +148,23 @@ function App() {
             </div>
             {uniqueSpecialties.length > 0 && (
               <div className="specialty-filters">
-                <p className="filter-label">{t('specialties')}:</p>
-                <div className="specialty-options">
-                  {uniqueSpecialties.map(spec => (
-                    <button
-                      key={spec}
-                      className={`filter-btn specialty-btn ${selectedSpecialties.includes(spec) ? 'active' : ''}`}
-                      onClick={() => handleSpecialtyFilter(spec)}
-                    >
-                      {t(`specialtyNames.${spec}`) || spec}
-                    </button>
-                  ))}
+                <div className="specialty-filter-bar">
+                  <div className="specialty-filter-title"><p className="filter-label">{t('specialties')}</p>{selectedSpecialties.length > 0 && <span className="selected-filter-count">{selectedSpecialties.length}</span>}</div>
+                  <button className={`specialty-toggle ${showSpecialtyFilter ? 'open' : ''}`} onClick={() => setShowSpecialtyFilter(value => !value)} aria-expanded={showSpecialtyFilter}>
+                    <SlidersHorizontal size={16} /><span>{showSpecialtyFilter ? t('closeFilter') : t('chooseSpecialty')}</span><ChevronDown size={15} />
+                  </button>
                 </div>
+                {selectedSpecialties.length > 0 && <div className="selected-specialties" aria-label={t('selectedSpecialties')}>
+                  {selectedSpecialties.map(spec => <span className="selected-specialty" key={spec}>{specialtyLabel(spec)}<button onClick={() => handleSpecialtyFilter(spec)} aria-label={`${t('remove')} ${specialtyLabel(spec)}`}><X size={13} /></button></span>)}
+                  <button className="clear-specialties" onClick={() => { setSelectedSpecialties([]); applyFilters(search, region, []) }}>{t('clear')}</button>
+                </div>}
+                {showSpecialtyFilter && <div className="specialty-panel">
+                  <div className="specialty-search"><Search size={16} /><input type="search" value={specialtySearch} onChange={(e) => setSpecialtySearch(e.target.value)} placeholder={t('specialtySearch')} />{specialtySearch && <button className="clear-search" onClick={() => setSpecialtySearch('')} aria-label={t('clear')}><X size={15} /></button>}</div>
+                  <div className="specialty-options">
+                    {uniqueSpecialties.filter(spec => specialtyLabel(spec).toLowerCase().includes(specialtySearch.toLowerCase())).map(spec => <button key={spec} className={`specialty-option ${selectedSpecialties.includes(spec) ? 'active' : ''}`} onClick={() => handleSpecialtyFilter(spec)} aria-pressed={selectedSpecialties.includes(spec)}><span className="specialty-check">{selectedSpecialties.includes(spec) && <Check size={13} />}</span><span>{specialtyLabel(spec)}</span></button>)}
+                    {uniqueSpecialties.filter(spec => specialtyLabel(spec).toLowerCase().includes(specialtySearch.toLowerCase())).length === 0 && <p className="no-specialties">{t('noSpecialties')}</p>}
+                  </div>
+                </div>}
               </div>
             )}
           </div>
