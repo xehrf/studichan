@@ -1,6 +1,7 @@
 export const translations = {
   en: {
     title: 'Chinese Universities',
+    language: 'Language',
     subtitle: 'Study in China',
     searchPlaceholder: 'Search university or city...',
     filterAll: 'All',
@@ -101,6 +102,7 @@ export const translations = {
   },
   ru: {
     title: 'Китайские университеты',
+    language: 'Язык',
     subtitle: 'Учись в Китае',
     searchPlaceholder: 'Поиск университета или города...',
     filterAll: 'Все',
@@ -201,6 +203,7 @@ export const translations = {
   },
   kk: {
     title: 'Қытай университеттері',
+    language: 'Тіл',
     subtitle: 'Қытайда оқы',
     searchPlaceholder: 'Университет немесе қаланы іздеңіз...',
     filterAll: 'Барлығы',

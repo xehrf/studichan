@@ -126,7 +126,7 @@ function App() {
       {!selectedUniversity ? (
         <>
           {showQuestionnaire ? (
-            <Questionnaire t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />
+            <Questionnaire lang={lang} onLanguageChange={setLang} t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />
           ) : (
             <>
               <header className="app-header">
@@ -217,7 +217,7 @@ function App() {
   )
 }
 
-function Questionnaire({ t, onComplete, onSkip }) {
+function Questionnaire({ lang, onLanguageChange, t, onComplete, onSkip }) {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({ goal: null, specialty: null, region: null, scholarship: null })
 
@@ -251,7 +251,7 @@ function Questionnaire({ t, onComplete, onSkip }) {
         </div>
       </div>
       <div className="questionnaire-panel">
-        <div className="questionnaire-topline"><span className="eyebrow">{t('questionnaire.matchProfile')}</span><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div>
+        <div className="questionnaire-topline"><span className="eyebrow">{t('questionnaire.matchProfile')}</span><div className="questionnaire-tools"><select className="lang-select questionnaire-lang-select" value={lang} onChange={(event) => onLanguageChange(event.target.value)} aria-label={t('language')}><option value="en">EN</option><option value="ru">RU</option><option value="kk">KK</option></select><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div></div>
         <div className="questionnaire-progress-meta"><span>{step + 1}<small> / 4</small></span></div>
         <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
         <div className="question-block">
