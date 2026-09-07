@@ -141,15 +141,15 @@ function App() {
                 <option value="kk">KK</option>
               </select>
               {!user && <button className="sign-in-btn" onClick={() => setShowAuth(true)}>{t('signIn')}</button>}
-              {canUseBrowserImporter && <button className="icon-btn" title="Импорт университетов" onClick={() => setShowImport(true)}><Upload size={18} /></button>}
+              {canUseBrowserImporter && <button className="icon-btn" title={t('importTitle')} onClick={() => setShowImport(true)}><Upload size={18} /></button>}
               {user && <button className="logout-btn" onClick={() => setUser(null)}><LogOut size={18} /></button>}
             </div>
               </header>
 
               <div className="catalogue-content">
               <section className="catalogue-intro">
-                <div><p className="catalogue-eyebrow">University catalogue</p><h2>Find your right fit.</h2></div>
-                <p>Compare programmes, tuition and application support in one clear shortlist.</p>
+                <div><p className="catalogue-eyebrow">{t('catalogueEyebrow')}</p><h2>{t('catalogueHeading')}</h2></div>
+                <p>{t('catalogueDescription')}</p>
               </section>
               <div className="search-section">
             <div className="search-input">
@@ -185,20 +185,20 @@ function App() {
             )}
               </div>
 
-              <div className="results-meta"><p><strong>{filtered.length}</strong> universities to explore</p><button onClick={resetFilters}>Reset all</button></div>
+              <div className="results-meta"><p>{t('universitiesToExplore', filtered.length)}</p><button onClick={resetFilters}>{t('resetAll')}</button></div>
 
               {loading ? (
                 <div className="loading">{t('loading')}</div>
               ) : (
                 <div className="universities-list">
-                  {filtered.length === 0 ? <div className="empty-state"><h3>No universities found.</h3><p>Try changing your search or filters.</p><button onClick={resetFilters}>Reset all</button></div> : filtered.map(uni => (
+                  {filtered.length === 0 ? <div className="empty-state"><h3>{t('noResults')}</h3><p>{t('tryDifferentFilters')}</p><button onClick={resetFilters}>{t('resetAll')}</button></div> : filtered.map(uni => (
                     <div key={uni.id} className="uni-card">
                       <div className="uni-card-top">
-                        <div className="uni-badges">{uni.ranking && <div className="ranking">{t('ranking', uni.ranking)} WORLD</div>}{uni.agency_id && <span className="agency-badge">AGENCY SUPPORT</span>}</div>
+                        <div className="uni-badges">{uni.ranking && <div className="ranking">{t('ranking', uni.ranking)} {t('world')}</div>}{uni.agency_id && <span className="agency-badge">{t('agencySupport')}</span>}</div>
                         <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
-                        <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)} · {uni.region} China</p>
+                        <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)} · {uni.region} {t('country')}</p>
                       </div>
-                      <div className="uni-card-footer"><p className="uni-meta"><strong>{t('tuition')} </strong>{localized(uni.tuition_translations, lang, uni.tuition)} <span>Focus {parseSpecialties(uni.specialties).slice(0, 2).join(', ')}</span></p><button className="apply-btn" onClick={() => handleViewDetails(uni)}>{t('viewDetails')} <ArrowRight size={16} /></button></div>
+                      <div className="uni-card-footer"><p className="uni-meta"><strong>{t('tuition')} </strong>{localized(uni.tuition_translations, lang, uni.tuition)} <span>{t('focus')} {parseSpecialties(uni.specialties).slice(0, 2).join(', ')}</span></p><button className="apply-btn" onClick={() => handleViewDetails(uni)}>{t('viewDetails')} <ArrowRight size={16} /></button></div>
                     </div>
                   ))}
                 </div>
@@ -212,7 +212,7 @@ function App() {
       )}
 
       {showAuth && <AuthModal university={selectedUniversity} lang={lang} t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
-      {canUseBrowserImporter && showImport && <ImportModal onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
+      {canUseBrowserImporter && showImport && <ImportModal t={t} onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
     </main>
   )
 }
@@ -245,13 +245,13 @@ function Questionnaire({ t, onComplete, onSkip }) {
       <div className="questionnaire-hero">
         <div className="questionnaire-brand"><span className="brand-mark">C</span><span className="questionnaire-wordmark"><strong>china</strong><span>course</span></span></div>
         <div className="questionnaire-hero-copy">
-          <p className="hero-support">A precise starting point for your next chapter in China.</p>
-          <h1>Study in<br />China<br /><em>made<br />simple.</em></h1>
-          <p className="hero-footer"><span>■</span> BUILT AROUND YOUR GOALS</p>
+          <p className="hero-support">{t('questionnaire.heroSupport')}</p>
+          <h1>{t('questionnaire.heroTitleStart')}<br />{t('questionnaire.heroTitlePlace')}<br /><em>{t('questionnaire.heroTitleEnd')}</em></h1>
+          <p className="hero-footer"><span>■</span> {t('questionnaire.builtAroundGoals')}</p>
         </div>
       </div>
       <div className="questionnaire-panel">
-        <div className="questionnaire-topline"><span className="eyebrow">YOUR MATCH PROFILE</span><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div>
+        <div className="questionnaire-topline"><span className="eyebrow">{t('questionnaire.matchProfile')}</span><button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button></div>
         <div className="questionnaire-progress-meta"><span>{String(step + 1).padStart(2, '0')}<small> / 04</small></span></div>
         <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
         <div className="question-block">
@@ -264,13 +264,13 @@ function Questionnaire({ t, onComplete, onSkip }) {
             ))}
           </div>
         </div>
-        <div className="questionnaire-actions"><p>Choose one answer to continue.</p><button type="button" className="continue-btn" onClick={continueQuestion} disabled={answers[question.key] === null}>{isLast ? 'See my matches' : 'Continue'} <ArrowRight size={17} /></button></div>
+        <div className="questionnaire-actions"><p>{t('questionnaire.answerHint')}</p><button type="button" className="continue-btn" onClick={continueQuestion} disabled={answers[question.key] === null}>{isLast ? t('questionnaire.seeMatches') : t('questionnaire.continue')} <ArrowRight size={17} /></button></div>
       </div>
     </section>
   )
 }
 
-function ImportModal({ onClose, onImported }) {
+function ImportModal({ t, onClose, onImported }) {
   const [csv, setCsv] = useState('')
   const [status, setStatus] = useState('')
   const [importing, setImporting] = useState(false)
@@ -295,7 +295,7 @@ function ImportModal({ onClose, onImported }) {
       })
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'Не удалось импортировать файл')
-      setStatus(`Готово: добавлено или обновлено ${data.imported}. ${data.skipped.length ? `Пропущены строки: ${data.skipped.join(', ')}` : ''}`)
+      setStatus(`${t('importSuccess', data.imported)} ${data.skipped.length ? t('skippedRows', data.skipped.join(', ')) : ''}`)
       onImported()
     } catch (error) { setStatus(error.message) }
     finally { setImporting(false) }
@@ -304,15 +304,15 @@ function ImportModal({ onClose, onImported }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal import-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-title"><h3>Импорт университетов</h3><button className="icon-btn" onClick={onClose}><X size={18} /></button></div>
-        <p className="import-hint">Скопируй таблицу из Excel или Google Sheets и вставь её сюда. Университет с тем же названием будет обновлён.</p>
-        <button className="template-btn" onClick={downloadTemplate}><Download size={16} /> Скачать шаблон CSV</button>
+        <div className="modal-title"><h3>{t('importTitle')}</h3><button className="icon-btn" onClick={onClose}><X size={18} /></button></div>
+        <p className="import-hint">{t('importHint')}</p>
+        <button className="template-btn" onClick={downloadTemplate}><Download size={16} /> {t('downloadTemplate')}</button>
         <form onSubmit={importCsv}>
           <textarea value={csv} onChange={(e) => setCsv(e.target.value)} required placeholder="name,city,region,..." rows="10" />
-          <button type="submit" disabled={importing}>{importing ? 'Импортируем…' : 'Импортировать'}</button>
+          <button type="submit" disabled={importing}>{importing ? t('importing') : t('importAction')}</button>
         </form>
         {status && <p className="import-status">{status}</p>}
-        <p className="columns-help">Обязательные колонки: <code>name, city, region</code>. Дополнительно: ranking, specialties, requirements, tuition, description, website, source_url, verified_at.</p>
+        <p className="columns-help">{t('requiredColumns')} <code>name, city, region</code>. {t('optionalColumns')} ranking, specialties, requirements, tuition, description, website, source_url, verified_at.</p>
       </div>
     </div>
   )
@@ -351,9 +351,9 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, universityId: university.id }),
       })
-      alert('Application submitted! The agency will contact you.')
+      alert(t('applicationSubmitted'))
     } catch (error) {
-      alert('Error submitting application')
+      alert(t('applicationError'))
     }
   }
 
@@ -386,8 +386,8 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       {agency ? (
         <div className="agency-info">
           <h3>{t('handledBy')}: {agency.name}</h3>
-          <p>Email: {agency.email}</p>
-          {agency.phone && <p>Phone: {agency.phone}</p>}
+          <p>{t('email')}: {agency.email}</p>
+          {agency.phone && <p>{t('phone')}: {agency.phone}</p>}
           {agency.website && <p><a href={`https://${agency.website}`} target="_blank">{t('visitWebsite')}</a></p>}
         </div>
       ) : (

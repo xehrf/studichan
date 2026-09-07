@@ -680,6 +680,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 
 .app-header { flex: 0 0 72px; padding: 16px max(24px, calc((100vw - 1280px) / 2)); background: var(--surface); border-bottom: 1px solid var(--line); }
 .header-title h1 { margin: 0; font-family: 'Outfit', sans-serif; }
+.header-title h1 strong { color: var(--brand); }
 .header-title p { margin-top: 3px; color: var(--text-muted); font-size: 11px; }
 .header-controls { gap: 16px; }
 .lang-select { min-height: 40px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font-size: 12px; }
