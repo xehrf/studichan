@@ -115,11 +115,14 @@ function App() {
   }
 
   return (
-    <main className="mobile-app">
+    <main className={`mobile-app ${showQuestionnaire ? 'questionnaire-mode' : ''}`}>
       {!selectedUniversity ? (
         <>
-          {!loading && showQuestionnaire && <Questionnaire t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />}
-          <header className="app-header">
+          {showQuestionnaire ? (
+            <Questionnaire t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />
+          ) : (
+            <>
+              <header className="app-header">
             <div className="header-title">
               <h1>中国大学</h1>
               <p>{t('title')}</p>
@@ -133,9 +136,9 @@ function App() {
               {canUseBrowserImporter && <button className="icon-btn" title="Импорт университетов" onClick={() => setShowImport(true)}><Upload size={18} /></button>}
               {user && <button className="logout-btn" onClick={() => setUser(null)}><LogOut size={18} /></button>}
             </div>
-          </header>
+              </header>
 
-          <div className="search-section">
+              <div className="search-section">
             <div className="search-input">
               <Search size={18} />
               <input type="text" placeholder={t('searchPlaceholder')} value={search} onChange={handleSearch} />
@@ -167,30 +170,32 @@ function App() {
                 </div>}
               </div>
             )}
-          </div>
+              </div>
 
-          {loading ? (
-            <div className="loading">{t('loading')}</div>
-          ) : (
-            <div className="universities-list">
-              {filtered.map(uni => (
-                <div key={uni.id} className="uni-card">
-                  <div className="uni-header">
-                    <div>
-                      <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
-                      <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)}</p>
+              {loading ? (
+                <div className="loading">{t('loading')}</div>
+              ) : (
+                <div className="universities-list">
+                  {filtered.map(uni => (
+                    <div key={uni.id} className="uni-card">
+                      <div className="uni-header">
+                        <div>
+                          <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
+                          <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)}</p>
+                        </div>
+                        {uni.ranking && <div className="ranking"><TrendingUp size={14} /> {t('ranking', uni.ranking)}</div>}
+                      </div>
+                      <p className="uni-tuition">{localized(uni.tuition_translations, lang, uni.tuition)}</p>
+                      {uni.agency_id ? (
+                        <div className="agency-badge">{t('agencyHandled', uni.students_count)}</div>
+                      ) : (
+                        <button className="apply-btn" onClick={() => handleApply(uni)}>{t('learnMore')}</button>
+                      )}
                     </div>
-                    {uni.ranking && <div className="ranking"><TrendingUp size={14} /> {t('ranking', uni.ranking)}</div>}
-                  </div>
-                  <p className="uni-tuition">{localized(uni.tuition_translations, lang, uni.tuition)}</p>
-                  {uni.agency_id ? (
-                    <div className="agency-badge">{t('agencyHandled', uni.students_count)}</div>
-                  ) : (
-                    <button className="apply-btn" onClick={() => handleApply(uni)}>{t('learnMore')}</button>
-                  )}
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </>
       ) : (
