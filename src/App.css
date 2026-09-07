@@ -30,6 +30,49 @@ body {
   overflow: hidden;
 }
 
+.questionnaire {
+  flex: 0 0 auto;
+  padding: 28px max(20px, calc((100vw - 760px) / 2));
+  background: #1c2a25;
+  color: #f8f7f0;
+  min-height: 390px;
+}
+
+.questionnaire-topline, .questionnaire-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.eyebrow, .questionnaire-step {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.skip-btn {
+  color: #b8c0b9;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.questionnaire-heading { margin-top: 34px; }
+.questionnaire-heading h2 { font-size: clamp(28px, 5vw, 48px); line-height: 1; margin: 8px 0 12px; max-width: 480px; }
+.questionnaire-heading p:not(.questionnaire-step) { color: #b8c0b9; font-size: 14px; line-height: 1.45; max-width: 430px; }
+.questionnaire-mark { color: var(--accent); font-size: 62px; font-weight: 800; line-height: .8; letter-spacing: -.06em; }
+.progress-track { height: 3px; background: #536159; margin: 28px 0 22px; }
+.progress-track span { display: block; height: 100%; background: var(--accent); transition: width .3s ease; }
+.question-block h3 { font-size: 15px; margin-bottom: 12px; }
+.answer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.answer-btn { min-height: 54px; display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 12px; border: 1px solid #536159; border-radius: 6px; background: #293a33; color: #f8f7f0; cursor: pointer; font-size: 12px; transition: background .2s, border-color .2s, transform .2s; }
+.answer-btn:hover, .answer-btn.selected { background: var(--accent); border-color: var(--accent); color: var(--ink); transform: translateY(-2px); }
+
 .app-header {
   padding: 16px;
   border-bottom: 1px solid var(--line);
@@ -258,6 +301,13 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
+}
+
+@media (max-width: 620px) {
+  .questionnaire { padding: 22px 16px 24px; min-height: 0; }
+  .questionnaire-heading { margin-top: 26px; }
+  .questionnaire-mark { font-size: 44px; }
+  .answer-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Detail view */

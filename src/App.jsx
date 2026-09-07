@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X } from 'lucide-react'
+import { Search, MapPin, TrendingUp, LogOut, Upload, Download, X, ArrowRight, Check } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
 
@@ -20,6 +20,7 @@ function App() {
   const [selectedUniversity, setSelectedUniversity] = useState(null)
   const [showAuth, setShowAuth] = useState(false)
   const [showImport, setShowImport] = useState(false)
+  const [showQuestionnaire, setShowQuestionnaire] = useState(true)
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en')
   const t = useTranslation(lang)
 
@@ -96,10 +97,19 @@ function App() {
     }
   }
 
+  const handleQuestionnaireComplete = ({ specialty, region: preferredRegion }) => {
+    const nextSpecialties = specialty ? [specialty] : []
+    setSelectedSpecialties(nextSpecialties)
+    setRegion(preferredRegion)
+    applyFilters(search, preferredRegion, nextSpecialties)
+    setShowQuestionnaire(false)
+  }
+
   return (
     <main className="mobile-app">
       {!selectedUniversity ? (
         <>
+          {!loading && showQuestionnaire && <Questionnaire t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />}
           <header className="app-header">
             <div className="header-title">
               <h1>中国大学</h1>
@@ -176,6 +186,56 @@ function App() {
       {showAuth && <AuthModal university={selectedUniversity} lang={lang} t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
       {canUseBrowserImporter && showImport && <ImportModal onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
     </main>
+  )
+}
+
+function Questionnaire({ t, onComplete, onSkip }) {
+  const [step, setStep] = useState(0)
+  const [answers, setAnswers] = useState({ goal: '', specialty: '', region: '', scholarship: '' })
+
+  const questions = [
+    { key: 'goal', title: t('questionnaire.goalTitle'), options: ['bachelor', 'master', 'language'] },
+    { key: 'specialty', title: t('questionnaire.specialtyTitle'), options: ['Computer Science', 'Engineering', 'Medicine', 'Business', 'Economics', 'Law', 'Liberal Arts'] },
+    { key: 'region', title: t('questionnaire.regionTitle'), options: ['', 'North', 'East', 'Central', 'South', 'West'] },
+    { key: 'scholarship', title: t('questionnaire.scholarshipTitle'), options: ['yes', 'no'] },
+  ]
+  const question = questions[step]
+  const isLast = step === questions.length - 1
+
+  const choose = (value) => {
+    const nextAnswers = { ...answers, [question.key]: value }
+    setAnswers(nextAnswers)
+    if (isLast) onComplete(nextAnswers)
+    else setStep(step + 1)
+  }
+
+  return (
+    <section className="questionnaire" aria-label={t('questionnaire.title')}>
+      <div className="questionnaire-topline">
+        <span className="eyebrow">{t('questionnaire.eyebrow')}</span>
+        <button className="skip-btn" onClick={onSkip}>{t('questionnaire.skip')}</button>
+      </div>
+      <div className="questionnaire-heading">
+        <div>
+          <p className="questionnaire-step">{t('questionnaire.step', step + 1, questions.length)}</p>
+          <h2>{t('questionnaire.title')}</h2>
+          <p>{t('questionnaire.subtitle')}</p>
+        </div>
+        <div className="questionnaire-mark">{String(step + 1).padStart(2, '0')}</div>
+      </div>
+      <div className="progress-track"><span style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
+      <div className="question-block">
+        <h3>{question.title}</h3>
+        <div className="answer-grid">
+          {question.options.map((option) => (
+            <button key={option || 'all'} className={`answer-btn ${answers[question.key] === option ? 'selected' : ''}`} onClick={() => choose(option)}>
+              <span>{question.key === 'goal' ? t(`questionnaire.goals.${option}`) : question.key === 'region' ? (option ? t(`regions.${option}`) : t('filterAll')) : question.key === 'scholarship' ? t(`questionnaire.scholarships.${option}`) : t(`specialtyNames.${option}`)}</span>
+              {answers[question.key] === option ? <Check size={17} /> : <ArrowRight size={16} />}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
