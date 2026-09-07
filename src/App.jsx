@@ -241,7 +241,7 @@ function Questionnaire({ t, onComplete, onSkip }) {
   }
 
   return (
-    <section className="questionnaire" aria-label={t('questionnaire.title')}>
+    <section className={`questionnaire ${question.options.length > 6 ? 'questionnaire-long' : ''}`} aria-label={t('questionnaire.title')}>
       <div className="questionnaire-hero">
         <div className="questionnaire-brand"><span className="brand-mark">C</span><span className="questionnaire-wordmark"><strong>china</strong><span>course</span></span></div>
         <div className="questionnaire-hero-copy">
