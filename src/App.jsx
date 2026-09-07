@@ -351,6 +351,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
       {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
       {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('verifiedSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
+      {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}
       <div className="detail-section">
         <strong>{t('requirements')}:</strong>
         <p>{localizedOrPending(university.requirements_translations, lang, university.requirements, t('dataPending'))}</p>

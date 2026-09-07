@@ -69,8 +69,8 @@ try {
           name, city, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
-          image_url, image_source
-        ) VALUES ($1, $2, $3, $4, $5, '', '', $6, $7, $7, CURRENT_DATE, $8, $9, $10, $11, $12, $13, $14)
+          image_url, image_source, data_status, data_checked_at
+        ) VALUES ($1, $2, $3, $4, $5, '', '', $6, $7, $7, NULL, $8, $9, $10, $11, $12, $13, $14, 'requires_verification', NULL)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           specialties = EXCLUDED.specialties, description = EXCLUDED.description,
@@ -80,7 +80,8 @@ try {
           specialties_translations = EXCLUDED.specialties_translations,
           requirements_translations = EXCLUDED.requirements_translations,
           tuition_translations = EXCLUDED.tuition_translations,
-          image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source
+          image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source,
+          data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at
       `, [
         university.nameEn, university.city, regionFor(university), university.rankingNational,
         translatedSpecialties.en, translatedDescription.en, university.website,

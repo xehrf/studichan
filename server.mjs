@@ -48,6 +48,7 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
     SELECT id, name, city, region, ranking, specialties, requirements, tuition, description,
       name_translations, description_translations, specialties_translations, requirements_translations,
       tuition_translations, image_url, image_source, website, source_url, verified_at, agency_id, students_count
+      , data_status, data_checked_at
     FROM universities
     ${where}
     ORDER BY ranking ASC NULLS LAST, name ASC
