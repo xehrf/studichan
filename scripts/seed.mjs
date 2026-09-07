@@ -72,6 +72,38 @@ const descriptionTranslations = (university, specialties) => ({
   kk: `${university.nameRu} — Қытайдың ${university.city} қаласындағы мемлекеттік университеті. Негізгі білім беру бағыттары: ${specialties.kk}.`,
 })
 
+const preliminaryAdmissions = (university) => {
+  const name = university.nameEn
+  const premium = {
+    'Peking University': ['1 794 000–3 105 000 ₸', 'HSK 5–6', 'IELTS н/д', 'TOEFL 100+'],
+    'Tsinghua University': ['1 794 000–2 070 000 ₸', 'HSK 5 (4→5)', 'IELTS н/д', 'TOEFL н/д'],
+    'Fudan University': ['3 450 000–4 830 000 ₸', 'HSK н/д', 'IELTS 6.5+', 'TOEFL 90+'],
+    'Shanghai Jiao Tong University': ['1 711 200+ ₸', 'HSK 5', 'IELTS 6.0+', 'TOEFL 90+'],
+    'Nanjing University': ['1 449 000–3 726 000 ₸', 'HSK 5 (180+)', 'IELTS 6.0', 'TOEFL 85'],
+    'Zhejiang University': ['1 380 000–3 105 000 ₸', 'HSK 4–5', 'IELTS 6.5+', 'TOEFL 80+'],
+    'University of Science and Technology of China': ['1 794 000+ ₸', 'HSK 5 (мин.4)', 'IELTS н/д', 'TOEFL н/д'],
+    "Xi'an Jiaotong University": ['1 380 000–3 450 000 ₸', 'HSK 4+', 'IELTS 6.0', 'TOEFL 80'],
+    'Harbin Institute of Technology': ['1 794 000–2 898 000 ₸', 'HSK 4+', 'IELTS 6.0', 'TOEFL 80'],
+  }
+  const is985 = ['Beijing Institute of Technology', 'China Agricultural University', 'Beijing Normal University',
+    'Tongji University', 'East China Normal University', 'Southeast University', 'Huazhong University of Science and Technology',
+    'Tianjin University', 'Sun Yat-sen University', 'Shandong University', 'Sichuan University', 'South China University of Technology',
+    'Hunan University', 'Central South University', 'Dalian University of Technology', 'Northeastern University',
+    'Nankai University', 'Jilin University', 'Ocean University of China', 'Chongqing University', 'Xiamen University'].includes(name)
+  const tuition = premium[name]?.[0] || (is985 ? '1 380 000–2 760 000 ₸' : '1 242 000–2 070 000 ₸')
+  const requirements = premium[name]?.slice(1) || (is985
+    ? ['HSK 4–5', 'IELTS 6.0–6.5', 'TOEFL 80–90']
+    : ['HSK 4', 'IELTS 5.5–6.0', 'TOEFL 70–80'])
+  return {
+    tuition,
+    requirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
+    ruRequirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
+    kkRequirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
+    ruTuition: `Стоимость обучения: ${tuition}.`,
+    kkTuition: `Оқу ақысы: ${tuition}.`,
+  }
+}
+
 const universities = JSON.parse(await readFile(dataPath, 'utf8')).filter((university) => (
   !university.website.includes('example.com')
 ))
@@ -84,16 +116,18 @@ try {
       const specialties = university.specialties || university.description.match(/Сильные стороны вуза: ([^.]+)\./)?.[1] || ''
       const translatedSpecialties = translateSpecialties(specialties)
       const translatedDescription = descriptionTranslations(university, translatedSpecialties)
+      const admissions = preliminaryAdmissions(university)
       await client.query(`
         INSERT INTO universities (
           name, city, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
           image_url, image_source, data_status, data_checked_at
-        ) VALUES ($1, $2, $3, $4, $5, '', '', $6, $7, $7, NULL, $8, $9, $10, $11, $12, $13, $14, 'requires_verification', NULL)
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $9, CURRENT_DATE, $10, $11, $12, $13, $14, $15, $16, 'requires_verification', NULL)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
-          specialties = EXCLUDED.specialties, description = EXCLUDED.description,
+          specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
+          tuition = EXCLUDED.tuition, description = EXCLUDED.description,
           website = EXCLUDED.website, source_url = EXCLUDED.source_url,
           verified_at = CURRENT_DATE, name_translations = EXCLUDED.name_translations,
           description_translations = EXCLUDED.description_translations,
@@ -104,10 +138,11 @@ try {
           data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at
       `, [
         university.nameEn, university.city, regionFor(university), university.rankingNational,
-        translatedSpecialties.en, translatedDescription.en, university.website,
+        translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
         JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
         JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),
-        '{}', '{}',
+        JSON.stringify({ en: admissions.requirements, ru: admissions.ruRequirements, kk: admissions.kkRequirements }),
+        JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
         university.coverUrl, university.logoUrl,
       ])
     }
