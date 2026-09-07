@@ -618,6 +618,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .questionnaire {
   display: grid;
   grid-template-columns: 42% 58%;
+  grid-template-rows: minmax(0, 1fr);
   min-height: 100svh;
   height: 100svh;
   padding: 0;
@@ -630,6 +631,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   position: relative;
   display: flex;
   align-items: flex-end;
+  min-height: 0;
+  overflow: hidden;
   min-width: 0;
   padding: clamp(64px, 9vw, 128px) clamp(40px, 7vw, 112px);
   background: var(--brand);
@@ -650,7 +653,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .hero-footer { display: flex; align-items: center; gap: 14px; margin-top: 48px; color: var(--panel); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
 .hero-footer span { color: var(--accent); font-size: 14px; }
 
-.questionnaire-panel { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: clamp(40px, 6vw, 96px) clamp(40px, 8vw, 144px); background: var(--panel); }
+.questionnaire-panel { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 0; overflow-y: auto; padding: clamp(40px, 6vw, 96px) clamp(40px, 8vw, 144px); background: var(--panel); }
 .questionnaire-long .questionnaire-panel { justify-content: flex-start; overflow-y: auto; padding-top: clamp(32px, 4vw, 56px); padding-bottom: clamp(32px, 4vw, 56px); scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
 .questionnaire-long .question-block { margin-top: 32px; }
 .questionnaire-long .questionnaire-heading { margin-bottom: 22px; }
@@ -743,9 +746,9 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .modal { max-width: 672px; border: 1px solid var(--line); }
 
 @media (max-width: 1023px) {
-  .questionnaire { grid-template-columns: 1fr; height: auto; min-height: 100svh; overflow-y: auto; }
-  .questionnaire-hero { min-height: 40svh; padding: 96px 40px 48px; }
-  .questionnaire-panel { min-height: 60svh; padding: 40px; }
+  .questionnaire { grid-template-columns: 1fr; grid-template-rows: none; height: auto; min-height: 100svh; overflow-y: auto; }
+  .questionnaire-hero { min-height: 40svh; overflow: visible; padding: 96px 40px 48px; }
+  .questionnaire-panel { min-height: 60svh; overflow: visible; padding: 40px; }
 }
 
 @media (max-width: 639px) {
