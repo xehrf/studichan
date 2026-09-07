@@ -774,3 +774,53 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   .uni-meta span { display: block; margin: 4px 0 0; }
   .apply-btn { justify-content: center; width: 100%; }
 }
+
+@media (max-width: 639px) {
+  html, body, #root { min-width: 0; overflow-x: hidden; }
+  .mobile-app { min-height: 100svh; }
+  .questionnaire-mode { overflow: hidden; }
+  .questionnaire { display: flex; flex-direction: column; min-height: 100svh; height: auto; overflow-y: auto; }
+  .questionnaire-hero { flex: 0 0 auto; min-height: 300px; padding: 82px 24px 30px; }
+  .questionnaire-hero-copy { width: 100%; }
+  .questionnaire-hero h1 { max-width: 290px; font-size: clamp(52px, 15vw, 68px); }
+  .questionnaire-panel { flex: 0 0 auto; min-height: 0; padding: 28px 20px 40px; justify-content: flex-start; }
+  .questionnaire-panel .questionnaire-topline { gap: 12px; }
+  .questionnaire-panel .eyebrow { font-size: 10px; }
+  .questionnaire-progress-meta { margin-top: 18px; }
+  .question-block { margin-top: 32px; }
+  .questionnaire-heading { gap: 0; margin-bottom: 22px; }
+  .questionnaire-heading h2 { max-width: 100%; font-size: clamp(29px, 8vw, 36px); }
+  .questionnaire-step { font-size: 10px; }
+  .answer-btn { grid-template-columns: 28px minmax(0, 1fr) 20px; padding: 15px 14px; }
+  .answer-label { white-space: normal; }
+  .questionnaire-actions { margin-top: 28px; }
+  .questionnaire-actions p { line-height: 1.4; }
+  .continue-btn { min-height: 50px; }
+  .brand-lockup { min-width: 0; }
+  .header-title h1 { font-size: 17px; }
+  .header-controls { gap: 8px; }
+  .lang-select { max-width: 76px; padding: 7px 6px; }
+  .catalogue-intro h2 { max-width: 300px; font-size: clamp(40px, 13vw, 52px); }
+  .catalogue-intro > p { font-size: 13px; }
+  .search-input { min-height: 50px; }
+  .region-filters { scrollbar-width: none; }
+  .region-filters::-webkit-scrollbar { display: none; }
+  .specialty-toggle { max-width: 100%; }
+  .specialty-toggle span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .specialty-panel { padding: 8px; }
+  .specialty-options { max-height: 230px; }
+  .uni-card { min-height: 0; padding: 16px; }
+  .uni-card-top h3 { margin-top: 14px; font-size: 22px; }
+  .uni-badges { flex-wrap: wrap; }
+  .results-meta { padding-top: 22px; }
+}
+
+@media (max-width: 380px) {
+  .questionnaire-hero { min-height: 270px; }
+  .questionnaire-hero h1 { font-size: 48px; }
+  .hero-support { max-width: 250px; font-size: 12px; }
+  .hero-footer { margin-top: 18px; font-size: 9px; }
+  .questionnaire-panel { padding-inline: 16px; }
+  .answer-btn { font-size: 13px; }
+  .catalogue-content { padding-inline: 12px; }
+}
