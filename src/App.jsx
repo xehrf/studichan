@@ -309,6 +309,9 @@ function ImportModal({ onClose, onImported }) {
 
 function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   const [agency, setAgency] = useState(null)
+  const mapQuery = `${university.name}, ${university.city}, China`
+  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
+  const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`
 
   useEffect(() => {
     if (university.agency_id) {
@@ -363,6 +366,10 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       <div className="detail-section">
         <strong>{t('tuition')}:</strong>
         <p>{localizedOrPending(university.tuition_translations, lang, university.tuition, t('dataPending'))}</p>
+      </div>
+      <div className="detail-map">
+        <div className="detail-map-heading"><strong>{t('map')}</strong><a href={mapLink} target="_blank" rel="noreferrer">{t('openMap')}</a></div>
+        <iframe title={`${t('map')} ${university.name}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
       </div>
 
       {agency ? (

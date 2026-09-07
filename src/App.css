@@ -279,6 +279,30 @@ body {
   padding-left: 8px;
 }
 
+.detail-map {
+  margin: 22px 0;
+}
+
+.detail-map-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.detail-map-heading a {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.detail-map iframe {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: block;
+  height: 240px;
+  width: 100%;
+}
+
 .uni-card:active {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
