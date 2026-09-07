@@ -55,11 +55,14 @@ const descriptionTranslations = (university, specialties) => ({
   kk: `${university.nameRu} — Қытайдың ${university.city} қаласындағы мемлекеттік университеті. Негізгі білім беру бағыттары: ${specialties.kk}.`,
 })
 
-const universities = JSON.parse(await readFile(dataPath, 'utf8'))
+const universities = JSON.parse(await readFile(dataPath, 'utf8')).filter((university) => (
+  !university.website.includes('example.com')
+))
 
 try {
   await initDb()
   await withTransaction(async (client) => {
+    await client.query("DELETE FROM universities WHERE website LIKE '%example.com%'")
     for (const university of universities) {
       const specialties = university.specialties || university.description.match(/Сильные стороны вуза: ([^.]+)\./)?.[1] || ''
       const translatedSpecialties = translateSpecialties(specialties)
