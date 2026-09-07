@@ -7,14 +7,14 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataPath = path.join(__dirname, '..', 'prisma', 'data', 'universities.json')
 const regionByProvince = {
-  Beijing: 'North', Tianjin: 'North', Hebei: 'North', Shanxi: 'North',
-  InnerMongolia: 'North', Liaoning: 'North', Jilin: 'North', Heilongjiang: 'North',
-  Shanghai: 'East', Jiangsu: 'East', Zhejiang: 'East', Anhui: 'East', Fujian: 'East',
-  Jiangxi: 'East', Shandong: 'East',
-  Henan: 'Central', Hubei: 'Central', Hunan: 'Central', Guangdong: 'South',
-  Guangxi: 'South', Hainan: 'South', Chongqing: 'West', Sichuan: 'West', Guizhou: 'West',
-  Yunnan: 'West', Tibet: 'West', Shaanxi: 'West', Gansu: 'West', Qinghai: 'West',
-  Ningxia: 'West', Xinjiang: 'West',
+  Пекин: 'North', Тяньцзинь: 'North', Хэбэй: 'North', Шаньси: 'North',
+  'ВнутренняяМонголия': 'North', Ляонин: 'North', Цзилинь: 'North', Хэйлунцзян: 'North',
+  Шанхай: 'East', Цзянсу: 'East', Чжэцзян: 'East', Аньхой: 'East', Фуцзянь: 'East',
+  Цзянси: 'East', Шаньдун: 'East',
+  Хэнань: 'Central', Хубэй: 'Central', Хунань: 'Central', Гуандун: 'South',
+  Гуанси: 'South', Хайнань: 'South', Чунцин: 'West', Сычуань: 'West', Гуйчжоу: 'West',
+  Юньнань: 'West', Тибет: 'West', Шэньси: 'West', Ганьсу: 'West', Цинхай: 'West',
+  Нинся: 'West', Синьцзян: 'West',
 }
 
 const regionFor = (university) => {

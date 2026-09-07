@@ -5,7 +5,7 @@ services:
   region: singapore
   plan: free
   buildCommand: npm ci --include=dev && npm run build
-  startCommand: npm start
+  startCommand: npm run db:seed && npm start
   initialDeployHook: npm run db:seed
   healthCheckPath: /api/health
   envVars:
