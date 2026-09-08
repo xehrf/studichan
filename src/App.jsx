@@ -365,6 +365,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
       <div className={`detail-safety safety-${university.city_safety || 'not_rated'}`}><strong>{t('citySafety')}:</strong> {t(`safetyLevels.${university.city_safety || 'not_rated'}`)}</div>
+      {university.city_safety_description && <div className="detail-section safety-description"><strong>{t('citySafetyDetails')}:</strong><p>{university.city_safety_description}</p></div>}
       {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
       {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('officialSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
       {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}

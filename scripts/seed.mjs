@@ -1,4 +1,5 @@
 import { closeDb, initDb, withTransaction } from '../db.mjs'
+import { getCitySafety } from '../city-safety.mjs'
 
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -122,8 +123,8 @@ try {
           name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
-          image_url, image_source, data_status, data_checked_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL)
+          image_url, image_source, data_status, data_checked_at, city_safety_description
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
@@ -135,15 +136,16 @@ try {
           requirements_translations = EXCLUDED.requirements_translations,
           tuition_translations = EXCLUDED.tuition_translations,
           image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source,
-          data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at
+          data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at,
+          city_safety = EXCLUDED.city_safety, city_safety_description = EXCLUDED.city_safety_description
       `, [
-        university.nameEn, university.city, university.citySafety || 'not_rated', regionFor(university), university.rankingNational,
+        university.nameEn, university.city, getCitySafety(university.city).level, regionFor(university), university.rankingNational,
         translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
         JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
         JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),
         JSON.stringify({ en: admissions.requirements, ru: admissions.ruRequirements, kk: admissions.kkRequirements }),
         JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
-        university.coverUrl, university.logoUrl,
+        university.coverUrl, university.logoUrl, getCitySafety(university.city).description,
       ])
     }
   })

@@ -99,7 +99,7 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
     SELECT id, name, city, region, ranking, specialties, requirements, tuition, description,
       name_translations, description_translations, specialties_translations, requirements_translations,
       tuition_translations, image_url, image_source, website, source_url, verified_at, agency_id, students_count
-      , data_status, data_checked_at, city_safety
+      , data_status, data_checked_at, city_safety, city_safety_description
     FROM universities
     ${where}
     ORDER BY ranking ASC NULLS LAST, name ASC
@@ -147,9 +147,9 @@ const parseCsv = (csv) => {
 
 const universityUpsertSql = `
   INSERT INTO universities (
-    name, city, city_safety, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at
+    name, city, city_safety, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at, city_safety_description
   ) VALUES (
-    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13
   )
   ON CONFLICT (name) DO UPDATE SET
     city = EXCLUDED.city,
@@ -162,7 +162,8 @@ const universityUpsertSql = `
     website = EXCLUDED.website,
     source_url = EXCLUDED.source_url,
     verified_at = EXCLUDED.verified_at,
-    city_safety = EXCLUDED.city_safety
+    city_safety = EXCLUDED.city_safety,
+    city_safety_description = EXCLUDED.city_safety_description
   RETURNING id
 `
 
@@ -245,7 +246,7 @@ app.post('/api/admin/import-universities', developmentOnly, asyncRoute(async (re
       await client.query(universityUpsertSql, [
         university.name, university.city, university.citySafety, university.region, university.ranking, university.specialties,
         university.requirements, university.tuition, university.description, university.website,
-        university.sourceUrl, university.verifiedAt,
+        university.sourceUrl, university.verifiedAt, university.citySafetyDescription || '',
       ])
       imported += 1
     }

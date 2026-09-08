@@ -56,6 +56,7 @@ export const initDb = async () => {
       name TEXT NOT NULL UNIQUE,
       city TEXT NOT NULL,
       city_safety TEXT NOT NULL DEFAULT 'not_rated',
+      city_safety_description TEXT NOT NULL DEFAULT '',
       region TEXT NOT NULL,
       ranking INTEGER,
       specialties TEXT NOT NULL DEFAULT '',
@@ -80,6 +81,7 @@ export const initDb = async () => {
 
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS name_translations JSONB NOT NULL DEFAULT '{}'::jsonb;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS city_safety TEXT NOT NULL DEFAULT 'not_rated';
+    ALTER TABLE universities ADD COLUMN IF NOT EXISTS city_safety_description TEXT NOT NULL DEFAULT '';
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS description_translations JSONB NOT NULL DEFAULT '{}'::jsonb;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS specialties_translations JSONB NOT NULL DEFAULT '{}'::jsonb;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS requirements_translations JSONB NOT NULL DEFAULT '{}'::jsonb;

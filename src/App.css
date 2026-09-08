@@ -430,6 +430,8 @@ body {
 .safety-medium { color: #8a5a00; background: #fff4d6; }
 .safety-high { color: #28703b; background: #e8f5e9; }
 
+.safety-description p { line-height: 1.55; }
+
 .detail-desc {
   font-size: 13px;
   line-height: 1.5;
