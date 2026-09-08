@@ -11,6 +11,11 @@ const localizedOrPending = (translations, lang, fallback, pending) => localized(
 const parseSpecialties = (specialties) => Array.isArray(specialties)
   ? specialties.map(spec => String(spec).trim()).filter(Boolean)
   : String(specialties || '').split(',').map(spec => spec.trim()).filter(Boolean)
+const imageList = (university) => {
+  const gallery = Array.isArray(university.image_gallery) ? university.image_gallery : []
+  const galleryUrls = gallery.map(item => typeof item === 'string' ? item : item?.url).filter(Boolean)
+  return [...new Set([university.image_url, ...galleryUrls].filter(Boolean))]
+}
 
 function App() {
   const [universities, setUniversities] = useState([])
@@ -321,11 +326,14 @@ function ImportModal({ t, onClose, onImported }) {
 
 function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   const [agency, setAgency] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(0)
+  const images = imageList(university)
   const mapQuery = `${university.name}, ${university.city}, China`
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
   const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`
 
   useEffect(() => {
+    setSelectedImage(0)
     if (university.agency_id) {
       fetchAgency()
     }
@@ -361,7 +369,12 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   return (
     <div className="detail-view">
       <button className="back-btn" onClick={onBack}>{t('back')}</button>
-      {university.image_url && <img className="detail-image" src={university.image_url} alt={university.name} />}
+      {images.length > 0 && <div className="detail-gallery">
+        <img className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
+        {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
+          {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
+        </div>}
+      </div>}
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
       <div className={`detail-safety safety-${university.city_safety || 'not_rated'}`}><strong>{t('citySafety')}:</strong> {t(`safetyLevels.${university.city_safety || 'not_rated'}`)}</div>

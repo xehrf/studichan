@@ -417,6 +417,25 @@ body {
   margin-bottom: 12px;
 }
 
+.detail-gallery { margin: 12px 0 16px; }
+
+.detail-thumbnails { display: flex; gap: 8px; overflow-x: auto; margin-top: 8px; }
+
+.detail-thumbnail {
+  flex: 0 0 68px;
+  width: 68px;
+  height: 52px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.detail-thumbnail.active { border-color: var(--accent); }
+.detail-thumbnail img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 .detail-safety {
   display: inline-block;
   margin: 8px 0 14px;

@@ -73,6 +73,7 @@ export const initDb = async () => {
       tuition_translations JSONB NOT NULL DEFAULT '{}'::jsonb,
       image_url TEXT,
       image_source TEXT,
+      image_gallery JSONB NOT NULL DEFAULT '[]'::jsonb,
       data_status TEXT NOT NULL DEFAULT 'requires_verification',
       data_checked_at DATE,
       agency_id BIGINT REFERENCES agencies(id),
@@ -88,6 +89,7 @@ export const initDb = async () => {
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS tuition_translations JSONB NOT NULL DEFAULT '{}'::jsonb;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS image_url TEXT;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS image_source TEXT;
+    ALTER TABLE universities ADD COLUMN IF NOT EXISTS image_gallery JSONB NOT NULL DEFAULT '[]'::jsonb;
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS data_status TEXT NOT NULL DEFAULT 'requires_verification';
     ALTER TABLE universities ADD COLUMN IF NOT EXISTS data_checked_at DATE;
 

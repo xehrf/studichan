@@ -123,8 +123,8 @@ try {
           name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
-          image_url, image_source, data_status, data_checked_at, city_safety_description
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18)
+          image_url, image_source, data_status, data_checked_at, city_safety_description, image_gallery
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
@@ -137,7 +137,12 @@ try {
           tuition_translations = EXCLUDED.tuition_translations,
           image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source,
           data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at,
-          city_safety = EXCLUDED.city_safety, city_safety_description = EXCLUDED.city_safety_description
+          city_safety = EXCLUDED.city_safety, city_safety_description = EXCLUDED.city_safety_description,
+          image_gallery = CASE
+            WHEN jsonb_array_length(EXCLUDED.image_gallery) > 1 OR universities.image_gallery = '[]'::jsonb
+            THEN EXCLUDED.image_gallery
+            ELSE universities.image_gallery
+          END
       `, [
         university.nameEn, university.city, getCitySafety(university.city).level, regionFor(university), university.rankingNational,
         translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
@@ -146,6 +151,7 @@ try {
         JSON.stringify({ en: admissions.requirements, ru: admissions.ruRequirements, kk: admissions.kkRequirements }),
         JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
         university.coverUrl, university.logoUrl, getCitySafety(university.city).description,
+        JSON.stringify(university.galleryUrls?.length ? university.galleryUrls : [university.coverUrl].filter(Boolean)),
       ])
     }
   })
