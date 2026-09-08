@@ -97,6 +97,12 @@ GOOGLE_REDIRECT_URI=https://YOUR-SERVICE.onrender.com/api/auth/google/callback
 npm run sync:universities
 ```
 
+Для загрузки фотографий всех университетов используй:
+
+```bash
+npm run sync:images
+```
+
 Перед этим укажи в `.env` адрес LibreTranslate. Для локального сервера его
 можно запустить Docker-командой `docker run --rm -p 5000:5000 libretranslate/libretranslate`,
 а в `.env` оставить `LIBRETRANSLATE_URL=http://localhost:5000/translate`.
