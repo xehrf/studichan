@@ -442,6 +442,18 @@ body {
   color: #555;
 }
 
+.medical-documents ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.medical-documents li + li {
+  margin-top: 4px;
+}
+
 .agency-info {
   background: #f9f9f9;
   border: 1px solid var(--line);
@@ -490,6 +502,33 @@ body {
   font-size: 18px;
   margin-bottom: 16px;
 }
+
+.google-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.google-g { color: #4285f4; font-weight: 800; font-size: 18px; }
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.auth-divider::before, .auth-divider::after { content: ''; height: 1px; flex: 1; background: var(--line); }
 
 .modal form {
   display: flex;

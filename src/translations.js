@@ -51,6 +51,18 @@ export const translations = {
     viewDetails: 'View details',
     agencyHandled: (count) => `Handled by agency • ${count} students`,
     requirements: 'Requirements',
+    medicalDocuments: {
+      title: 'Medical documents, if required by the university',
+      items: [
+        'Examination by a therapist, ophthalmologist, otolaryngologist, neurologist and psychiatrist',
+        'General and biochemical blood tests',
+        'HIV and syphilis tests',
+        'Hepatitis B test (sometimes hepatitis C as well)',
+        'Chest X-ray or fluorography for tuberculosis screening',
+        'ECG',
+        'Height, weight, blood type and a matte 3×4 cm photo'
+      ]
+    },
     specialties: 'Specialties',
     back: '← Back',
     handledBy: 'Handled by',
@@ -59,6 +71,8 @@ export const translations = {
     wantToApply: 'I want to apply',
     signIn: 'Sign In',
     signUp: 'Sign Up',
+    continueWithGoogle: 'Continue with Google',
+    or: 'or',
     email: 'Email',
     password: 'Password',
     fullName: 'Full name',
@@ -152,6 +166,18 @@ export const translations = {
     viewDetails: 'Подробнее',
     agencyHandled: (count) => `Работает агентство • ${count} студентов`,
     requirements: 'Требования',
+    medicalDocuments: {
+      title: 'Медицинские документы, если их требует университет',
+      items: [
+        'Осмотр терапевта, офтальмолога, отоларинголога, невролога и психиатра',
+        'Общий и биохимический анализ крови',
+        'Тесты на ВИЧ и сифилис',
+        'Тест на гепатит B (иногда также на гепатит C)',
+        'Рентген или флюорография грудной клетки для проверки на туберкулёз',
+        'ЭКГ',
+        'Рост, вес, группа крови и матовое фото 3×4 см'
+      ]
+    },
     specialties: 'Специальности',
     back: '← Назад',
     handledBy: 'Работает с нами',
@@ -160,6 +186,8 @@ export const translations = {
     wantToApply: 'Я хочу подать заявку',
     signIn: 'Войти',
     signUp: 'Регистрация',
+    continueWithGoogle: 'Продолжить через Google',
+    or: 'или',
     email: 'Email',
     password: 'Пароль',
     fullName: 'Полное имя',
@@ -246,6 +274,18 @@ export const translations = {
     viewDetails: 'Толығырақ',
     agencyHandled: (count) => `Агенттік істеледі • ${count} студент`,
     requirements: 'Талаптар',
+    medicalDocuments: {
+      title: 'Университет талап етсе, медициналық құжаттар',
+      items: [
+        'Терапевт, офтальмолог, отоларинголог, невролог және психиатр тексеруі',
+        'Жалпы және биохимиялық қан анализі',
+        'АИТВ және мерезге тест',
+        'В гепатитіне тест (кейде С гепатитіне де)',
+        'Туберкулезді тексеру үшін кеуде қуысының рентгені немесе флюорография',
+        'ЭКГ',
+        'Бойы, салмағы, қан тобы және 3×4 см күңгірт фото'
+      ]
+    },
     specialties: 'Мамандықтар',
     back: '← Артқа',
     handledBy: 'Біздің агенттік',
@@ -254,6 +294,8 @@ export const translations = {
     wantToApply: 'Мен өтінім бергісі келемін',
     signIn: 'Кіру',
     signUp: 'Тіркелу',
+    continueWithGoogle: 'Google арқылы жалғастыру',
+    or: 'немесе',
     email: 'Email',
     password: 'Пароль',
     fullName: 'Толық аты',

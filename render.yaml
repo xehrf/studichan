@@ -15,6 +15,12 @@ services:
       fromDatabase:
         name: studichan-db
         property: connectionString
+    - key: GOOGLE_CLIENT_ID
+      sync: false
+    - key: GOOGLE_CLIENT_SECRET
+      sync: false
+    - key: GOOGLE_REDIRECT_URI
+      sync: false
 
 databases:
   - name: studichan-db

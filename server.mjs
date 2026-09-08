@@ -1,5 +1,7 @@
 import express from 'express'
 import bcrypt from 'bcryptjs'
+import crypto from 'node:crypto'
+import { OAuth2Client } from 'google-auth-library'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { initDb, query, withTransaction } from './db.mjs'
@@ -8,6 +10,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
 const port = Number(process.env.PORT || 3000)
 const isProduction = process.env.NODE_ENV === 'production'
+const googleClient = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+  ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URI)
+  : null
+const oauthStates = new Map()
 
 await initDb()
 
@@ -19,6 +25,51 @@ const developmentOnly = (_req, res, next) => {
   if (isProduction) return res.status(404).json({ error: 'Not found' })
   next()
 }
+
+const cookieValue = (req, name) => req.headers.cookie?.split(';').map(part => part.trim()).find(part => part.startsWith(`${name}=`))?.slice(name.length + 1)
+const hashToken = (token) => crypto.createHash('sha256').update(token).digest('hex')
+const publicUser = (user) => ({ id: user.id, email: user.email, full_name: user.full_name })
+const createSession = async (userId, res) => {
+  const token = crypto.randomBytes(32).toString('hex')
+  await query('INSERT INTO auth_sessions (token_hash, user_id, expires_at) VALUES ($1, $2, NOW() + INTERVAL \'30 days\')', [hashToken(token), userId])
+  res.setHeader('Set-Cookie', `studichan_session=${token}; HttpOnly; Path=/; SameSite=Lax; Max-Age=2592000${isProduction ? '; Secure' : ''}`)
+}
+const currentUser = async (req) => {
+  const token = cookieValue(req, 'studichan_session')
+  if (!token) return null
+  const result = await query(`SELECT u.id, u.email, u.full_name FROM auth_sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = $1 AND s.expires_at > NOW()`, [hashToken(token)])
+  return result.rows[0] || null
+}
+
+app.get('/api/auth/google', (req, res) => {
+  if (!googleClient || !process.env.GOOGLE_REDIRECT_URI) return res.status(503).send('Google authentication is not configured')
+  const state = crypto.randomBytes(24).toString('hex')
+  oauthStates.set(state, Date.now() + 10 * 60 * 1000)
+  const authUrl = googleClient.generateAuthUrl({ access_type: 'online', scope: ['openid', 'email', 'profile'], state, prompt: 'select_account' })
+  res.redirect(authUrl)
+})
+
+app.get('/api/auth/google/callback', asyncRoute(async (req, res) => {
+  const { code, state } = req.query
+  const expiresAt = oauthStates.get(state)
+  oauthStates.delete(state)
+  if (!code || !state || !expiresAt || expiresAt < Date.now()) return res.status(400).send('Invalid Google authentication state')
+  if (!googleClient) return res.status(503).send('Google authentication is not configured')
+
+  const { tokens } = await googleClient.getToken(code)
+  const ticket = await googleClient.verifyIdToken({ idToken: tokens.id_token, audience: process.env.GOOGLE_CLIENT_ID })
+  const profile = ticket.getPayload()
+  if (!profile?.sub || !profile.email || profile.email_verified !== true) return res.status(400).send('Google account email is not verified')
+
+  const result = await query(`
+    INSERT INTO users (email, google_id, full_name)
+    VALUES ($1, $2, $3)
+    ON CONFLICT (email) DO UPDATE SET google_id = COALESCE(users.google_id, EXCLUDED.google_id), full_name = COALESCE(NULLIF(users.full_name, ''), EXCLUDED.full_name)
+    RETURNING id, email, full_name
+  `, [profile.email.toLowerCase(), profile.sub, profile.name || ''])
+  await createSession(result.rows[0].id, res)
+  res.redirect('/')
+}))
 
 // Проверка состояния приложения и подключения к PostgreSQL.
 app.get('/api/health', asyncRoute(async (_req, res) => {
@@ -214,6 +265,7 @@ app.post('/api/auth/register', asyncRoute(async (req, res) => {
       'INSERT INTO users (email, password_hash, full_name, country, phone) VALUES ($1, $2, $3, $4, $5) RETURNING id, email, full_name',
       [String(email).trim().toLowerCase(), passwordHash, fullName || '', country || '', phone || ''],
     )
+    await createSession(result.rows[0].id, res)
     res.status(201).json({ ok: true, user: result.rows[0] })
   } catch (error) {
     if (error.code === '23505') return res.status(400).json({ error: 'Email already registered' })
@@ -228,10 +280,23 @@ app.post('/api/auth/login', asyncRoute(async (req, res) => {
 
   const result = await query('SELECT id, email, full_name, password_hash FROM users WHERE email = $1', [String(email).trim().toLowerCase()])
   const user = result.rows[0]
-  if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+  if (!user || !user.password_hash || !(await bcrypt.compare(password, user.password_hash))) {
     return res.status(401).json({ error: 'Invalid credentials' })
   }
-  res.json({ ok: true, user: { id: user.id, email: user.email, full_name: user.full_name } })
+  await createSession(user.id, res)
+  res.json({ ok: true, user: publicUser(user) })
+}))
+
+app.get('/api/auth/me', asyncRoute(async (req, res) => {
+  const user = await currentUser(req)
+  res.json({ user: user ? publicUser(user) : null })
+}))
+
+app.post('/api/auth/logout', asyncRoute(async (req, res) => {
+  const token = cookieValue(req, 'studichan_session')
+  if (token) await query('DELETE FROM auth_sessions WHERE token_hash = $1', [hashToken(token)])
+  res.setHeader('Set-Cookie', 'studichan_session=; HttpOnly; Path=/; SameSite=Lax; Max-Age=0')
+  res.json({ ok: true })
 }))
 
 // Подать заявку на университет.

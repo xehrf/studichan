@@ -40,6 +40,7 @@ function App() {
 
   useEffect(() => {
     fetchUniversities()
+    fetch('/api/auth/me').then(response => response.json()).then(data => setUser(data.user)).catch(() => {})
   }, [])
 
   const fetchUniversities = async () => {
@@ -142,7 +143,7 @@ function App() {
               </select>
               {!user && <button className="sign-in-btn" onClick={() => setShowAuth(true)}>{t('signIn')}</button>}
               {canUseBrowserImporter && <button className="icon-btn" title={t('importTitle')} onClick={() => setShowImport(true)}><Upload size={18} /></button>}
-              {user && <button className="logout-btn" onClick={() => setUser(null)}><LogOut size={18} /></button>}
+              {user && <button className="logout-btn" onClick={() => { fetch('/api/auth/logout', { method: 'POST' }); setUser(null) }}><LogOut size={18} /></button>}
             </div>
               </header>
 
@@ -370,6 +371,12 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
         <strong>{t('requirements')}:</strong>
         <p>{localizedOrPending(university.requirements_translations, lang, university.requirements, t('dataPending'))}</p>
       </div>
+      <div className="detail-section medical-documents">
+        <strong>{t('medicalDocuments.title')}</strong>
+        <ul>
+          {t('medicalDocuments.items').map(item => <li key={item}>{item}</li>)}
+        </ul>
+      </div>
       <div className="detail-section">
         <strong>{t('specialties')}:</strong>
         <p>{localizedOrPending(university.specialties_translations, lang, university.specialties, t('dataPending'))}</p>
@@ -423,6 +430,8 @@ function AuthModal({ t, onClose, onLogin }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>{isLogin ? t('signIn') : t('signUp')}</h3>
+        <a className="google-auth-btn" href="/api/auth/google"><span className="google-g">G</span>{t('continueWithGoogle')}</a>
+        <div className="auth-divider"><span>{t('or')}</span></div>
         <form onSubmit={handleSubmit}>
           {!isLogin && <input type="text" placeholder={t('fullName')} value={fullName} onChange={(e) => setFullName(e.target.value)} />}
           <input type="email" placeholder={t('email')} value={email} onChange={(e) => setEmail(e.target.value)} />
