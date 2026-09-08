@@ -99,7 +99,7 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
     SELECT id, name, city, region, ranking, specialties, requirements, tuition, description,
       name_translations, description_translations, specialties_translations, requirements_translations,
       tuition_translations, image_url, image_source, website, source_url, verified_at, agency_id, students_count
-      , data_status, data_checked_at
+      , data_status, data_checked_at, city_safety
     FROM universities
     ${where}
     ORDER BY ranking ASC NULLS LAST, name ASC
@@ -147,9 +147,9 @@ const parseCsv = (csv) => {
 
 const universityUpsertSql = `
   INSERT INTO universities (
-    name, city, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at
+    name, city, city_safety, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at
   ) VALUES (
-    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
+    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
   )
   ON CONFLICT (name) DO UPDATE SET
     city = EXCLUDED.city,
@@ -161,13 +161,14 @@ const universityUpsertSql = `
     description = EXCLUDED.description,
     website = EXCLUDED.website,
     source_url = EXCLUDED.source_url,
-    verified_at = EXCLUDED.verified_at
+    verified_at = EXCLUDED.verified_at,
+    city_safety = EXCLUDED.city_safety
   RETURNING id
 `
 
 app.post('/api/admin/universities', developmentOnly, asyncRoute(async (req, res) => {
   const {
-    name, city, region, ranking, specialties, requirements, tuition,
+    name, city, city_safety, region, ranking, specialties, requirements, tuition,
     description, website, sourceUrl, verifiedAt,
     nameTranslations, descriptionTranslations, specialtiesTranslations,
     requirementsTranslations, tuitionTranslations, imageUrl, imageSource,
@@ -188,14 +189,14 @@ app.post('/api/admin/universities', developmentOnly, asyncRoute(async (req, res)
   try {
     const result = await query(`
       INSERT INTO universities (
-        name, city, region, ranking, specialties, requirements, tuition,
+        name, city, city_safety, region, ranking, specialties, requirements, tuition,
         description, website, source_url, verified_at, name_translations,
         description_translations, specialties_translations, requirements_translations,
         tuition_translations, image_url, image_source
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
       RETURNING *
     `, [
-      universityName, universityCity, universityRegion, parsedRanking,
+      universityName, universityCity, ['low', 'medium', 'high', 'not_rated'].includes(city_safety) ? city_safety : 'not_rated', universityRegion, parsedRanking,
       specialties || '', requirements || '', tuition || '', description || '',
       website || '', sourceUrl || '', verifiedAt || new Date().toISOString().slice(0, 10),
       nameTranslations || {}, descriptionTranslations || {}, specialtiesTranslations || {},
@@ -231,7 +232,7 @@ app.post('/api/admin/import-universities', developmentOnly, asyncRoute(async (re
     const skipped = []
     for (const [offset, row] of rows.slice(1).entries()) {
       const university = {
-        name: get(row, 'name'), city: get(row, 'city'), region: get(row, 'region'),
+        name: get(row, 'name'), city: get(row, 'city'), region: get(row, 'region'), citySafety: get(row, 'city_safety') || 'not_rated',
         ranking: Number(get(row, 'ranking')) || null, specialties: get(row, 'specialties'),
         requirements: get(row, 'requirements'), tuition: get(row, 'tuition'), description: get(row, 'description'),
         website: get(row, 'website'), sourceUrl: get(row, 'source_url'),
@@ -242,7 +243,7 @@ app.post('/api/admin/import-universities', developmentOnly, asyncRoute(async (re
         continue
       }
       await client.query(universityUpsertSql, [
-        university.name, university.city, university.region, university.ranking, university.specialties,
+        university.name, university.city, university.citySafety, university.region, university.ranking, university.specialties,
         university.requirements, university.tuition, university.description, university.website,
         university.sourceUrl, university.verifiedAt,
       ])

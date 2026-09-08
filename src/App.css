@@ -417,6 +417,19 @@ body {
   margin-bottom: 12px;
 }
 
+.detail-safety {
+  display: inline-block;
+  margin: 8px 0 14px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--accent-tint);
+}
+
+.safety-low { color: #9c2f24; background: #fde5e1; }
+.safety-medium { color: #8a5a00; background: #fff4d6; }
+.safety-high { color: #28703b; background: #e8f5e9; }
+
 .detail-desc {
   font-size: 13px;
   line-height: 1.5;

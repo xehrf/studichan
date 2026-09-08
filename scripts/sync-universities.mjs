@@ -81,15 +81,15 @@ const findImage = async (name) => {
 
 const upsertSql = `
   INSERT INTO universities (
-    name, city, region, ranking, specialties, requirements, tuition, description,
+    name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
     website, source_url, verified_at, name_translations, description_translations,
     specialties_translations, requirements_translations, tuition_translations, image_url, image_source
-  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_DATE, $11, $12, $13, $14, $15, $16, $17)
+  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, CURRENT_DATE, $12, $13, $14, $15, $16, $17, $18)
   ON CONFLICT (name) DO UPDATE SET
     city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
     specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements, tuition = EXCLUDED.tuition,
     description = EXCLUDED.description, website = EXCLUDED.website, source_url = EXCLUDED.source_url,
-    verified_at = CURRENT_DATE, name_translations = EXCLUDED.name_translations,
+    verified_at = CURRENT_DATE, city_safety = EXCLUDED.city_safety, name_translations = EXCLUDED.name_translations,
     description_translations = EXCLUDED.description_translations, specialties_translations = EXCLUDED.specialties_translations,
     requirements_translations = EXCLUDED.requirements_translations, tuition_translations = EXCLUDED.tuition_translations,
     image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source
@@ -106,7 +106,7 @@ try {
         translations(source.requirements), translations(source.tuition),
       ])
       await client.query(upsertSql, [
-        source.name, source.city, source.region, Number(source.ranking) || null, source.specialties || '',
+        source.name, source.city, source.city_safety || 'not_rated', source.region, Number(source.ranking) || null, source.specialties || '',
         source.requirements || '', source.tuition || '', source.description || '', source.website || '',
         source.source_url || source.website || '', nameTranslations, descriptionTranslations,
         specialtiesTranslations, requirementsTranslations, tuitionTranslations, image?.url || null, image?.source || null,

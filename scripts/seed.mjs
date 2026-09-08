@@ -119,11 +119,11 @@ try {
       const admissions = preliminaryAdmissions(university)
       await client.query(`
         INSERT INTO universities (
-          name, city, region, ranking, specialties, requirements, tuition, description,
+          name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
           image_url, image_source, data_status, data_checked_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $9, NULL, $10, $11, $12, $13, $14, $15, $16, 'requires_verification', NULL)
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
@@ -137,7 +137,7 @@ try {
           image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source,
           data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at
       `, [
-        university.nameEn, university.city, regionFor(university), university.rankingNational,
+        university.nameEn, university.city, university.citySafety || 'not_rated', regionFor(university), university.rankingNational,
         translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
         JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
         JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),

@@ -200,7 +200,7 @@ const reviewRecord = async (source) => {
     sourceRow: source.sourceRow,
     status: successful.length ? 'ready_for_review' : 'needs_attention',
     university: {
-      name: source.name, city: source.city, region: source.region,
+      name: source.name, city: source.city, city_safety: source.city_safety || 'not_rated', region: source.region,
       ranking: source.ranking ? Number(source.ranking) : null,
       specialties: source.specialties || '', requirements: source.requirements || '', tuition: source.tuition || '',
       description, website: source.website || '', source_url: sourceUrl, verified_at: date,
@@ -210,13 +210,13 @@ const reviewRecord = async (source) => {
 }
 
 const upsertSql = `
-  INSERT INTO universities (name, city, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+  INSERT INTO universities (name, city, city_safety, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
   ON CONFLICT (name) DO UPDATE SET
     city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
     specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements, tuition = EXCLUDED.tuition,
     description = EXCLUDED.description, website = EXCLUDED.website, source_url = EXCLUDED.source_url,
-    verified_at = EXCLUDED.verified_at
+    verified_at = EXCLUDED.verified_at, city_safety = EXCLUDED.city_safety
 `
 
 if (args.includes('--help') || args.includes('-h')) {
@@ -254,7 +254,7 @@ try {
     for (const record of ready) {
       const item = record.university
       await client.query(upsertSql, [
-        item.name, item.city, item.region, item.ranking, item.specialties, item.requirements,
+        item.name, item.city, item.city_safety || 'not_rated', item.region, item.ranking, item.specialties, item.requirements,
         item.tuition, item.description, item.website, item.source_url, item.verified_at,
       ])
     }

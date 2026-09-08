@@ -313,7 +313,7 @@ function ImportModal({ t, onClose, onImported }) {
           <button type="submit" disabled={importing}>{importing ? t('importing') : t('importAction')}</button>
         </form>
         {status && <p className="import-status">{status}</p>}
-        <p className="columns-help">{t('requiredColumns')} <code>name, city, region</code>. {t('optionalColumns')} ranking, specialties, requirements, tuition, description, website, source_url, verified_at.</p>
+        <p className="columns-help">{t('requiredColumns')} <code>name, city, region</code>. {t('optionalColumns')} city_safety (low, medium, high), ranking, specialties, requirements, tuition, description, website, source_url, verified_at.</p>
       </div>
     </div>
   )
@@ -364,6 +364,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       {university.image_url && <img className="detail-image" src={university.image_url} alt={university.name} />}
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>
+      <div className={`detail-safety safety-${university.city_safety || 'not_rated'}`}><strong>{t('citySafety')}:</strong> {t(`safetyLevels.${university.city_safety || 'not_rated'}`)}</div>
       {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
       {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('officialSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
       {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}
