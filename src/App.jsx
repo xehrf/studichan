@@ -370,7 +370,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
     <div className="detail-view">
       <button className="back-btn" onClick={onBack}>{t('back')}</button>
       {images.length > 0 && <div className="detail-gallery">
-        <img className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
+        <img key={images[selectedImage] || images[0]} className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
         {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
           {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
         </div>}
