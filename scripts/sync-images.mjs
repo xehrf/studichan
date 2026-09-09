@@ -7,7 +7,15 @@ import { closeDb, initDb, withTransaction } from '../db.mjs'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataPath = path.join(__dirname, '..', 'prisma', 'data', 'universities.json')
 const reviewDir = path.join(__dirname, '..', 'data', 'review')
-const universities = JSON.parse(await readFile(dataPath, 'utf8')).filter(item => item.nameEn && item.website)
+const limitIndex = process.argv.indexOf('--limit')
+const requestedLimit = limitIndex === -1 ? null : Number(process.argv[limitIndex + 1])
+if (requestedLimit !== null && (!Number.isInteger(requestedLimit) || requestedLimit < 1)) {
+  throw new Error('--limit must be a positive integer')
+}
+const universities = JSON.parse(await readFile(dataPath, 'utf8'))
+  .filter(item => item.nameEn && item.website)
+  .sort((a, b) => (a.rankingNational || Number.MAX_SAFE_INTEGER) - (b.rankingNational || Number.MAX_SAFE_INTEGER))
+  .slice(0, requestedLimit || undefined)
 const delayMs = Number(process.env.IMAGE_SYNC_DELAY_MS || 1200)
 const shouldApply = process.argv.includes('--apply')
 const maxImages = 6
@@ -116,6 +124,7 @@ const findOfficialImages = async (university) => {
 }
 
 const results = []
+console.log(`Scanning ${universities.length} university website(s).`)
 for (const university of universities) {
   try {
     const images = await findOfficialImages(university)
