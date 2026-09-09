@@ -395,9 +395,6 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
             </div>
           </>}
         </div>
-        {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
-          {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => selectImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
-        </div>}
       </div>}
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
       <p className="detail-city">{university.city} • {t('region', university.region)}</p>

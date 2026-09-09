@@ -257,7 +257,8 @@ body {
 
 .detail-image {
   width: 100%;
-  height: clamp(340px, 48vw, 680px);
+  height: min(78svh, 820px);
+  min-height: 400px;
   object-fit: cover;
   display: block;
   animation: gallery-image-in .55s ease-out;
@@ -422,8 +423,8 @@ body {
   margin-bottom: 12px;
 }
 
-.detail-gallery { margin: 12px 0 22px; }
-.detail-slider { position: relative; overflow: hidden; border-radius: 8px; background: #171a17; }
+.detail-gallery { width: calc(100% + 32px); margin: 0 -16px 24px; }
+.detail-slider { position: relative; overflow: hidden; background: #171a17; }
 .gallery-control { position: absolute; top: 50%; z-index: 1; width: 42px; height: 42px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(23, 26, 23, .56); color: white; cursor: pointer; transform: translateY(-50%); opacity: 0; transition: opacity .2s ease, background .2s ease; }
 .detail-slider:hover .gallery-control, .gallery-control:focus-visible { opacity: 1; }
 .gallery-control:hover { background: rgba(23, 26, 23, .82); }
@@ -433,27 +434,9 @@ body {
 .gallery-pagination button { width: 8px; height: 8px; padding: 0; border: 1px solid rgba(255, 255, 255, .9); border-radius: 50%; background: transparent; cursor: pointer; transition: width .25s ease, background .25s ease; }
 .gallery-pagination button.active { width: 24px; border-radius: 8px; background: white; }
 
-.detail-thumbnails { display: flex; gap: 8px; overflow-x: auto; margin-top: 8px; }
-
-  .detail-thumbnail {
-  flex: 0 0 68px;
-  width: 68px;
-  height: 52px;
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  overflow: hidden;
-    background: var(--surface);
-    cursor: pointer;
-    transition: border-color .2s ease, opacity .2s ease, transform .2s ease;
-  }
-  
-  .detail-thumbnail:hover { opacity: .82; transform: translateY(-1px); }
-  .detail-thumbnail.active { border-color: var(--accent); }
-.detail-thumbnail img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
 @media (max-width: 639px) {
-  .detail-image { height: clamp(260px, 65vw, 420px); }
+  .detail-gallery { width: calc(100% + 32px); margin: 0 -16px 20px; }
+  .detail-image { height: min(62svh, 520px); min-height: 280px; }
   .gallery-control { width: 36px; height: 36px; opacity: 1; }
   .gallery-control-prev { left: 10px; }
   .gallery-control-next { right: 10px; }
