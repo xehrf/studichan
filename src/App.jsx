@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
@@ -214,7 +214,7 @@ function App() {
           )}
         </>
       ) : (
-        <UniversityDetail university={selectedUniversity} user={user} lang={lang} t={t} onBack={() => setSelectedUniversity(null)} onAuth={() => setShowAuth(true)} />
+        <UniversityDetail university={selectedUniversity} user={user} lang={lang} t={t} onBack={() => setSelectedUniversity(null)} onAuth={() => setShowAuth(true)} onLanguageChange={setLang} />
       )}
 
       {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
@@ -324,10 +324,12 @@ function ImportModal({ t, onClose, onImported }) {
   )
 }
 
-function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
+function UniversityDetail({ university, user, lang, t, onBack, onAuth, onLanguageChange }) {
   const [agency, setAgency] = useState(null)
   const [selectedImage, setSelectedImage] = useState(0)
   const [isGalleryPaused, setIsGalleryPaused] = useState(false)
+  const [showCompactHeader, setShowCompactHeader] = useState(false)
+  const galleryRef = useRef(null)
   const images = imageList(university)
   const mapQuery = `${university.name}, ${university.city}, China`
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
@@ -335,6 +337,7 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
 
   useEffect(() => {
     setSelectedImage(0)
+    setShowCompactHeader(false)
     if (university.agency_id) {
       fetchAgency()
     }
@@ -352,6 +355,13 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
 
   const selectImage = (index) => {
     setSelectedImage((index + images.length) % images.length)
+  }
+
+  const handleDetailScroll = (event) => {
+    const gallery = galleryRef.current
+    const threshold = gallery ? gallery.offsetTop + gallery.offsetHeight - 72 : 0
+    const nextVisible = event.currentTarget.scrollTop >= threshold
+    setShowCompactHeader(current => current === nextVisible ? current : nextVisible)
   }
 
   const fetchAgency = async () => {
@@ -382,9 +392,18 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   }
 
   return (
-    <div className="detail-view">
+    <div className="detail-view" onScroll={handleDetailScroll}>
+      <div className={`detail-sticky-header ${showCompactHeader ? 'visible' : ''}`}>
+        <button type="button" className="detail-header-back" onClick={onBack} aria-label={t('back')}><ChevronLeft size={22} /></button>
+        <strong>{localized(university.name_translations, lang, university.name)}</strong>
+        <select className="detail-header-language" value={lang} onChange={(event) => onLanguageChange(event.target.value)} aria-label="Language">
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+          <option value="kk">KK</option>
+        </select>
+      </div>
       <button className="back-btn" onClick={onBack}>{t('back')}</button>
-      {images.length > 0 && <div className="detail-gallery" onMouseEnter={() => setIsGalleryPaused(true)} onMouseLeave={() => setIsGalleryPaused(false)}>
+      {images.length > 0 && <div ref={galleryRef} className="detail-gallery" onMouseEnter={() => setIsGalleryPaused(true)} onMouseLeave={() => setIsGalleryPaused(false)}>
         <div className="detail-slider">
           <img key={images[selectedImage] || images[0]} className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
           {images.length > 1 && <>
