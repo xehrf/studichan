@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown } from 'lucide-react'
+import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
 
@@ -327,6 +327,7 @@ function ImportModal({ t, onClose, onImported }) {
 function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   const [agency, setAgency] = useState(null)
   const [selectedImage, setSelectedImage] = useState(0)
+  const [isGalleryPaused, setIsGalleryPaused] = useState(false)
   const images = imageList(university)
   const mapQuery = `${university.name}, ${university.city}, China`
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
@@ -338,6 +339,20 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
       fetchAgency()
     }
   }, [university])
+
+  useEffect(() => {
+    if (images.length < 2 || isGalleryPaused) return undefined
+
+    const slideshow = window.setInterval(() => {
+      setSelectedImage(current => (current + 1) % images.length)
+    }, 5000)
+
+    return () => window.clearInterval(slideshow)
+  }, [images.length, selectedImage, isGalleryPaused])
+
+  const selectImage = (index) => {
+    setSelectedImage((index + images.length) % images.length)
+  }
 
   const fetchAgency = async () => {
     try {
@@ -369,10 +384,19 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
   return (
     <div className="detail-view">
       <button className="back-btn" onClick={onBack}>{t('back')}</button>
-      {images.length > 0 && <div className="detail-gallery">
-        <img key={images[selectedImage] || images[0]} className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
+      {images.length > 0 && <div className="detail-gallery" onMouseEnter={() => setIsGalleryPaused(true)} onMouseLeave={() => setIsGalleryPaused(false)}>
+        <div className="detail-slider">
+          <img key={images[selectedImage] || images[0]} className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
+          {images.length > 1 && <>
+            <button type="button" className="gallery-control gallery-control-prev" onClick={() => selectImage(selectedImage - 1)} aria-label="Previous photo"><ChevronLeft size={24} /></button>
+            <button type="button" className="gallery-control gallery-control-next" onClick={() => selectImage(selectedImage + 1)} aria-label="Next photo"><ChevronRight size={24} /></button>
+            <div className="gallery-pagination" aria-label={t('photoGallery')}>
+              {images.map((image, index) => <button type="button" key={image} className={index === selectedImage ? 'active' : ''} onClick={() => selectImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`} />)}
+            </div>
+          </>}
+        </div>
         {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
-          {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
+          {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => selectImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
         </div>}
       </div>}
       <h2>{localized(university.name_translations, lang, university.name)}</h2>
