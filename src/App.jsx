@@ -33,12 +33,6 @@ const parseRequirements = (requirements) => {
   return parsed
 }
 
-// Викисклад отдаёт превью любой ширины: карточке незачем тянуть файл на мегабайт.
-const scaledImage = (url, width) => {
-  if (!url || !url.includes('/thumb/')) return url
-  return url.replace(/\/(\d+)px-([^/]+)$/, (match, current, file) => Number(current) > width ? `/${width}px-${file}` : match)
-}
-
 const amountMatch = (tuition) => String(tuition || '').match(/\d[\d\s ]*\d|\d/)
 const tuitionAmount = (tuition) => {
   const amount = amountMatch(tuition)?.[0]?.trim()
@@ -296,7 +290,7 @@ function UniversityCard({ university, lang, t, specialtyLabel, onOpen }) {
       <div className="uni-card-photo">
         {images[0] ? (
           <>
-            <img src={scaledImage(images[0], 640)} alt={name} loading="lazy" />
+            <img src={images[0]} alt={name} loading="lazy" />
             <span className="photo-count"><Camera size={12} /> {t('photosCount', images.length)}</span>
           </>
         ) : (
@@ -525,13 +519,13 @@ function UniversityDetail({ university, user, lang, t, catalogueSize, specialtyL
           {images.length > 0 ? (
             <div className="detail-gallery">
               <div className="detail-stage">
-                <img className="detail-image" src={scaledImage(images[selectedImage] || images[0], 1280)} alt={name} />
+                <img className="detail-image" src={images[selectedImage] || images[0]} alt={name} />
                 <span className="gallery-position">{t('galleryPosition', Math.min(selectedImage + 1, images.length), images.length)}</span>
               </div>
               {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
                 {visibleThumbs.map((image, index) => (
                   <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}>
-                    <img src={scaledImage(image, 260)} alt="" />
+                    <img src={image} alt="" />
                   </button>
                 ))}
                 {hiddenThumbs > 0 && <span className="detail-thumbnail more">{t('morePhotos', hiddenThumbs)}</span>}

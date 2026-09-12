@@ -4,7 +4,12 @@
       "Bash(rm -rf .preview-shots)",
       "Bash(rm -rf /home/tlek/snap/firefox/common/shotprofile /home/tlek/.cache/studichan-shot-profile)",
       "Bash(pkill -f \"preview-api.mjs\")",
-      "Bash(pkill -f \"vite --port 5199\")"
+      "Bash(pkill -f \"vite --port 5199\")",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(curl -sk -o /dev/null -w 'код %{http_code}, тип %{content_type}, размер %{size_download}\\\\n' --max-time 30 https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg/1920px-Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg)",
+      "Bash(curl -s -o /dev/null -w 'код %{http_code}\\\\n' --max-time 30 https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg/1920px-Wanliu_Campus_of_Peking_University_%2820220925175136%29.jpg)",
+      "Bash(timeout 25 openssl s_client -connect thumb.wikimedia.org:443 -servername thumb.wikimedia.org)",
+      "Bash(openssl x509 *)"
     ]
   }
 }
