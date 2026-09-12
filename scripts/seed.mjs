@@ -123,10 +123,12 @@ try {
           name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
-          image_url, image_source, data_status, data_checked_at, city_safety_description, image_gallery
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19)
+          image_url, image_source, data_status, data_checked_at, city_safety_description, image_gallery,
+          ranking_world, has_csc_scholarship
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19, $20, $21)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
+          ranking_world = EXCLUDED.ranking_world, has_csc_scholarship = EXCLUDED.has_csc_scholarship,
           specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
           tuition = EXCLUDED.tuition, description = EXCLUDED.description,
           website = EXCLUDED.website, source_url = EXCLUDED.source_url,
@@ -152,6 +154,7 @@ try {
         JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
         university.coverUrl, university.logoUrl, getCitySafety(university.city).description,
         JSON.stringify(university.galleryUrls?.length ? university.galleryUrls : [university.coverUrl].filter(Boolean)),
+        university.rankingWorld || null, Boolean(university.hasCscScholarship),
       ])
     }
   })

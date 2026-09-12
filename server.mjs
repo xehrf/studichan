@@ -100,6 +100,7 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
       name_translations, description_translations, specialties_translations, requirements_translations,
       tuition_translations, image_url, image_source, website, source_url, verified_at, agency_id, students_count
       , data_status, data_checked_at, city_safety, city_safety_description, image_gallery
+      , ranking_world, has_csc_scholarship
     FROM universities
     ${where}
     ORDER BY ranking ASC NULLS LAST, name ASC

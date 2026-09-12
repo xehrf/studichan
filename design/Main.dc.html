@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Manrope', Arial, sans-serif; color: #2c120a; background: #f4f3f0; }
+    a { color: #d85a30; text-decoration: none; }
+    a:hover { color: #4a1b0c; }
+    p { margin: 0; }
+    h1, h2, h3 { margin: 0; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; background: #f4f3f0;">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; padding: 0 80px; background: #fffdfb; border-bottom: 1px solid rgba(74, 27, 12, .16);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; background: #d85a30; color: #4a1b0c; font: 800 20px/1 'Outfit', sans-serif;">C</span>
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        <h1 style="display: inline-flex; align-items: baseline; gap: 2px; font: 800 18px/1 'Outfit', sans-serif; letter-spacing: -.06em;"><strong style="color: #4a1b0c;">china</strong><span style="color: #d85a30; font-weight: 500;">course</span></h1>
+        <p style="color: #6b5750; font-size: 11px;">Университеты Китая для студентов из Казахстана</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <span style="min-height: 40px; display: inline-flex; align-items: center; padding: 8px 10px; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">RU</span>
+      <span style="min-height: 40px; display: inline-flex; align-items: center; padding: 8px 16px; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 13px;">Войти</span>
+    </div>
+  </header>
+
+  <div style="width: 1280px; margin: 0 auto; padding: 52px 0 64px;">
+
+    <section style="display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; padding-bottom: 42px;">
+      <div>
+        <p style="color: #6b5750; font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;">Каталог · 115 вузов</p>
+        <h2 style="margin-top: 12px; color: #4a1b0c; font: 900 60px/.94 'Outfit', sans-serif; letter-spacing: -.065em;">Выбери свой<br>университет</h2>
+      </div>
+      <p style="max-width: 280px; padding-bottom: 6px; color: #6b5750; font-size: 14px; line-height: 1.45;">Стоимость, требования по языку и проверенная дата обновления данных указаны в каждой карточке.</p>
+    </section>
+
+    <div style="display: grid; grid-template-columns: minmax(280px, 1fr) auto; gap: 12px; padding: 16px 0; border-top: 1px solid rgba(74, 27, 12, .16); border-bottom: 1px solid rgba(74, 27, 12, .16);">
+      <div style="min-height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <span style="color: #6b5750; font-size: 14px;">Поиск по названию или городу</span>
+      </div>
+      <div style="display: flex; align-items: stretch; gap: 4px;">
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #4a1b0c; border: 1px solid #4a1b0c; color: #fffdfb; font-size: 12px;">Все регионы</span>
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">Север</span>
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">Восток</span>
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">Центр</span>
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">Юг</span>
+        <span style="min-height: 48px; display: inline-flex; align-items: center; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">Запад</span>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 28px 0 18px;">
+      <p style="color: #6b5750; font-size: 13px;"><strong style="color: #4a1b0c; font-size: 16px;">115 вузов</strong> подходят под фильтры</p>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="color: #6b5750; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Сортировка</span>
+        <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 13px; font-weight: 600;">Сначала по рейтингу
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b5750" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+        </span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+
+      <article style="display: flex; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <div style="position: relative; flex: 0 0 300px;">
+          <img src="tsinghua.jpg" alt="Кампус университета Цинхуа" style="display: block; width: 300px; height: 208px; object-fit: cover;">
+          <span style="position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; background: rgba(44, 18, 10, .78); color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .08em;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14"></rect><circle cx="12" cy="13" r="3.5"></circle></svg>6 ФОТО
+          </span>
+        </div>
+        <div style="display: flex; flex: 1 1 auto; gap: 28px; min-width: 0; padding: 18px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-width: 0;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1.05 'Outfit', sans-serif; letter-spacing: -.045em;">Университет Цинхуа <span style="color: #6b5750; font: 500 15px/1 'Manrope', sans-serif; letter-spacing: 0;">清华大学</span></h3>
+            <p style="display: flex; align-items: center; gap: 6px; color: #6b5750; font-size: 13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Пекин · Север · Публичный
+            </p>
+            <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; color: #2c120a; font-size: 13px; line-height: 1.5;">Сильнейший инженерный вуз страны в Хайдяне, на месте бывших императорских садов династии Цин. 21 школа и 59 факультетов.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">HSK 5</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Стипендия CSC</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Инженерия</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Компьютерные науки</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border: 1px solid rgba(74, 27, 12, .16); color: #2f6b3d; font-size: 11px; font-weight: 700;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"></path></svg>Безопасность высокая
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; flex: 0 0 208px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№1 В КИТАЕ</span>
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700;">QS 25</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Обучение от</span>
+              <p style="color: #d85a30; font: 800 25px/1 'Outfit', sans-serif; letter-spacing: -.04em;">1 794 000 ₸</p>
+              <span style="color: #6b5750; font-size: 11px;">за учебный год</span>
+            </div>
+            <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: #d85a30; color: #4a1b0c; font-size: 13px; font-weight: 700;">Смотреть вуз
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article style="display: flex; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <div style="position: relative; flex: 0 0 300px;">
+          <img src="huazhong.jpg" alt="Кампус Хуачжунского университета" style="display: block; width: 300px; height: 208px; object-fit: cover;">
+          <span style="position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; background: rgba(44, 18, 10, .78); color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .08em;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14"></rect><circle cx="12" cy="13" r="3.5"></circle></svg>6 ФОТО
+          </span>
+        </div>
+        <div style="display: flex; flex: 1 1 auto; gap: 28px; min-width: 0; padding: 18px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-width: 0;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1.05 'Outfit', sans-serif; letter-spacing: -.045em;">Хуачжунский университет науки и технологий <span style="color: #6b5750; font: 500 15px/1 'Manrope', sans-serif; letter-spacing: 0;">华中科技大学</span></h3>
+            <p style="display: flex; align-items: center; gap: 6px; color: #6b5750; font-size: 13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Ухань · Центр · Публичный
+            </p>
+            <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; color: #2c120a; font-size: 13px; line-height: 1.5;">Государственный университет Китая в городе Ухань. Сильные стороны вуза: медицина, инженерия и компьютерные науки.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">HSK 4–5</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Стипендия CSC</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Медицина</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border: 1px solid rgba(74, 27, 12, .16); color: #2f6b3d; font-size: 11px; font-weight: 700;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"></path></svg>Безопасность высокая
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; flex: 0 0 208px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№13 В КИТАЕ</span>
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700;">QS 275</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Обучение от</span>
+              <p style="color: #d85a30; font: 800 25px/1 'Outfit', sans-serif; letter-spacing: -.04em;">1 380 000 ₸</p>
+              <span style="color: #6b5750; font-size: 11px;">за учебный год</span>
+            </div>
+            <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: #d85a30; color: #4a1b0c; font-size: 13px; font-weight: 700;">Смотреть вуз
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article style="display: flex; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <div style="position: relative; flex: 0 0 300px;">
+          <img src="hit.jpg" alt="Главный корпус Харбинского технологического института" style="display: block; width: 300px; height: 208px; object-fit: cover;">
+          <span style="position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; background: rgba(44, 18, 10, .78); color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .08em;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14"></rect><circle cx="12" cy="13" r="3.5"></circle></svg>3 ФОТО
+          </span>
+        </div>
+        <div style="display: flex; flex: 1 1 auto; gap: 28px; min-width: 0; padding: 18px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-width: 0;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1.05 'Outfit', sans-serif; letter-spacing: -.045em;">Харбинский технологический институт <span style="color: #6b5750; font: 500 15px/1 'Manrope', sans-serif; letter-spacing: 0;">哈尔滨工业大学</span></h3>
+            <p style="display: flex; align-items: center; gap: 6px; color: #6b5750; font-size: 13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Харбин · Север · Публичный
+            </p>
+            <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; color: #2c120a; font-size: 13px; line-height: 1.5;">Инженерный университет в районе Наньган. Ведущий центр подготовки по космической технике и робототехнике.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">HSK 4+</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">IELTS 6.0</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Космическая техника</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Робототехника</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; flex: 0 0 208px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№9 В КИТАЕ</span>
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700;">QS 256</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Обучение от</span>
+              <p style="color: #d85a30; font: 800 25px/1 'Outfit', sans-serif; letter-spacing: -.04em;">1 794 000 ₸</p>
+              <span style="color: #6b5750; font-size: 11px;">за учебный год</span>
+            </div>
+            <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: #d85a30; color: #4a1b0c; font-size: 13px; font-weight: 700;">Смотреть вуз
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article style="display: flex; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <div style="position: relative; flex: 0 0 300px;">
+          <img src="nankai.jpg" alt="Главный корпус Нанькайского университета" style="display: block; width: 300px; height: 208px; object-fit: cover;">
+          <span style="position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; background: rgba(44, 18, 10, .78); color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .08em;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14"></rect><circle cx="12" cy="13" r="3.5"></circle></svg>4 ФОТО
+          </span>
+        </div>
+        <div style="display: flex; flex: 1 1 auto; gap: 28px; min-width: 0; padding: 18px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-width: 0;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1.05 'Outfit', sans-serif; letter-spacing: -.045em;">Нанькайский университет <span style="color: #6b5750; font: 500 15px/1 'Manrope', sans-serif; letter-spacing: 0;">南开大学</span></h3>
+            <p style="display: flex; align-items: center; gap: 6px; color: #6b5750; font-size: 13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Тяньцзинь · Север · Публичный
+            </p>
+            <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; color: #2c120a; font-size: 13px; line-height: 1.5;">Государственный университет Китая в городе Тяньцзинь. Сильные стороны вуза: экономика, химия, математика и история.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">HSK 4–5</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Стипендия CSC</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Экономика</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border: 1px solid rgba(74, 27, 12, .16); color: #2f6b3d; font-size: 11px; font-weight: 700;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"></path></svg>Безопасность высокая
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; flex: 0 0 208px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№16 В КИТАЕ</span>
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700;">QS 355</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Обучение от</span>
+              <p style="color: #d85a30; font: 800 25px/1 'Outfit', sans-serif; letter-spacing: -.04em;">1 380 000 ₸</p>
+              <span style="color: #6b5750; font-size: 11px;">за учебный год</span>
+            </div>
+            <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: #d85a30; color: #4a1b0c; font-size: 13px; font-weight: 700;">Смотреть вуз
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article style="display: flex; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; flex: 0 0 300px; background: #faece7; border-right: 1px solid rgba(74, 27, 12, .16);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d9c4bc" stroke-width="1.6"><rect x="3" y="6" width="18" height="14"></rect><circle cx="12" cy="13" r="3.5"></circle></svg>
+          <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .06em;">ФОТО УТОЧНЯЮТСЯ</span>
+        </div>
+        <div style="display: flex; flex: 1 1 auto; gap: 28px; min-width: 0; padding: 18px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-width: 0;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1.05 'Outfit', sans-serif; letter-spacing: -.045em;">Шанхайский университет Цзяотун <span style="color: #6b5750; font: 500 15px/1 'Manrope', sans-serif; letter-spacing: 0;">上海交通大学</span></h3>
+            <p style="display: flex; align-items: center; gap: 6px; color: #6b5750; font-size: 13px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Шанхай · Восток · Публичный
+            </p>
+            <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; color: #2c120a; font-size: 13px; line-height: 1.5;">Государственный университет Китая в городе Шанхай. Сильные стороны вуза: инженерия, медицина и менеджмент.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">HSK 5</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">IELTS 6.0+</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Менеджмент</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; flex: 0 0 208px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№4 В КИТАЕ</span>
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700;">QS 50</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+              <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Обучение от</span>
+              <p style="color: #d85a30; font: 800 25px/1 'Outfit', sans-serif; letter-spacing: -.04em;">1 711 200 ₸</p>
+              <span style="color: #6b5750; font-size: 11px;">за учебный год</span>
+            </div>
+            <span style="min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: #d85a30; color: #4a1b0c; font-size: 13px; font-weight: 700;">Смотреть вуз
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Manrope', Arial, sans-serif; color: #2c120a; background: #f4f3f0; }
+    a { color: #d85a30; text-decoration: none; }
+    a:hover { color: #4a1b0c; }
+    p { margin: 0; }
+    h1, h2, h3, h4 { margin: 0; }
+    .spec-cell { padding: 13px 0; border-bottom: 1px solid rgba(74, 27, 12, .16); }
+  </style>
+</helmet>
+
+<div style="width: 1440px; background: #f4f3f0;">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; padding: 0 80px; background: #fffdfb; border-bottom: 1px solid rgba(74, 27, 12, .16);">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <span style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(74, 27, 12, .16);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a1b0c" stroke-width="2" stroke-linecap="round"><path d="M20 12H5M11 6l-6 6 6 6"></path></svg>
+      </span>
+      <span style="width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; background: #d85a30; color: #4a1b0c; font: 800 20px/1 'Outfit', sans-serif;">C</span>
+      <h1 style="display: inline-flex; align-items: baseline; gap: 2px; font: 800 18px/1 'Outfit', sans-serif; letter-spacing: -.06em;"><strong style="color: #4a1b0c;">china</strong><span style="color: #d85a30; font-weight: 500;">course</span></h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <span style="min-height: 40px; display: inline-flex; align-items: center; padding: 8px 10px; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 12px;">RU</span>
+      <span style="min-height: 40px; display: inline-flex; align-items: center; padding: 8px 16px; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 13px;">Войти</span>
+    </div>
+  </header>
+
+  <div style="width: 1280px; margin: 0 auto; padding: 28px 0 72px;">
+
+    <p style="display: flex; align-items: center; gap: 8px; padding-bottom: 24px; color: #6b5750; font-size: 12px;">
+      <span style="color: #d85a30;">Каталог</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#d9c4bc" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg>
+      <span style="color: #d85a30;">Пекин</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#d9c4bc" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg>
+      Университет Цинхуа
+    </p>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 836px) 380px; gap: 64px; align-items: start;">
+
+      <div style="display: flex; flex-direction: column; gap: 40px; min-width: 0;">
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="position: relative;">
+            <img src="hero.jpg" alt="Кампус университета Цинхуа" style="display: block; width: 836px; height: 470px; object-fit: cover;">
+            <span style="position: absolute; right: 12px; bottom: 12px; padding: 7px 10px; background: rgba(44, 18, 10, .78); color: #fffdfb; font-size: 11px; font-weight: 700; letter-spacing: .06em;">1 / 6</span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <img src="th1.jpg" alt="" style="display: block; width: 120px; height: 80px; object-fit: cover; outline: 2px solid #d85a30; outline-offset: -2px;">
+            <img src="th2.jpg" alt="" style="display: block; width: 120px; height: 80px; object-fit: cover;">
+            <img src="th3.jpg" alt="" style="display: block; width: 120px; height: 80px; object-fit: cover;">
+            <img src="th4.jpg" alt="" style="display: block; width: 120px; height: 80px; object-fit: cover;">
+            <span style="width: 120px; height: 80px; display: inline-flex; align-items: center; justify-content: center; background: #faece7; border: 1px solid rgba(74, 27, 12, .16); color: #4a1b0c; font-size: 12px; font-weight: 700;">+2 фото</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="padding: 5px 8px; background: #4a1b0c; color: #fffdfb; font-size: 10px; font-weight: 800; letter-spacing: .04em;">№1 В КИТАЕ</span>
+            <span style="padding: 5px 8px; border: 1px solid rgba(74, 27, 12, .16); color: #6b5750; font-size: 10px; font-weight: 800; letter-spacing: .04em;">QS 25</span>
+            <span style="padding: 5px 8px; border: 1px solid rgba(74, 27, 12, .16); color: #2f6b3d; font-size: 10px; font-weight: 800; letter-spacing: .04em;">БЕЗОПАСНОСТЬ ВЫСОКАЯ</span>
+          </div>
+          <h2 style="color: #4a1b0c; font: 900 52px/.96 'Outfit', sans-serif; letter-spacing: -.06em;">Университет Цинхуа</h2>
+          <p style="display: flex; align-items: center; gap: 10px; color: #6b5750; font-size: 14px;">
+            <span style="font-size: 16px;">清华大学</span>
+            <span style="width: 1px; height: 14px; background: rgba(74, 27, 12, .16);"></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+              Пекин · Север
+            </span>
+          </p>
+        </div>
+
+        <section style="display: flex; flex-direction: column; gap: 4px;">
+          <h3 style="padding-bottom: 12px; color: #4a1b0c; font: 700 26px/1 'Outfit', sans-serif; letter-spacing: -.045em;">Характеристики</h3>
+          <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); border-top: 1px solid rgba(74, 27, 12, .16);">
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Рейтинг в Китае</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">№1 из 115 в каталоге</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Рейтинг QS в мире</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">25 место</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Город</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">Пекин</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Регион</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">Север</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Тип университета</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">Публичный</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Требование по HSK</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">HSK 5, приём с HSK 4 с досдачей</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">IELTS</span>
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">нет требования</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">TOEFL</span>
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">нет требования</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Стоимость обучения</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 700;">1 794 000 – 2 070 000 ₸ за год</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Стипендия CSC</span>
+            <span class="spec-cell" style="display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2f6b3d" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4 10-10"></path></svg>Доступна
+            </span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Безопасность города</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600; color: #2f6b3d;">Высокая</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Количество студентов</span>
+            <span class="spec-cell" style="color: #d9c4bc; font-size: 13px; font-style: italic;">данные уточняются</span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Специальности</span>
+            <span class="spec-cell" style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Инженерия</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Компьютерные науки</span>
+              <span style="padding: 5px 9px; background: #fdeee8; color: #4a1b0c; font-size: 11px; font-weight: 700;">Архитектура</span>
+            </span>
+
+            <span class="spec-cell" style="color: #6b5750; font-size: 13px;">Данные проверены</span>
+            <span class="spec-cell" style="font-size: 13px; font-weight: 600;">10 сентября 2026</span>
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="color: #4a1b0c; font: 700 26px/1 'Outfit', sans-serif; letter-spacing: -.045em;">Об университете</h3>
+          <p style="color: #2c120a; font-size: 14px; line-height: 1.6;">Университет Цинхуа расположен в Пекине, в районе Хайдянь, на месте бывших императорских садов династии Цин. Это государственный исследовательский университет, подведомственный Министерству образования КНР. Входит в программу «Двойной первый класс» и в Лигу C9. В структуре университета 21 школа и 59 факультетов: естественные и инженерные науки, гуманитарные направления, право, медицина, история, философия, экономика и менеджмент.</p>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 14px;">
+          <h3 style="color: #4a1b0c; font: 700 26px/1 'Outfit', sans-serif; letter-spacing: -.045em;">Безопасность в городе</h3>
+          <div style="display: flex; gap: 14px; padding: 18px 20px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2f6b3d" stroke-width="1.8" style="flex: 0 0 22px;"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+              <p style="color: #2f6b3d; font-size: 13px; font-weight: 700;">Высокий уровень безопасности</p>
+              <p style="color: #2c120a; font-size: 13px; line-height: 1.55;">Один из самых безопасных мегаполисов Азии: спокойно даже в тёмное время суток на центральных улицах, полиция активно патрулирует. Хорошая адаптация для иностранцев: англоязычная навигация, приложения и сервисы.</p>
+            </div>
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 14px;">
+          <h3 style="color: #4a1b0c; font: 700 26px/1 'Outfit', sans-serif; letter-spacing: -.045em;">Документы для поступления</h3>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
+            <span style="display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" style="flex: 0 0 16px;"><path d="M14 3H7v18h10V6z"></path><path d="M14 3v4h4"></path></svg>Аттестат с приложением
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" style="flex: 0 0 16px;"><path d="M14 3H7v18h10V6z"></path><path d="M14 3v4h4"></path></svg>Загранпаспорт, срок от 2 лет
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" style="flex: 0 0 16px;"><path d="M14 3H7v18h10V6z"></path><path d="M14 3v4h4"></path></svg>Сертификат HSK
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" style="flex: 0 0 16px;"><path d="M14 3H7v18h10V6z"></path><path d="M14 3v4h4"></path></svg>Медицинская справка form 015
+            </span>
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+            <h3 style="color: #4a1b0c; font: 700 26px/1 'Outfit', sans-serif; letter-spacing: -.045em;">Расположение</h3>
+            <span style="color: #d85a30; font-size: 13px; font-weight: 600;">Открыть на карте</span>
+          </div>
+          <div style="position: relative; height: 240px; background: #faece7; border: 1px solid rgba(74, 27, 12, .16); overflow: hidden;">
+            <svg width="836" height="240" viewBox="0 0 836 240" fill="none" style="display: block;">
+              <path d="M0 62h836M0 150h836M120 0v240M420 0v240M640 0v240" stroke="rgba(74,27,12,.12)" stroke-width="1"></path>
+              <path d="M120 150L420 62 640 150" stroke="rgba(216,90,48,.35)" stroke-width="3"></path>
+              <circle cx="420" cy="100" r="9" fill="#d85a30"></circle>
+              <circle cx="420" cy="100" r="20" stroke="#d85a30" stroke-width="1.5" opacity=".5"></circle>
+            </svg>
+            <span style="position: absolute; left: 20px; bottom: 18px; padding: 8px 12px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16); font-size: 12px; font-weight: 600;">Хайдянь, Пекин</span>
+          </div>
+        </section>
+
+      </div>
+
+      <aside style="display: flex; flex-direction: column; gap: 10px; position: sticky; top: 24px;">
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 24px; background: #fffdfb; border: 1px solid rgba(74, 27, 12, .16);">
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <span style="color: #6b5750; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Стоимость обучения</span>
+            <p style="color: #d85a30; font: 800 34px/1.05 'Outfit', sans-serif; letter-spacing: -.05em;">1 794 000 ₸</p>
+            <span style="color: #6b5750; font-size: 13px;">до 2 070 000 ₸ за учебный год</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 9px; padding: 16px 0; border-top: 1px solid rgba(74, 27, 12, .16); border-bottom: 1px solid rgba(74, 27, 12, .16);">
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px;"><span style="color: #6b5750;">Язык</span><strong style="font-weight: 700;">HSK 5</strong></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px;"><span style="color: #6b5750;">Стипендия CSC</span><strong style="font-weight: 700; color: #2f6b3d;">Доступна</strong></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px;"><span style="color: #6b5750;">Подача заявки</span><strong style="font-weight: 700;">Бесплатно</strong></span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; background: #d85a30; color: #4a1b0c; font-size: 15px; font-weight: 700;">Подать заявку
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+            </span>
+            <span style="min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1px solid rgba(74, 27, 12, .16); color: #2c120a; font-size: 14px; font-weight: 600;">Официальный сайт
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" stroke-linecap="round"><path d="M14 5h5v5M19 5l-8 8"></path><path d="M18 14v5H5V6h5"></path></svg>
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 10px; padding: 16px 18px; background: #faece7; border: 1px solid rgba(74, 27, 12, .16);">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2f6b3d" stroke-width="2" style="flex: 0 0 17px; margin-top: 1px;"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5 5-5"></path></svg>
+          <p style="color: #2c120a; font-size: 12px; line-height: 1.5;">Данные сверены с официальным сайтом <span style="color: #d85a30; font-weight: 600;">tsinghua.edu.cn</span> 10 сентября 2026 года.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

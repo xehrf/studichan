@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown } from 'lucide-react'
+import { Search, MapPin, LogOut, Upload, Download, X, ArrowRight, Check, SlidersHorizontal, ChevronDown, Camera, ShieldCheck, ExternalLink, FileText, ChevronRight } from 'lucide-react'
 import { useTranslation } from './translations'
 import './App.css'
 
@@ -7,7 +7,6 @@ import './App.css'
 // would let any visitor alter the production catalogue.
 const canUseBrowserImporter = import.meta.env.DEV
 const localized = (translations, lang, fallback = '') => translations?.[lang] || translations?.en || fallback
-const localizedOrPending = (translations, lang, fallback, pending) => localized(translations, lang, fallback) || pending
 const parseSpecialties = (specialties) => Array.isArray(specialties)
   ? specialties.map(spec => String(spec).trim()).filter(Boolean)
   : String(specialties || '').split(',').map(spec => spec.trim()).filter(Boolean)
@@ -16,6 +15,60 @@ const imageList = (university) => {
   const galleryUrls = gallery.map(item => typeof item === 'string' ? item : item?.url).filter(Boolean)
   return [...new Set([university.image_url, ...galleryUrls].filter(Boolean))]
 }
+
+// Сид пишет требования одной строкой «HSK: HSK 4; IELTS: IELTS 6.0; ...»,
+// поэтому храним и полную запись для чипов, и короткую для таблицы с подписями.
+const missingValue = /^(?:н\/д|нет данных|n\/a|na|-|—)$/i
+const parseRequirements = (requirements) => {
+  const parsed = {}
+  for (const part of String(requirements || '').split(';')) {
+    const separator = part.indexOf(':')
+    if (separator === -1) continue
+    const label = part.slice(0, separator).trim()
+    const key = label.toLowerCase()
+    const full = part.slice(separator + 1).trim()
+    const value = full.toLowerCase().startsWith(key) ? full.slice(label.length).trim() : full
+    if (key && value && !missingValue.test(value)) parsed[key] = { full: full || value, value }
+  }
+  return parsed
+}
+
+// Викисклад отдаёт превью любой ширины: карточке незачем тянуть файл на мегабайт.
+const scaledImage = (url, width) => {
+  if (!url || !url.includes('/thumb/')) return url
+  return url.replace(/\/(\d+)px-([^/]+)$/, (match, current, file) => Number(current) > width ? `/${width}px-${file}` : match)
+}
+
+const amountMatch = (tuition) => String(tuition || '').match(/\d[\d\s ]*\d|\d/)
+const tuitionAmount = (tuition) => {
+  const amount = amountMatch(tuition)?.[0]?.trim()
+  if (!amount) return ''
+  const currency = String(tuition).match(/[₸$€¥£]|CNY|USD|KZT|RMB/i)?.[0]
+  return currency ? `${amount} ${currency}` : amount
+}
+const tuitionValue = (tuition) => Number(amountMatch(tuition)?.[0].replace(/\D/g, '')) || Number.MAX_SAFE_INTEGER
+
+const localeTag = { en: 'en-GB', ru: 'ru-RU', kk: 'kk-KZ' }
+const formatDate = (value, lang) => {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return String(value)
+  return date.toLocaleDateString(localeTag[lang] || 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+const hostOf = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return ''
+  }
+}
+
+const sortUniversities = (list, sort) => [...list].sort((a, b) => {
+  if (sort === 'tuition') return tuitionValue(a.tuition) - tuitionValue(b.tuition)
+  if (sort === 'name') return String(a.name).localeCompare(String(b.name))
+  return (a.ranking || Number.MAX_SAFE_INTEGER) - (b.ranking || Number.MAX_SAFE_INTEGER)
+})
 
 function App() {
   const [universities, setUniversities] = useState([])
@@ -32,6 +85,7 @@ function App() {
   const [showAuth, setShowAuth] = useState(false)
   const [showImport, setShowImport] = useState(false)
   const [showQuestionnaire, setShowQuestionnaire] = useState(true)
+  const [sort, setSort] = useState('ranking')
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en')
   const t = useTranslation(lang)
   const specialtyLabel = (specialty) => {
@@ -129,29 +183,28 @@ function App() {
 
   return (
     <main className={`mobile-app ${showQuestionnaire ? 'questionnaire-mode' : ''}`}>
+      {!showQuestionnaire && <header className="app-header">
+        <button className="brand-lockup" onClick={() => setSelectedUniversity(null)}>
+          <span className="brand-mark">C</span>
+          <div className="header-title"><h1><strong>china</strong><span>course</span></h1><p>{t('title')}</p></div>
+        </button>
+        <div className="header-controls">
+          <select className="lang-select" value={lang} onChange={(e) => setLang(e.target.value)} aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+            <option value="kk">KK</option>
+          </select>
+          {!user && <button className="sign-in-btn" onClick={() => setShowAuth(true)}>{t('signIn')}</button>}
+          {canUseBrowserImporter && <button className="icon-btn" title={t('importTitle')} onClick={() => setShowImport(true)}><Upload size={18} /></button>}
+          {user && <button className="logout-btn" onClick={() => { fetch('/api/auth/logout', { method: 'POST' }); setUser(null) }}><LogOut size={18} /></button>}
+        </div>
+      </header>}
       {!selectedUniversity ? (
         <>
           {showQuestionnaire ? (
             <Questionnaire lang={lang} onLanguageChange={setLang} t={t} onComplete={handleQuestionnaireComplete} onSkip={() => setShowQuestionnaire(false)} />
           ) : (
             <>
-              <header className="app-header">
-            <div className="brand-lockup">
-              <span className="brand-mark">C</span>
-              <div className="header-title"><h1><strong>china</strong><span>course</span></h1><p>{t('title')}</p></div>
-            </div>
-            <div className="header-controls">
-              <select className="lang-select" value={lang} onChange={(e) => setLang(e.target.value)} aria-label="Language">
-                <option value="en">EN</option>
-                <option value="ru">RU</option>
-                <option value="kk">KK</option>
-              </select>
-              {!user && <button className="sign-in-btn" onClick={() => setShowAuth(true)}>{t('signIn')}</button>}
-              {canUseBrowserImporter && <button className="icon-btn" title={t('importTitle')} onClick={() => setShowImport(true)}><Upload size={18} /></button>}
-              {user && <button className="logout-btn" onClick={() => { fetch('/api/auth/logout', { method: 'POST' }); setUser(null) }}><LogOut size={18} /></button>}
-            </div>
-              </header>
-
               <div className="catalogue-content">
               <section className="catalogue-intro">
                 <div><p className="catalogue-eyebrow">{t('catalogueEyebrow')}</p><h2>{t('catalogueHeading')}</h2></div>
@@ -191,21 +244,27 @@ function App() {
             )}
               </div>
 
-              <div className="results-meta"><p>{t('universitiesToExplore', filtered.length)}</p><button onClick={resetFilters}>{t('resetAll')}</button></div>
+              <div className="results-meta">
+                <p>{t('matchFilters', filtered.length)}</p>
+                <div className="results-tools">
+                  <label className="sort-control">
+                    <span className="filter-label">{t('sortLabel')}</span>
+                    <select value={sort} onChange={(event) => setSort(event.target.value)}>
+                      <option value="ranking">{t('sortOptions.ranking')}</option>
+                      <option value="tuition">{t('sortOptions.tuition')}</option>
+                      <option value="name">{t('sortOptions.name')}</option>
+                    </select>
+                  </label>
+                  <button onClick={resetFilters}>{t('resetAll')}</button>
+                </div>
+              </div>
 
               {loading ? (
                 <div className="loading">{t('loading')}</div>
               ) : (
                 <div className="universities-list">
-                  {filtered.length === 0 ? <div className="empty-state"><h3>{t('noResults')}</h3><p>{t('tryDifferentFilters')}</p><button onClick={resetFilters}>{t('resetAll')}</button></div> : filtered.map(uni => (
-                    <div key={uni.id} className="uni-card">
-                      <div className="uni-card-top">
-                        <div className="uni-badges">{uni.ranking && <div className="ranking">{t('ranking', uni.ranking)} {t('world')}</div>}{uni.agency_id && <span className="agency-badge">{t('agencySupport')}</span>}</div>
-                        <h3>{localized(uni.name_translations, lang, uni.name)}</h3>
-                        <p className="uni-location"><MapPin size={14} /> {t('location', uni.city)} · {uni.region} {t('country')}</p>
-                      </div>
-                      <div className="uni-card-footer"><p className="uni-meta"><strong>{t('tuition')} </strong>{localized(uni.tuition_translations, lang, uni.tuition)} <span>{t('focus')} {parseSpecialties(uni.specialties).slice(0, 2).join(', ')}</span></p><button className="apply-btn" onClick={() => handleViewDetails(uni)}>{t('viewDetails')} <ArrowRight size={16} /></button></div>
-                    </div>
+                  {filtered.length === 0 ? <div className="empty-state"><h3>{t('noResults')}</h3><p>{t('tryDifferentFilters')}</p><button onClick={resetFilters}>{t('resetAll')}</button></div> : sortUniversities(filtered, sort).map(uni => (
+                    <UniversityCard key={uni.id} university={uni} lang={lang} t={t} specialtyLabel={specialtyLabel} onOpen={handleViewDetails} />
                   ))}
                 </div>
               )}
@@ -214,12 +273,68 @@ function App() {
           )}
         </>
       ) : (
-        <UniversityDetail university={selectedUniversity} user={user} lang={lang} t={t} onBack={() => setSelectedUniversity(null)} onAuth={() => setShowAuth(true)} />
+        <UniversityDetail university={selectedUniversity} user={user} lang={lang} t={t} catalogueSize={universities.length} specialtyLabel={specialtyLabel} onBack={() => setSelectedUniversity(null)} onAuth={() => setShowAuth(true)} />
       )}
 
       {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} onLogin={(userData) => { setUser(userData); setShowAuth(false) }} />}
       {canUseBrowserImporter && showImport && <ImportModal t={t} onClose={() => setShowImport(false)} onImported={fetchUniversities} />}
     </main>
+  )
+}
+
+function UniversityCard({ university, lang, t, specialtyLabel, onOpen }) {
+  const images = imageList(university)
+  const name = localized(university.name_translations, lang, university.name)
+  const requirements = parseRequirements(university.requirements)
+  const specialties = parseSpecialties(localized(university.specialties_translations, lang, university.specialties))
+  const summary = localized(university.description_translations, lang, university.description)
+  const amount = tuitionAmount(university.tuition)
+  const safety = university.city_safety && university.city_safety !== 'not_rated' ? university.city_safety : null
+
+  return (
+    <article className="uni-card" onClick={() => onOpen(university)}>
+      <div className="uni-card-photo">
+        {images[0] ? (
+          <>
+            <img src={scaledImage(images[0], 640)} alt={name} loading="lazy" />
+            <span className="photo-count"><Camera size={12} /> {t('photosCount', images.length)}</span>
+          </>
+        ) : (
+          <div className="photo-empty"><Camera size={28} /><span>{t('photosPending')}</span></div>
+        )}
+      </div>
+      <div className="uni-card-body">
+        <div className="uni-card-main">
+          <h3>{name}</h3>
+          <p className="uni-location"><MapPin size={14} /> {university.city} · {t(`regions.${university.region}`)} · {t('publicUniversity')}</p>
+          {summary && <p className="uni-summary">{summary}</p>}
+          <div className="uni-chips">
+            {requirements.hsk && <span className="uni-chip">{requirements.hsk.full}</span>}
+            {requirements.ielts && <span className="uni-chip">{requirements.ielts.full}</span>}
+            {university.has_csc_scholarship && <span className="uni-chip">{t('spec.csc')}</span>}
+            {specialties.slice(0, 2).map(specialty => <span className="uni-chip" key={specialty}>{specialtyLabel(specialty)}</span>)}
+            {safety && <span className={`uni-chip safety-chip safety-${safety}`}><ShieldCheck size={12} /> {t(`safetyLevels.${safety}`)}</span>}
+          </div>
+        </div>
+        <div className="uni-card-aside">
+          <div className="uni-badges">
+            {university.ranking && <span className="ranking">{t('rankInChina', university.ranking)}</span>}
+            {university.ranking_world && <span className="world-rank">{t('worldRank', university.ranking_world)}</span>}
+            {university.agency_id && <span className="agency-badge">{t('agencySupport')}</span>}
+          </div>
+          {amount && (
+            <div className="uni-price">
+              <span className="uni-price-label">{t('tuitionFrom')}</span>
+              <p>{amount}</p>
+              <span className="uni-price-note">{t('perYear')}</span>
+            </div>
+          )}
+          <button className="apply-btn" onClick={(event) => { event.stopPropagation(); onOpen(university) }}>
+            {t('viewUniversity')} <ArrowRight size={16} />
+          </button>
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -324,7 +439,7 @@ function ImportModal({ t, onClose, onImported }) {
   )
 }
 
-function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
+function UniversityDetail({ university, user, lang, t, catalogueSize, specialtyLabel, onBack, onAuth }) {
   const [agency, setAgency] = useState(null)
   const [selectedImage, setSelectedImage] = useState(0)
   const images = imageList(university)
@@ -366,55 +481,160 @@ function UniversityDetail({ university, user, lang, t, onBack, onAuth }) {
     }
   }
 
+  const name = localized(university.name_translations, lang, university.name)
+  const requirements = parseRequirements(university.requirements)
+  const specialties = parseSpecialties(localized(university.specialties_translations, lang, university.specialties))
+  const description = localized(university.description_translations, lang, university.description)
+  const amount = tuitionAmount(university.tuition)
+  const safety = university.city_safety && university.city_safety !== 'not_rated' ? university.city_safety : null
+  const verified = formatDate(university.verified_at || university.data_checked_at, lang)
+  const sourceUrl = university.source_url || university.website
+  const sourceHost = hostOf(sourceUrl)
+  const visibleThumbs = images.slice(0, 5)
+  const hiddenThumbs = images.length - visibleThumbs.length
+
+  const specRows = [
+    university.ranking && { label: t('spec.rankChina'), value: t('rankOfTotal', university.ranking, catalogueSize) },
+    university.ranking_world && { label: t('spec.rankWorld'), value: t('rankWorldValue', university.ranking_world) },
+    { label: t('spec.city'), value: university.city },
+    { label: t('spec.region'), value: t(`regions.${university.region}`) },
+    { label: t('spec.type'), value: t('publicUniversity') },
+    { label: t('spec.hsk'), value: requirements.hsk?.value || t('noRequirement'), muted: !requirements.hsk },
+    { label: t('spec.ielts'), value: requirements.ielts?.value || t('noRequirement'), muted: !requirements.ielts },
+    { label: t('spec.toefl'), value: requirements.toefl?.value || t('noRequirement'), muted: !requirements.toefl },
+    amount && { label: t('spec.tuition'), value: university.tuition, strong: true },
+    { label: t('spec.csc'), value: university.has_csc_scholarship ? t('cscAvailable') : t('cscUnknown'), positive: university.has_csc_scholarship, muted: !university.has_csc_scholarship },
+    safety && { label: t('spec.safety'), value: t(`safetyLevels.${safety}`), positive: safety === 'high' },
+    specialties.length > 0 && { label: t('spec.specialties'), chips: specialties },
+    { label: t('spec.students'), value: university.students_count || t('dataPending'), muted: !university.students_count },
+    { label: t('spec.verified'), value: verified || t('dataPending'), muted: !verified },
+  ].filter(Boolean)
+
   return (
     <div className="detail-view">
-      <button className="back-btn" onClick={onBack}>{t('back')}</button>
-      {images.length > 0 && <div className="detail-gallery">
-        <img className="detail-image" src={images[selectedImage] || images[0]} alt={university.name} />
-        {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
-          {images.map((image, index) => <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}><img src={image} alt="" /></button>)}
-        </div>}
-      </div>}
-      <h2>{localized(university.name_translations, lang, university.name)}</h2>
-      <p className="detail-city">{university.city} • {t('region', university.region)}</p>
-      <div className={`detail-safety safety-${university.city_safety || 'not_rated'}`}><strong>{t('citySafety')}:</strong> {t(`safetyLevels.${university.city_safety || 'not_rated'}`)}</div>
-      {university.city_safety_description && <div className="detail-section safety-description"><strong>{t('citySafetyDetails')}:</strong><p>{university.city_safety_description}</p></div>}
-      {localized(university.description_translations, lang, university.description) && <p className="detail-desc">{localized(university.description_translations, lang, university.description)}</p>}
-      {university.source_url && <p className="detail-source"><a href={university.source_url} target="_blank" rel="noreferrer">{t('officialSource')}</a>{university.verified_at && ` • ${t('verifiedAt', university.verified_at)}`}</p>}
-      {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}
-      <div className="detail-section">
-        <strong>{t('requirements')}:</strong>
-        <p>{localizedOrPending(university.requirements_translations, lang, university.requirements, t('dataPending'))}</p>
-      </div>
-      <div className="detail-section medical-documents">
-        <strong>{t('medicalDocuments.title')}</strong>
-        <ul>
-          {t('medicalDocuments.items').map(item => <li key={item}>{item}</li>)}
-        </ul>
-      </div>
-      <div className="detail-section">
-        <strong>{t('specialties')}:</strong>
-        <p>{localizedOrPending(university.specialties_translations, lang, university.specialties, t('dataPending'))}</p>
-      </div>
-      <div className="detail-section">
-        <strong>{t('tuition')}:</strong>
-        <p>{localizedOrPending(university.tuition_translations, lang, university.tuition, t('dataPending'))}</p>
-      </div>
-      <div className="detail-map">
-        <div className="detail-map-heading"><strong>{t('map')}</strong><a href={mapLink} target="_blank" rel="noreferrer">{t('openMap')}</a></div>
-        <iframe title={`${t('map')} ${university.name}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-      </div>
+      <nav className="detail-crumbs">
+        <button className="back-btn" onClick={onBack}>{t('catalogueCrumb')}</button>
+        <ChevronRight size={13} />
+        <span>{university.city}</span>
+        <ChevronRight size={13} />
+        <span className="current">{name}</span>
+      </nav>
 
-      {agency ? (
-        <div className="agency-info">
-          <h3>{t('handledBy')}: {agency.name}</h3>
-          <p>{t('email')}: {agency.email}</p>
-          {agency.phone && <p>{t('phone')}: {agency.phone}</p>}
-          {agency.website && <p><a href={`https://${agency.website}`} target="_blank">{t('visitWebsite')}</a></p>}
+      <div className="detail-layout">
+        <div className="detail-main">
+          {images.length > 0 ? (
+            <div className="detail-gallery">
+              <div className="detail-stage">
+                <img className="detail-image" src={scaledImage(images[selectedImage] || images[0], 1280)} alt={name} />
+                <span className="gallery-position">{t('galleryPosition', Math.min(selectedImage + 1, images.length), images.length)}</span>
+              </div>
+              {images.length > 1 && <div className="detail-thumbnails" aria-label={t('photoGallery')}>
+                {visibleThumbs.map((image, index) => (
+                  <button type="button" key={image} className={`detail-thumbnail ${index === selectedImage ? 'active' : ''}`} onClick={() => setSelectedImage(index)} aria-label={`${t('photoGallery')} ${index + 1}`}>
+                    <img src={scaledImage(image, 260)} alt="" />
+                  </button>
+                ))}
+                {hiddenThumbs > 0 && <span className="detail-thumbnail more">{t('morePhotos', hiddenThumbs)}</span>}
+              </div>}
+            </div>
+          ) : (
+            <div className="detail-gallery detail-gallery-empty"><Camera size={34} /><span>{t('photosPending')}</span></div>
+          )}
+
+          <header className="detail-headline">
+            <div className="uni-badges">
+              {university.ranking && <span className="ranking">{t('rankInChina', university.ranking)}</span>}
+              {university.ranking_world && <span className="world-rank">{t('worldRank', university.ranking_world)}</span>}
+              {safety && <span className={`safety-badge safety-${safety}`}>{t('citySafety')}: {t(`safetyLevels.${safety}`)}</span>}
+            </div>
+            <h2>{name}</h2>
+            <p className="detail-city"><MapPin size={14} /> {university.city} · {t(`regions.${university.region}`)}</p>
+          </header>
+
+          <section className="detail-section">
+            <h3>{t('characteristics')}</h3>
+            <dl className="spec-table">
+              {specRows.map(row => (
+                <div className="spec-row" key={row.label}>
+                  <dt>{row.label}</dt>
+                  <dd className={`${row.muted ? 'muted' : ''} ${row.strong ? 'strong' : ''} ${row.positive ? 'positive' : ''}`.trim()}>
+                    {row.chips
+                      ? <span className="uni-chips">{row.chips.map(specialty => <span className="uni-chip" key={specialty}>{specialtyLabel(specialty)}</span>)}</span>
+                      : row.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            {university.data_status === 'requires_verification' && <p className="data-status">{t('requiresVerification')}</p>}
+          </section>
+
+          {description && <section className="detail-section">
+            <h3>{t('aboutUniversity')}</h3>
+            <p className="detail-desc">{description}</p>
+          </section>}
+
+          {university.city_safety_description && <section className="detail-section">
+            <h3>{t('safetyInCity')}</h3>
+            <div className={`safety-panel safety-${safety || 'not_rated'}`}>
+              <ShieldCheck size={22} />
+              <div>
+                <p className="safety-panel-level">{t(`safetyLevels.${safety || 'not_rated'}`)}</p>
+                <p>{university.city_safety_description}</p>
+              </div>
+            </div>
+          </section>}
+
+          <section className="detail-section">
+            <h3>{t('admissionDocuments')}</h3>
+            <div className="document-grid">
+              {t('medicalDocuments.items').map(item => <span className="document-item" key={item}><FileText size={16} /> {item}</span>)}
+            </div>
+            <p className="document-note">{t('medicalDocuments.title')}</p>
+          </section>
+
+          <section className="detail-section">
+            <div className="detail-map-heading"><h3>{t('locationTitle')}</h3><a href={mapLink} target="_blank" rel="noreferrer">{t('openMap')}</a></div>
+            <div className="detail-map">
+              <iframe title={`${t('map')} ${university.name}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+            </div>
+          </section>
         </div>
-      ) : (
-        <button className="apply-btn" onClick={handleSubmitApplication}>{user ? t('submitApplication') : t('wantToApply')}</button>
-      )}
+
+        <aside className="detail-aside">
+          <div className="detail-panel">
+            {amount && <div className="panel-price">
+              <span className="uni-price-label">{t('tuitionFrom')}</span>
+              <p>{amount}</p>
+              <span className="uni-price-note">{university.tuition} · {t('perYear')}</span>
+            </div>}
+
+            <div className="panel-facts">
+              {requirements.hsk && <span><span>{t('spec.hsk')}</span><strong>{requirements.hsk.full}</strong></span>}
+              <span><span>{t('spec.csc')}</span><strong className={university.has_csc_scholarship ? 'positive' : 'muted'}>{university.has_csc_scholarship ? t('cscAvailable') : t('cscUnknown')}</strong></span>
+              <span><span>{t('applicationLabel')}</span><strong>{t('applicationFree')}</strong></span>
+            </div>
+
+            {agency ? (
+              <div className="agency-info">
+                <h3>{t('handledBy')}: {agency.name}</h3>
+                <p>{t('email')}: {agency.email}</p>
+                {agency.phone && <p>{t('phone')}: {agency.phone}</p>}
+                {agency.website && <p><a href={`https://${agency.website}`} target="_blank" rel="noreferrer">{t('visitWebsite')}</a></p>}
+              </div>
+            ) : (
+              <div className="panel-actions">
+                <button className="apply-btn primary" onClick={handleSubmitApplication}>{user ? t('submitApplication') : t('wantToApply')} <ArrowRight size={17} /></button>
+                {sourceUrl && <a className="panel-link" href={sourceUrl} target="_blank" rel="noreferrer">{t('officialSource')} <ExternalLink size={15} /></a>}
+              </div>
+            )}
+          </div>
+
+          <div className="detail-verified">
+            <ShieldCheck size={17} />
+            <p>{verified && sourceHost ? t('verifiedWith', sourceHost, verified) : t('notVerifiedYet')}</p>
+          </div>
+        </aside>
+      </div>
     </div>
   )
 }

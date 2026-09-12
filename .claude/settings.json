@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf .preview-shots)",
+      "Bash(rm -rf /home/tlek/snap/firefox/common/shotprofile /home/tlek/.cache/studichan-shot-profile)",
+      "Bash(pkill -f \"preview-api.mjs\")",
+      "Bash(pkill -f \"vite --port 5199\")"
+    ]
+  }
+}
