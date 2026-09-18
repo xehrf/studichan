@@ -100,7 +100,7 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
       name_translations, description_translations, specialties_translations, requirements_translations,
       tuition_translations, image_url, image_source, website, source_url, verified_at, agency_id, students_count
       , data_status, data_checked_at, city_safety, city_safety_description, image_gallery
-      , ranking_world, has_csc_scholarship
+      , ranking_world, has_csc_scholarship, province, founded_year, site_rating, international_students
     FROM universities
     ${where}
     ORDER BY ranking ASC NULLS LAST, name ASC
@@ -108,7 +108,33 @@ app.get('/api/universities', asyncRoute(async (req, res) => {
   res.json(result.rows)
 }))
 
-// Получить один университет.
+// Данные для страницы сравнения. Карточки каталога намеренно остаются
+// лёгкими, поэтому подробные JSONB-поля отдаются только для выбранных вузов.
+app.get('/api/universities/compare', asyncRoute(async (req, res) => {
+  const ids = String(req.query.ids || '')
+    .split(',')
+    .map((id) => Number(id.trim()))
+    .filter((id) => Number.isInteger(id) && id > 0)
+  if (!ids.length) return res.status(400).json({ error: 'Pass at least one university id' })
+  if (ids.length > 4) return res.status(400).json({ error: 'Compare up to four universities at a time' })
+
+  const result = await query('SELECT * FROM universities WHERE id = ANY($1::bigint[]) ORDER BY ranking ASC NULLS LAST, name ASC', [ids])
+  res.json(result.rows)
+}))
+
+// Список вузов, которые принимают по государственной стипендии Китая (CSC).
+app.get('/api/state-grant/universities', asyncRoute(async (_req, res) => {
+  const result = await query(`
+    SELECT id, name, city, region, ranking, ranking_world, tuition, name_translations,
+      image_url, site_rating, province, province_grant
+    FROM universities
+    WHERE has_csc_scholarship
+    ORDER BY ranking ASC NULLS LAST, name ASC
+  `)
+  res.json(result.rows)
+}))
+
+// Получить один университет вместе с проверенными отзывами.
 app.get('/api/universities/:id', asyncRoute(async (req, res) => {
   const universityResult = await query('SELECT * FROM universities WHERE id = $1', [req.params.id])
   const university = universityResult.rows[0]
@@ -119,7 +145,47 @@ app.get('/api/universities/:id', asyncRoute(async (req, res) => {
     const agencyResult = await query('SELECT * FROM agencies WHERE id = $1', [university.agency_id])
     agency = agencyResult.rows[0] || null
   }
-  res.json({ ...university, agency })
+
+  const reviewsResult = await query(`
+    SELECT id, author_name, author_status, rating, body, created_at
+    FROM university_reviews
+    WHERE university_id = $1 AND verified
+    ORDER BY created_at DESC
+    LIMIT 20
+  `, [req.params.id])
+  const ratings = reviewsResult.rows.map((review) => Number(review.rating))
+  const reviewsAverage = ratings.length
+    ? Math.round((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length) * 10) / 10
+    : null
+
+  res.json({ ...university, agency, reviews: reviewsResult.rows, reviews_average: reviewsAverage })
+}))
+
+// Отзыв сохраняется скрытым: на карточке он появится после проверки редактором.
+app.post('/api/universities/:id/reviews', asyncRoute(async (req, res) => {
+  const user = await currentUser(req)
+  if (!user) return res.status(401).json({ error: 'Sign in to leave a review' })
+
+  const rating = Number(req.body?.rating)
+  const body = String(req.body?.body || '').trim()
+  if (!Number.isFinite(rating) || rating < 1 || rating > 10) return res.status(400).json({ error: 'Rating must be between 1 and 10' })
+  if (body.length < 40) return res.status(400).json({ error: 'A review needs at least 40 characters' })
+
+  try {
+    const result = await query(`
+      INSERT INTO university_reviews (university_id, user_id, author_name, author_status, rating, body)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id
+    `, [
+      req.params.id, user.id, user.full_name || '',
+      ['student', 'graduate', 'applicant'].includes(req.body?.authorStatus) ? req.body.authorStatus : 'student',
+      rating, body,
+    ])
+    res.status(201).json({ ok: true, reviewId: result.rows[0].id, verified: false })
+  } catch (error) {
+    if (error.code === '23503') return res.status(404).json({ error: 'University not found' })
+    throw error
+  }
 }))
 
 const parseCsv = (csv) => {

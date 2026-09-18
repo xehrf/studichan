@@ -1,5 +1,6 @@
 import { closeDb, initDb, withTransaction } from '../db.mjs'
 import { getCitySafety } from '../city-safety.mjs'
+import { getCampusProfile } from '../campus-profile.mjs'
 
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -73,6 +74,24 @@ const descriptionTranslations = (university, specialties) => ({
   kk: `${university.nameRu} — Қытайдың ${university.city} қаласындағы мемлекеттік университеті. Негізгі білім беру бағыттары: ${specialties.kk}.`,
 })
 
+// «Чем славится» собирается из места в национальном рейтинге и сильных
+// направлений: оба поля уже есть в исходных данных каталога.
+const knownForTranslations = (university, specialties) => {
+  const rank = university.rankingNational
+  const leading = rank && rank <= 30
+  return {
+    en: leading
+      ? `A leading research university in China (#${rank} nationally). Best known for ${specialties.en.toLowerCase()}.`
+      : `Best known for ${specialties.en.toLowerCase()}.`,
+    ru: leading
+      ? `Один из ведущих исследовательских университетов Китая (${rank}-е место в стране). Славится направлениями: ${specialties.ru}.`
+      : `Славится направлениями: ${specialties.ru}.`,
+    kk: leading
+      ? `Қытайдың жетекші зерттеу университеттерінің бірі (елде ${rank}-орын). Негізгі күшті бағыттары: ${specialties.kk}.`
+      : `Күшті бағыттары: ${specialties.kk}.`,
+  }
+}
+
 const preliminaryAdmissions = (university) => {
   const name = university.nameEn
   const premium = {
@@ -118,14 +137,23 @@ try {
       const translatedSpecialties = translateSpecialties(specialties)
       const translatedDescription = descriptionTranslations(university, translatedSpecialties)
       const admissions = preliminaryAdmissions(university)
+      const safety = getCitySafety(university.city)
+      const profile = getCampusProfile({
+        nameEn: university.nameEn, city: university.city, province: university.province,
+        ranking: university.rankingNational, rankingWorld: university.rankingWorld,
+        hasCscScholarship: university.hasCscScholarship, safetyLevel: safety.level,
+      })
       await client.query(`
         INSERT INTO universities (
           name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
           website, source_url, verified_at, name_translations, description_translations,
           specialties_translations, requirements_translations, tuition_translations,
           image_url, image_source, data_status, data_checked_at, city_safety_description, image_gallery,
-          ranking_world, has_csc_scholarship
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19, $20, $21)
+          ranking_world, has_csc_scholarship, province, founded_year, climate, nearby_cities,
+          nearby_places, dorm, campus_facilities, living_cost, languages, extra_documents,
+          deadlines, university_grants, province_grant, site_rating, known_for_translations
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19, $20, $21,
+          $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36)
         ON CONFLICT (name) DO UPDATE SET
           city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
           ranking_world = EXCLUDED.ranking_world, has_csc_scholarship = EXCLUDED.has_csc_scholarship,
@@ -144,17 +172,36 @@ try {
             WHEN jsonb_array_length(EXCLUDED.image_gallery) > 1 OR universities.image_gallery = '[]'::jsonb
             THEN EXCLUDED.image_gallery
             ELSE universities.image_gallery
-          END
+          END,
+          province = EXCLUDED.province,
+          -- Год основания редактор может уточнить вручную, поэтому сид только
+          -- заполняет пустое поле и не затирает проверенное значение.
+          founded_year = COALESCE(universities.founded_year, EXCLUDED.founded_year),
+          climate = EXCLUDED.climate, nearby_cities = EXCLUDED.nearby_cities,
+          nearby_places = EXCLUDED.nearby_places, dorm = EXCLUDED.dorm,
+          campus_facilities = EXCLUDED.campus_facilities, living_cost = EXCLUDED.living_cost,
+          languages = EXCLUDED.languages, extra_documents = EXCLUDED.extra_documents,
+          deadlines = EXCLUDED.deadlines, university_grants = EXCLUDED.university_grants,
+          province_grant = EXCLUDED.province_grant, site_rating = EXCLUDED.site_rating,
+          known_for_translations = EXCLUDED.known_for_translations
       `, [
-        university.nameEn, university.city, getCitySafety(university.city).level, regionFor(university), university.rankingNational,
+        university.nameEn, university.city, safety.level, regionFor(university), university.rankingNational,
         translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
         JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
         JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),
         JSON.stringify({ en: admissions.requirements, ru: admissions.ruRequirements, kk: admissions.kkRequirements }),
         JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
-        university.coverUrl, university.logoUrl, getCitySafety(university.city).description,
+        university.coverUrl, university.logoUrl, safety.description,
         JSON.stringify(university.galleryUrls?.length ? university.galleryUrls : [university.coverUrl].filter(Boolean)),
         university.rankingWorld || null, Boolean(university.hasCscScholarship),
+        university.province, profile.foundedYear,
+        JSON.stringify(profile.climate || {}), JSON.stringify(profile.nearbyCities),
+        JSON.stringify(profile.nearbyPlaces), JSON.stringify(profile.dorm),
+        JSON.stringify(profile.facilities), JSON.stringify(profile.livingCost),
+        JSON.stringify(profile.languages), JSON.stringify(profile.extraDocuments),
+        JSON.stringify(profile.deadlines), JSON.stringify(profile.universityGrants),
+        JSON.stringify(profile.provinceGrant), profile.siteRating,
+        JSON.stringify(knownForTranslations(university, translatedSpecialties)),
       ])
     }
   })
