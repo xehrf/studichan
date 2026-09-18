@@ -74,6 +74,26 @@ const parseSourceRows = (csv) => {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+const numberOrNull = (value) => {
+  const text = String(value || '').trim().replace(',', '.')
+  if (!text) return null
+  const parsed = Number(text)
+  if (!Number.isFinite(parsed)) throw new Error(`Expected a number, got "${value}"`)
+  return parsed
+}
+
+// Колонка campuses принимает JSON-массив вида
+// [{"name":{"ru":"Главный кампус"},"founded_year":1911,"renovated_year":2019,
+//   "area_ha":395,"dorm_condition":"good"}]
+const jsonArrayOrNull = (value, sourceRow) => {
+  const text = String(value || '').trim()
+  if (!text) return null
+  let parsed
+  try { parsed = JSON.parse(text) } catch { throw new Error(`Row ${sourceRow}: campuses must be valid JSON`) }
+  if (!Array.isArray(parsed)) throw new Error(`Row ${sourceRow}: campuses must be a JSON array`)
+  return JSON.stringify(parsed)
+}
+
 const domainMatches = (hostname, approvedDomain) => {
   const allowed = approvedDomain.toLowerCase().replace(/^www\./, '')
   const current = hostname.toLowerCase().replace(/^www\./, '')
@@ -204,19 +224,42 @@ const reviewRecord = async (source) => {
       ranking: source.ranking ? Number(source.ranking) : null,
       specialties: source.specialties || '', requirements: source.requirements || '', tuition: source.tuition || '',
       description, website: source.website || '', source_url: sourceUrl, verified_at: date,
+      // Поля, которые справочник campus-profile.mjs вывести не может: их
+      // заполняет редактор вручную. Пустая ячейка ничего не затирает.
+      province: source.province || '',
+      founded_year: numberOrNull(source.founded_year),
+      campus_area_ha: numberOrNull(source.campus_area_ha),
+      students_count: numberOrNull(source.students_count),
+      international_students: numberOrNull(source.international_students),
+      campuses: jsonArrayOrNull(source.campuses, source.sourceRow),
     },
     evidence,
   }
 }
 
 const upsertSql = `
-  INSERT INTO universities (name, city, city_safety, region, ranking, specialties, requirements, tuition, description, website, source_url, verified_at)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+  INSERT INTO universities (
+    name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
+    website, source_url, verified_at, province, founded_year, campus_area_ha, students_count,
+    international_students, campuses
+  )
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
+    COALESCE($16, 0), $17, COALESCE($18::jsonb, '[]'::jsonb))
   ON CONFLICT (name) DO UPDATE SET
     city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
     specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements, tuition = EXCLUDED.tuition,
     description = EXCLUDED.description, website = EXCLUDED.website, source_url = EXCLUDED.source_url,
-    verified_at = EXCLUDED.verified_at, city_safety = EXCLUDED.city_safety
+    verified_at = EXCLUDED.verified_at, city_safety = EXCLUDED.city_safety,
+    -- Пустая ячейка в CSV не должна стирать уже проверенные значения.
+    province = COALESCE(NULLIF(EXCLUDED.province, ''), universities.province),
+    founded_year = COALESCE(EXCLUDED.founded_year, universities.founded_year),
+    campus_area_ha = COALESCE(EXCLUDED.campus_area_ha, universities.campus_area_ha),
+    students_count = COALESCE(NULLIF(EXCLUDED.students_count, 0), universities.students_count),
+    international_students = COALESCE(EXCLUDED.international_students, universities.international_students),
+    campuses = CASE
+      WHEN jsonb_array_length(EXCLUDED.campuses) > 0 THEN EXCLUDED.campuses
+      ELSE universities.campuses
+    END
 `
 
 if (args.includes('--help') || args.includes('-h')) {
@@ -256,6 +299,8 @@ try {
       await client.query(upsertSql, [
         item.name, item.city, item.city_safety || 'not_rated', item.region, item.ranking, item.specialties, item.requirements,
         item.tuition, item.description, item.website, item.source_url, item.verified_at,
+        item.province || '', item.founded_year, item.campus_area_ha, item.students_count,
+        item.international_students, item.campuses,
       ])
     }
   })
