@@ -1,138 +1,47 @@
 import { closeDb, initDb, withTransaction } from '../db.mjs'
 import { getCitySafety } from '../city-safety.mjs'
+import { loadCatalog } from './catalog.mjs'
+import { toKzt } from '../src/catalog-config.js'
 
-import { readFile } from 'node:fs/promises'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+const universities = await loadCatalog()
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dataPath = path.join(__dirname, '..', 'prisma', 'data', 'universities.json')
-const regionByProvince = {
-  Пекин: 'North', Тяньцзинь: 'North', Хэбэй: 'North', Шаньси: 'North',
-  'ВнутренняяМонголия': 'North', Ляонин: 'North', Цзилинь: 'North', Хэйлунцзян: 'North',
-  Шанхай: 'East', Цзянсу: 'East', Чжэцзян: 'East', Аньхой: 'East', Фуцзянь: 'East',
-  Цзянси: 'East', Шаньдун: 'East',
-  Хэнань: 'Central', Хубэй: 'Central', Хунань: 'Central', Гуандун: 'South',
-  Гуанси: 'South', Хайнань: 'South', Чунцин: 'West', Сычуань: 'West', Гуйчжоу: 'West',
-  Юньнань: 'West', Тибет: 'West', Шэньси: 'West', Ганьсу: 'West', Цинхай: 'West',
-  Нинся: 'West', Синьцзян: 'West',
-}
-
-const regionFor = (university) => {
-  const province = university.province.replace(/\s+/g, '')
-  return regionByProvince[province] || 'Central'
-}
-
-const specialtyTranslations = {
-  engineering: ['Engineering', 'инженерия', 'инженерия'],
-  'computer science': ['Computer Science', 'компьютерные науки', 'компьютерлік ғылымдар'],
-  architecture: ['Architecture', 'архитектура', 'сәулет'],
-  medicine: ['Medicine', 'медицина', 'медицина'],
-  economics: ['Economics', 'экономика', 'экономика'],
-  business: ['Business and Management', 'бизнес и менеджмент', 'бизнес және менеджмент'],
-  law: ['Law', 'право', 'құқық'],
-  humanities: ['Humanities', 'гуманитарные науки', 'гуманитарлық ғылымдар'],
-  science: ['Natural Sciences', 'естественные науки', 'жаратылыстану ғылымдары'],
-  education: ['Education', 'педагогика', 'педагогика'],
-  agriculture: ['Agriculture', 'сельское хозяйство', 'ауыл шаруашылығы'],
-  materials: ['Materials Science', 'материаловедение', 'материалтану'],
-  chemistry: ['Chemistry', 'химия', 'химия'],
-}
-
-const translateSpecialties = (value) => {
-  const aliases = {
-    engineering: ['engineering', 'инженерия', 'строительство', 'автоматизация', 'энергетика', 'транспорт'],
-    'computer science': ['computer science', 'информатика', 'телекоммуникации', 'кибербезопасность', 'искусственный интеллект'],
-    architecture: ['architecture', 'архитектура'],
-    medicine: ['medicine', 'медицина', 'стоматология', 'фармацевтика', 'офтальмология'],
-    economics: ['economics', 'экономика', 'финансы', 'страхование', 'бухгалтерский учет'],
-    business: ['business', 'менеджмент', 'торговля', 'бизнес'],
-    law: ['law', 'право', 'криминология'],
-    humanities: ['humanities', 'гуманитарные', 'история', 'философия', 'этнология', 'языки'],
-    science: ['science', 'физика', 'химия', 'математика', 'биология', 'геология', 'география', 'экология'],
-    education: ['education', 'образование', 'педагогика', 'психология'],
-    agriculture: ['agriculture', 'сельское хозяйство', 'агрономия', 'ветеринария', 'лесное хозяйство'],
-    materials: ['materials', 'материалы', 'материаловедение', 'металлургия'],
-    chemistry: ['chemistry', 'химия', 'биоинженерия'],
-  }
-  const lowerValue = value.toLowerCase()
-  const selected = Object.entries(aliases)
-    .filter(([, words]) => words.some((word) => lowerValue.includes(word)))
-    .map(([key]) => key)
-  const fallback = selected.length ? selected : ['engineering', 'science']
-  return {
-    en: fallback.map((key) => specialtyTranslations[key][0]).join(', '),
-    ru: fallback.map((key) => specialtyTranslations[key][1]).join(', '),
-    kk: fallback.map((key) => specialtyTranslations[key][2]).join(', '),
-  }
-}
-
-const descriptionTranslations = (university, specialties) => ({
-  en: `${university.nameEn} is a public university in ${university.city}, China. Its main academic areas include ${specialties.en}.`,
-  ru: `${university.nameRu} — государственный университет Китая в городе ${university.city}. Основные направления подготовки: ${specialties.ru}.`,
-  kk: `${university.nameRu} — Қытайдың ${university.city} қаласындағы мемлекеттік университеті. Негізгі білім беру бағыттары: ${specialties.kk}.`,
-})
-
-const preliminaryAdmissions = (university) => {
-  const name = university.nameEn
-  const premium = {
-    'Peking University': ['1 794 000–3 105 000 ₸', 'HSK 5–6', 'IELTS н/д', 'TOEFL 100+'],
-    'Tsinghua University': ['1 794 000–2 070 000 ₸', 'HSK 5 (4→5)', 'IELTS н/д', 'TOEFL н/д'],
-    'Fudan University': ['3 450 000–4 830 000 ₸', 'HSK н/д', 'IELTS 6.5+', 'TOEFL 90+'],
-    'Shanghai Jiao Tong University': ['1 711 200+ ₸', 'HSK 5', 'IELTS 6.0+', 'TOEFL 90+'],
-    'Nanjing University': ['1 449 000–3 726 000 ₸', 'HSK 5 (180+)', 'IELTS 6.0', 'TOEFL 85'],
-    'Zhejiang University': ['1 380 000–3 105 000 ₸', 'HSK 4–5', 'IELTS 6.5+', 'TOEFL 80+'],
-    'University of Science and Technology of China': ['1 794 000+ ₸', 'HSK 5 (мин.4)', 'IELTS н/д', 'TOEFL н/д'],
-    "Xi'an Jiaotong University": ['1 380 000–3 450 000 ₸', 'HSK 4+', 'IELTS 6.0', 'TOEFL 80'],
-    'Harbin Institute of Technology': ['1 794 000–2 898 000 ₸', 'HSK 4+', 'IELTS 6.0', 'TOEFL 80'],
-  }
-  const is985 = ['Beijing Institute of Technology', 'China Agricultural University', 'Beijing Normal University',
-    'Tongji University', 'East China Normal University', 'Southeast University', 'Huazhong University of Science and Technology',
-    'Tianjin University', 'Sun Yat-sen University', 'Shandong University', 'Sichuan University', 'South China University of Technology',
-    'Hunan University', 'Central South University', 'Dalian University of Technology', 'Northeastern University',
-    'Nankai University', 'Jilin University', 'Ocean University of China', 'Chongqing University', 'Xiamen University'].includes(name)
-  const tuition = premium[name]?.[0] || (is985 ? '1 380 000–2 760 000 ₸' : '1 242 000–2 070 000 ₸')
-  const requirements = premium[name]?.slice(1) || (is985
-    ? ['HSK 4–5', 'IELTS 6.0–6.5', 'TOEFL 80–90']
-    : ['HSK 4', 'IELTS 5.5–6.0', 'TOEFL 70–80'])
-  return {
-    tuition,
-    requirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
-    ruRequirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
-    kkRequirements: `HSK: ${requirements[0]}; IELTS: ${requirements[1]}; TOEFL: ${requirements[2]}`,
-    ruTuition: `Стоимость обучения: ${tuition}.`,
-    kkTuition: `Оқу ақысы: ${tuition}.`,
-  }
-}
-
-const universities = JSON.parse(await readFile(dataPath, 'utf8')).filter((university) => (
-  !university.website.includes('example.com')
-))
+const requirementsText = (requirements) => Object.entries(requirements).map(([key, value]) => `${key}: ${value}`).join('; ')
 
 try {
   await initDb()
   await withTransaction(async (client) => {
     await client.query("DELETE FROM universities WHERE website LIKE '%example.com%'")
     for (const university of universities) {
-      const specialties = university.specialties || university.description.match(/Сильные стороны вуза: ([^.]+)\./)?.[1] || ''
-      const translatedSpecialties = translateSpecialties(specialties)
-      const translatedDescription = descriptionTranslations(university, translatedSpecialties)
-      const admissions = preliminaryAdmissions(university)
+      const safety = university.country === 'CN' ? getCitySafety(university.city.ru) : { level: 'not_rated', description: '' }
+      const tuition = university.tuition
+      // Строки, созданные прежним сидом, ещё без slug: привязываем их по имени,
+      // чтобы сохранить id и связанные заявки.
+      await client.query('UPDATE universities SET slug = $1 WHERE slug IS NULL AND name = $2', [university.slug, university.dbName])
       await client.query(`
         INSERT INTO universities (
-          name, city, city_safety, region, ranking, specialties, requirements, tuition, description,
-          website, source_url, verified_at, name_translations, description_translations,
-          specialties_translations, requirements_translations, tuition_translations,
-          image_url, image_source, data_status, data_checked_at, city_safety_description, image_gallery,
-          ranking_world, has_csc_scholarship
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $10, NULL, $11, $12, $13, $14, $15, $16, $17, 'requires_verification', NULL, $18, $19, $20, $21)
-        ON CONFLICT (name) DO UPDATE SET
-          city = EXCLUDED.city, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
-          ranking_world = EXCLUDED.ranking_world, has_csc_scholarship = EXCLUDED.has_csc_scholarship,
-          specialties = EXCLUDED.specialties, requirements = EXCLUDED.requirements,
-          tuition = EXCLUDED.tuition, description = EXCLUDED.description,
-          website = EXCLUDED.website, source_url = EXCLUDED.source_url,
-          verified_at = NULL, name_translations = EXCLUDED.name_translations,
+          slug, name, country, city, city_translations, region, ranking, ranking_world, ranking_world_label,
+          university_type, specialties, requirements, admission_requirements, tuition, tuition_currency,
+          tuition_min_local, tuition_max_local, tuition_min_kzt, tuition_max_kzt, description, website, source_url,
+          verified_at, name_translations, name_local, description_translations, specialties_translations,
+          requirements_translations, tuition_translations, image_url, image_source, image_gallery, data_status,
+          data_checked_at, city_safety, city_safety_description, has_csc_scholarship, scholarships, languages,
+          founded, students_count, latitude, longitude, wikipedia_url
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, '', $20, $20,
+          NULL, $21, $22, '{}'::jsonb, '{}'::jsonb, '{}'::jsonb, '{}'::jsonb, $23, $24, $25, 'requires_verification',
+          NULL, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35
+        )
+        ON CONFLICT (slug) DO UPDATE SET
+          name = EXCLUDED.name, country = EXCLUDED.country, city = EXCLUDED.city,
+          city_translations = EXCLUDED.city_translations, region = EXCLUDED.region, ranking = EXCLUDED.ranking,
+          ranking_world = EXCLUDED.ranking_world, ranking_world_label = EXCLUDED.ranking_world_label,
+          university_type = EXCLUDED.university_type, specialties = EXCLUDED.specialties,
+          requirements = EXCLUDED.requirements, admission_requirements = EXCLUDED.admission_requirements,
+          tuition = EXCLUDED.tuition, tuition_currency = EXCLUDED.tuition_currency,
+          tuition_min_local = EXCLUDED.tuition_min_local, tuition_max_local = EXCLUDED.tuition_max_local,
+          tuition_min_kzt = EXCLUDED.tuition_min_kzt, tuition_max_kzt = EXCLUDED.tuition_max_kzt,
+          description = EXCLUDED.description, website = EXCLUDED.website, source_url = EXCLUDED.source_url,
+          verified_at = NULL, name_translations = EXCLUDED.name_translations, name_local = EXCLUDED.name_local,
           description_translations = EXCLUDED.description_translations,
           specialties_translations = EXCLUDED.specialties_translations,
           requirements_translations = EXCLUDED.requirements_translations,
@@ -140,25 +49,32 @@ try {
           image_url = EXCLUDED.image_url, image_source = EXCLUDED.image_source,
           data_status = EXCLUDED.data_status, data_checked_at = EXCLUDED.data_checked_at,
           city_safety = EXCLUDED.city_safety, city_safety_description = EXCLUDED.city_safety_description,
+          has_csc_scholarship = EXCLUDED.has_csc_scholarship, scholarships = EXCLUDED.scholarships,
+          languages = EXCLUDED.languages, founded = EXCLUDED.founded, students_count = EXCLUDED.students_count,
+          latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, wikipedia_url = EXCLUDED.wikipedia_url,
+          -- Галерею с официальных сайтов (npm run sync:images) не затираем одной обложкой.
           image_gallery = CASE
             WHEN jsonb_array_length(EXCLUDED.image_gallery) > 1 OR universities.image_gallery = '[]'::jsonb
             THEN EXCLUDED.image_gallery
             ELSE universities.image_gallery
           END
       `, [
-        university.nameEn, university.city, getCitySafety(university.city).level, regionFor(university), university.rankingNational,
-        translatedSpecialties.en, admissions.requirements, admissions.tuition, translatedDescription.en, university.website,
-        JSON.stringify({ en: university.nameEn, ru: university.nameRu, kk: university.nameRu }),
-        JSON.stringify(translatedDescription), JSON.stringify(translatedSpecialties),
-        JSON.stringify({ en: admissions.requirements, ru: admissions.ruRequirements, kk: admissions.kkRequirements }),
-        JSON.stringify({ en: admissions.tuition, ru: admissions.ruTuition, kk: admissions.kkTuition }),
-        university.coverUrl, university.logoUrl, getCitySafety(university.city).description,
-        JSON.stringify(university.galleryUrls?.length ? university.galleryUrls : [university.coverUrl].filter(Boolean)),
-        university.rankingWorld || null, Boolean(university.hasCscScholarship),
+        university.slug, university.dbName, university.country, university.city.ru,
+        JSON.stringify(university.city), university.region || university.country, university.rankingNational,
+        university.rankingWorld, university.rankingWorldLabel, university.type, university.specialties.join(', '),
+        requirementsText(university.requirements), JSON.stringify(university.requirements),
+        tuition ? `${tuition.min}–${tuition.max} ${tuition.currency}` : '', tuition?.currency || null,
+        tuition?.min ?? null, tuition?.max ?? null, tuition ? toKzt(tuition.min, tuition.currency) : null,
+        tuition ? toKzt(tuition.max, tuition.currency) : null, university.website,
+        JSON.stringify(university.names), university.nameLocal, university.cover, university.imageSource,
+        JSON.stringify(university.gallery), safety.level, safety.description,
+        university.scholarships.includes('csc'), JSON.stringify(university.scholarships),
+        JSON.stringify(university.languages), university.founded, university.students || 0,
+        university.latitude, university.longitude, university.wikipedia || null,
       ])
     }
   })
-  console.log(`Seeded ${universities.length} universities from ${dataPath}.`)
+  console.log(`Seeded ${universities.length} universities.`)
 } finally {
   await closeDb()
 }

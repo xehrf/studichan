@@ -1,5 +1,5 @@
 {
-  "name": "chinese-universities",
+  "name": "studichan",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -11,17 +11,20 @@
     "dev:client": "vite",
     "dev:server": "node server.mjs",
     "start": "node server.mjs",
+    "deploy": "bash scripts/deploy.sh",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "db:migrate": "node scripts/migrate.mjs",
     "db:seed": "node scripts/seed.mjs",
+    "enrich:universities": "node scripts/enrich-universities.mjs",
     "import:universities": "node scripts/import-universities.mjs",
     "sync:universities": "node scripts/sync-universities.mjs",
     "sync:images": "node scripts/sync-images.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
     "dotenv": "^17.2.2",
     "express": "^5.2.1",
     "google-auth-library": "^11.0.2",

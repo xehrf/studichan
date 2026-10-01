@@ -9,3 +9,4 @@ dist/
 data/review/
 __pycache__/
 *.pyc
+.deploy.env
