@@ -1,4 +1,5 @@
 import { cabinetTranslations } from './translations-cabinet.js'
+import { essayTranslations } from './translations-essay.js'
 
 // Русское множественное число: plural(5, 'вуз', 'вуза', 'вузов') → 'вузов'.
 export const plural = (count, one, few, many) => {
@@ -663,10 +664,18 @@ const kk = {
   skippedRows: (rows) => `Өткізілген жолдар: ${rows}`,
 }
 
+// Блок promo есть и у кабинета, и у курса эссе, поэтому его сливаем отдельно.
+const merge = (base, lang) => ({
+  ...base,
+  ...cabinetTranslations[lang],
+  ...essayTranslations[lang],
+  promo: { ...cabinetTranslations[lang].promo, ...essayTranslations[lang].promo },
+})
+
 export const translations = {
-  en: { ...en, ...cabinetTranslations.en },
-  ru: { ...ru, ...cabinetTranslations.ru },
-  kk: { ...kk, ...cabinetTranslations.kk },
+  en: merge(en, 'en'),
+  ru: merge(ru, 'ru'),
+  kk: merge(kk, 'kk'),
 }
 
 const lookup = (source, keys) => keys.reduce((value, key) => (value === undefined || value === null ? undefined : value[key]), source)

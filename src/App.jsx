@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight, Award, CalendarDays, Camera, Check, ChevronDown, ChevronLeft, ChevronRight, Download, ExternalLink,
-  BookOpen, Compass, FileText, Heart, Languages, Link2, MapPin, Search, ShieldCheck, SlidersHorizontal, Sparkles, Upload,
+  BookOpen, Compass, FileText, Heart, Languages, Link2, MapPin, PenLine, Search, ShieldCheck, SlidersHorizontal, Sparkles, Upload,
   User, Users, Wallet, X,
 } from 'lucide-react'
 import { useTranslation, translations } from './translations'
@@ -14,6 +14,7 @@ import {
 import Cabinet from './Cabinet.jsx'
 import AdminPage from './AdminPage.jsx'
 import { CareerTest, IeltsTest } from './Tests.jsx'
+import EssayCourse from './EssayCourse.jsx'
 import './App.css'
 
 // Импорт из браузера работает только локально: открытый маршрут импорта
@@ -35,11 +36,13 @@ const initialLang = () => {
   return 'ru'
 }
 
-const staticPages = { '/cabinet': 'cabinet', '/tests/career': 'career', '/tests/ielts': 'ielts', '/admin': 'admin' }
+const staticPages = { '/cabinet': 'cabinet', '/tests/career': 'career', '/tests/ielts': 'ielts', '/admin': 'admin', '/essay': 'essay' }
 
 const parseRoute = () => {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
   if (staticPages[path]) return { page: staticPages[path] }
+  const lesson = path.match(/^\/essay\/(\d+)$/)
+  if (lesson) return { page: 'essay', lesson: Number(lesson[1]) }
   const match = path.match(/^\/u\/([^/]+)$/)
   return match ? { page: 'university', slug: decodeURIComponent(match[1]) } : { page: 'catalogue' }
 }
@@ -134,7 +137,7 @@ function App() {
 
   const currentUniversity = route.page === 'university' ? universities.find(item => item.slug === route.slug) : null
   useEffect(() => {
-    const titles = { cabinet: t('cabinet.title'), career: t('career.title'), ielts: t('ielts.title'), admin: 'Админка' }
+    const titles = { cabinet: t('cabinet.title'), career: t('career.title'), ielts: t('ielts.title'), essay: t('essay.title'), admin: 'Админка' }
     document.title = currentUniversity
       ? `${universityName(currentUniversity, lang)} — Studichan`
       : titles[route.page] ? `${titles[route.page]} — Studichan` : `Studichan — ${t('brandTagline')}`
@@ -253,6 +256,7 @@ function App() {
         </a>
         <div className="header-controls">
           <button className="header-link" onClick={() => setShowQuestionnaire(true)}><Sparkles size={16} /><span>{t('findMatch')}</span></button>
+          <a className={`header-link ${route.page === 'essay' ? 'active' : ''}`} href="/essay" onClick={(event) => { if (isPlainClick(event)) { event.preventDefault(); navigate('/essay') } }} aria-label={t('essayLink')}><PenLine size={16} /><span>{t('essayLink')}</span></a>
           <button className={`header-link ${filters.favorites && route.page === 'catalogue' ? 'active' : ''}`} onClick={() => goToCatalogue({ favorites: true })} aria-label={t('favorites')}>
             <Heart size={16} /><span>{t('favorites')}</span>{favorites.length > 0 && <span className="header-count">{favorites.length}</span>}
           </button>
@@ -281,6 +285,7 @@ function App() {
       )}
       {route.page === 'career' && <CareerTest lang={lang} t={t} user={user} onAuth={() => setShowAuth(true)} onNavigate={navigate} onSaveResult={saveTestResult} />}
       {route.page === 'ielts' && <IeltsTest lang={lang} t={t} user={user} universities={universities} onAuth={() => setShowAuth(true)} onNavigate={navigate} onSaveResult={saveTestResult} />}
+      {route.page === 'essay' && <EssayCourse lessonId={route.lesson} lang={lang} t={t} onNavigate={navigate} />}
       {route.page === 'admin' && <AdminPage user={user} t={t} />}
       {route.page === 'university' && (
         <UniversityDetail
@@ -360,6 +365,9 @@ function Catalogue({ universities, status, filters, onFilters, lang, t, favorite
         </a>
         <a className="promo-card" href="/tests/ielts" onClick={promoLink('/tests/ielts')}>
           <BookOpen size={24} /><span><strong>{t('promo.ieltsTitle')}</strong><small>{t('promo.ieltsText')}</small><em>{t('promo.ieltsCta')} <ArrowRight size={14} /></em></span>
+        </a>
+        <a className="promo-card" href="/essay" onClick={promoLink('/essay')}>
+          <PenLine size={24} /><span><strong>{t('promo.essayTitle')}</strong><small>{t('promo.essayText')}</small><em>{t('promo.essayCta')} <ArrowRight size={14} /></em></span>
         </a>
       </div>
 
